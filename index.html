@@ -3,152 +3,362 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>데스크포인트 — 쉬는 틈에, 광고 보고 커피값</title>
-<meta name="description" content="설치 없이 웹에서. 직장인이 쉬는 틈에 버튼 하나로 광고를 보고 포인트를 모아 기프티콘으로 바꾸는 서비스.">
+<title>데스크포인트 — 직장인 PC 리워드 (프로토타입)</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f5f1;--ink:#1d1d1b;--mute:#6b6a65;--line:#e2e0d8;--acc:#1f6f5c;--acc2:#e9f3ef}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
-a{color:inherit}
-.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
-header{position:sticky;top:0;background:rgba(246,245,241,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
-header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
-.logo{font-weight:800;font-size:20px;text-decoration:none}.logo span{color:var(--acc)}
-.navl{display:flex;gap:22px;align-items:center;font-size:15px}.navl a{text-decoration:none;color:var(--mute)}
-.btn{display:inline-block;background:var(--acc);color:#fff;border:0;border-radius:12px;padding:14px 22px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
-.btn.ghost{background:transparent;color:var(--acc);border:1px solid var(--acc)}
-.btn.sm{padding:9px 16px;font-size:14px}
-.hero{padding:88px 0 64px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-@media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:56px}.navl a:not(.btn){display:none}}
-.tag{display:inline-block;font-size:13px;padding:4px 10px;border-radius:99px;background:var(--acc2);color:var(--acc);font-weight:600}
-h1{font-size:46px;line-height:1.25;margin:16px 0;letter-spacing:-.02em}
-@media(max-width:600px){h1{font-size:34px}}
-.lead{font-size:18px;color:var(--mute);max-width:520px}
-.cta{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
-/* 히어로 목업 */
-.mock{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.08);overflow:hidden}
-.mock .bar{display:flex;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line)}.mock .bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
-.mock .scr{padding:22px}
-.mock .ad{height:150px;border-radius:12px;background:#fdf1e6;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:20px}
-.mock .ad small{font-weight:400;font-size:13px;color:var(--mute)}
-.prog{height:6px;background:var(--line);border-radius:99px;margin:14px 0;overflow:hidden}.prog i{display:block;height:100%;width:0;background:var(--acc);animation:p 15s linear infinite}
-@keyframes p{to{width:100%}}
-.mrow{display:flex;justify-content:space-between;font-size:14px;color:var(--mute)}.mrow b{color:var(--ink);font-size:18px}
-section{padding:72px 0}
-h2{font-size:32px;margin:0 0 12px;letter-spacing:-.01em}
-.sub{color:var(--mute);font-size:17px;margin:0 0 32px;max-width:620px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
-.card .n{width:34px;height:34px;border-radius:10px;background:var(--acc2);color:var(--acc);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:14px}
-.card h3{margin:0 0 6px;font-size:18px}.card p{margin:0;color:var(--mute);font-size:15px}
-.calc{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
-@media(max-width:760px){.calc{grid-template-columns:1fr}}
-input[type=range]{width:100%;accent-color:var(--acc)}
-.result{font-size:44px;font-weight:800;color:var(--acc)}
-.dark{background:var(--ink);color:#fff;border-radius:24px;padding:48px}
-.dark .sub{color:#bdbcb6}
-.dark .card{background:#2a2a27;border-color:#3a3a36}.dark .card p{color:#bdbcb6}
-details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:10px}
-summary{font-weight:600;cursor:pointer}details p{color:var(--mute);margin:10px 0 0}
-form{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-form input,form select{flex:1;min-width:200px;padding:14px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff}
-#msg{margin-top:12px;color:var(--acc);font-weight:600}
-footer{padding:40px 0;color:var(--mute);font-size:14px;border-top:1px solid var(--line)}
+:root{--bg:#f6f5f1;--ink:#1d1d1b;--mute:#6b6a65;--line:#e2e0d8;--acc:#1f6f5c;--acc2:#e9f3ef;--warn:#b8572a;--warn2:#fbefe7}
+*{box-sizing:border-box}body{margin:0;font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 28px;border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5;gap:12px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:20px}.logo span{color:var(--acc)}
+nav{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+nav button{background:none;border:0;font:inherit;padding:8px 12px;cursor:pointer;color:var(--mute);border-radius:8px}
+nav button.on{background:var(--acc2);color:var(--acc);font-weight:600}
+nav .sep{width:1px;height:20px;background:var(--line);margin:0 6px}
+.pill{margin-left:8px;background:var(--ink);color:#fff;border-radius:99px;padding:6px 12px;font-weight:600;font-size:14px}
+main{max-width:1080px;margin:0 auto;padding:28px}
+.view{display:none}.view.on{display:block}
+h1{font-size:28px;line-height:1.35;margin:8px 0 10px}h2{font-size:18px;margin:0 0 10px}h3{font-size:15px;margin:0 0 6px}
+.mute{color:var(--mute);font-size:14px;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.g2{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-top:16px}@media(max-width:800px){.g2{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.big{font-size:26px;font-weight:800}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:600;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--acc);border:1px solid var(--acc)}
+.btn.sm{padding:7px 12px;font-size:13px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.tag{display:inline-block;font-size:12px;padding:3px 8px;border-radius:99px;background:var(--acc2);color:var(--acc)}
+.tag.w{background:var(--warn2);color:var(--warn)}
+.hero{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.batch{display:flex;gap:10px;flex-wrap:wrap}.batch .btn{min-width:140px}.batch small{display:block;font-weight:400;font-size:12px;opacity:.85}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}.meter i{display:block;height:100%;background:var(--acc)}
+.ad{display:flex;flex-direction:column;gap:10px}
+.thumb{height:100px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;text-align:center;padding:10px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.done{opacity:.5}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:9px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--mute);font-weight:600}
+input[type=range]{width:100%}
+input.f,select.f{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit;margin:4px 0 10px;background:#fff}
+.slots{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.slot{font-size:13px;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--mute)}.slot.on{border-color:var(--acc);color:var(--acc);font-weight:600}
+.days{display:flex;gap:6px;margin:10px 0}.day{flex:1;text-align:center;padding:8px 0;border-radius:8px;background:var(--bg);font-size:12px;color:var(--mute)}.day.on{background:var(--acc);color:#fff}
+.mission{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);gap:10px}.mission:last-child{border:0}
+#player,#modal{position:fixed;inset:0;background:rgba(20,20,18,.72);display:none;align-items:center;justify-content:center;z-index:20}
+#player.on,#modal.on{display:flex}
+.pbox{background:#fff;border-radius:16px;width:min(560px,92vw);overflow:hidden}
+#screen{min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;transition:background .4s}
+#screen b{font-size:24px}
+.quiz{display:flex;flex-direction:column;gap:8px;width:100%;max-width:320px;margin-top:14px}
+.pbar{height:6px;background:var(--line)}.pbar i{display:block;height:100%;width:0;background:var(--acc);transition:width .25s linear}
+.pfoot{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;font-size:14px}
+.note{background:var(--warn2);border:1px solid #f0d9c8;color:var(--warn);border-radius:10px;padding:10px 14px;font-size:13px;line-height:1.6;margin-top:14px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:99px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:30}.toast.on{opacity:1}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-  <a class="logo" href="#">데스크<span>포인트</span></a>
-  <nav class="navl"><a href="#how">이용 방법</a><a href="#calc">얼마나 모일까</a><a href="#biz">광고주</a><a href="#faq">FAQ</a><a class="btn sm" href="#join">사전 신청</a></nav>
-</div></header>
+<header>
+  <div class="logo">데스크<span>포인트</span></div>
+  <nav>
+    <button data-v="watch" class="on">광고 보기</button>
+    <button data-v="mission">출석·미션</button>
+    <button data-v="me">내 포인트</button>
+    <button data-v="shop">교환소</button>
+    <span class="sep"></span>
+    <button data-v="biz">광고주</button>
+    <button data-v="ops">운영</button>
+    <span class="pill" id="hpt">0P</span>
+    <button class="btn sm" id="authBtn" style="margin-left:8px">로그인</button>
+  </nav>
+</header>
 
 <main>
-<div class="wrap hero">
-  <div>
-    <span class="tag">설치 없이 웹에서 · 사전 신청 중</span>
-    <h1>쉬는 틈에 버튼 하나,<br>광고 보고 커피값.</h1>
-    <p class="lead">업무 중 잠깐 숨 돌릴 때, 브라우저 탭 하나에서 15초 광고를 보고 포인트를 모으세요. 모은 포인트는 편의점·커피·배달 기프티콘으로 바꿀 수 있어요.</p>
-    <div class="cta"><a class="btn" href="#join">사전 신청하기</a><a class="btn ghost" href="demo.html">데모 체험해보기</a></div>
-  </div>
-  <div class="mock" aria-hidden="true">
-    <div class="bar"><i></i><i></i><i></i></div>
-    <div class="scr">
-      <div class="ad">점심 배달비 0원<small>배달앱 A · 광고</small></div>
-      <div class="prog"><i></i></div>
-      <div class="mrow"><span>1/5편 · 끝까지 보면 +10P</span><b>2,340P</b></div>
-    </div>
-  </div>
-</div>
-
-<section id="how"><div class="wrap">
-  <h2>이렇게 써요</h2>
-  <p class="sub">설치할 프로그램도, 켜둬야 할 창도 없어요. 보고 싶을 때만 누르면 됩니다.</p>
-  <div class="grid">
-    <div class="card"><div class="n">1</div><h3>버튼을 눌러요</h3><p>1개만 볼지, 3개·5개 연속으로 볼지 골라요. 연속으로 끝까지 보면 보너스가 있어요.</p></div>
-    <div class="card"><div class="n">2</div><h3>15초를 봐요</h3><p>광고가 끝나면 아주 짧은 확인 문제가 하나 나와요. 맞히면 바로 적립돼요.</p></div>
-    <div class="card"><div class="n">3</div><h3>기프티콘으로 바꿔요</h3><p>1P는 1원. 1,000P부터 편의점·커피·배달 쿠폰으로 교환할 수 있어요.</p></div>
-  </div>
-</div></section>
-
-<section id="calc"><div class="wrap">
-  <div class="card calc">
+<!-- 광고 보기 -->
+<section class="view on" id="watch">
+  <div class="hero">
     <div>
-      <h2>한 달에 얼마나 모일까?</h2>
-      <p class="sub" style="margin-bottom:20px">하루에 몇 편 볼지 움직여 보세요. (예상치이며, 실제 적립액은 광고 상황에 따라 달라요)</p>
-      <label>하루 <b id="nv">15</b>편</label>
-      <input type="range" id="n" min="1" max="30" value="15">
+      <span class="tag" id="hello">설치 없이 웹에서</span>
+      <h1>쉬는 틈에 버튼 하나,<br>광고 보고 포인트 받기</h1>
+      <p class="mute">1편 15초 · 끝까지 보고 확인 문제를 맞히면 <b id="perv1"></b>P · 하루 최대 <b id="capv"></b>P</p>
+      <div class="meter"><i id="meter"></i></div>
+      <p class="mute" id="todayv" style="margin-top:6px"></p>
+      <div class="slots" id="slots"></div>
     </div>
-    <div style="text-align:center">
-      <div class="result" id="out">3,000P</div>
-      <div style="color:var(--mute)">한 달(20영업일) 예상 · <span id="eq">아메리카노 약 0.7잔</span></div>
+    <div class="batch">
+      <button class="btn" data-n="1">1개 보기<small id="b1"></small></button>
+      <button class="btn" data-n="3">3개 연속<small id="b3"></small></button>
+      <button class="btn" data-n="5">5개 연속<small id="b5"></small></button>
     </div>
   </div>
-</div></section>
+  <h2 style="margin-top:28px">지금 볼 수 있는 광고</h2>
+  <p class="mute">광고는 시간대(오전·점심·오후·저녁)마다 새로 채워져요. 본 광고는 오늘 다시 적립되지 않아요.</p>
+  <div class="grid" id="adlist"></div>
+</section>
 
-<section id="biz"><div class="wrap">
-  <div class="dark">
-    <h2>광고주라면</h2>
-    <p class="sub">평일 업무 시간, PC 앞의 직장인에게 닿는 광고 지면이에요. 사용자가 직접 골라서 끝까지 보고, 확인 문제까지 맞힌 시청에만 비용을 받아요.</p>
-    <div class="grid">
-      <div class="card"><h3>업무 시간대 타겟</h3><p>오전·점심·오후 시간대를 골라 집행. 점심 배달, 업무용 툴, 사무용품에 잘 맞아요.</p></div>
-      <div class="card"><h3>끝까지 본 시청만 과금</h3><p>15초 완료 + 확인 문제 정답 기준. 틀어만 둔 노출은 청구하지 않아요.</p></div>
-      <div class="card"><h3>수익의 절반은 사용자에게</h3><p>보상이 커야 사용자가 자발적으로 봐요. 광고비의 약 50%가 사용자 포인트로 돌아가요.</p></div>
+<!-- 출석·미션 -->
+<section class="view" id="mission">
+  <div class="g2">
+    <div class="card">
+      <h2>출석 체크</h2>
+      <p class="mute">매일 <b id="attv"></b>P · 7일 연속이면 보너스 <b id="att7v"></b>P</p>
+      <div class="days" id="days"></div>
+      <button class="btn" id="attbtn">오늘 출석하기</button>
     </div>
-    <div class="cta"><a class="btn" href="#join" onclick="document.getElementById('type').value='광고주'">광고 입점 문의</a></div>
+    <div class="card">
+      <h2>오늘의 미션</h2>
+      <div id="missions"></div>
+    </div>
   </div>
-</div></section>
+</section>
 
-<section id="faq"><div class="wrap">
-  <h2>자주 묻는 질문</h2>
-  <details><summary>정말 설치가 필요 없나요?</summary><p>네. 웹 브라우저에서 바로 써요. 회사 PC에 프로그램을 깔 수 없어도 괜찮아요.</p></details>
-  <details><summary>광고를 틀어두고 다른 일을 하면요?</summary><p>다른 탭으로 넘어가면 광고가 일시정지되고, 끝난 뒤 확인 문제를 맞혀야 적립돼요. 그래야 광고주가 계속 광고비를 낼 수 있어요.</p></details>
-  <details><summary>하루에 얼마까지 모을 수 있나요?</summary><p>공정한 운영을 위해 하루 적립 상한이 있어요. 정확한 금액은 정식 오픈 때 안내할게요.</p></details>
-  <details><summary>언제 오픈하나요?</summary><p>지금은 사전 신청을 받으며 컨셉을 확인하는 단계예요. 신청해주시면 오픈 소식을 가장 먼저 알려드릴게요.</p></details>
-</div></section>
-
-<section id="join"><div class="wrap">
-  <div class="card">
-    <h2>사전 신청</h2>
-    <p class="sub" style="margin-bottom:12px">오픈하면 가장 먼저 알려드리고, 사전 신청자에게는 시작 포인트를 드릴 예정이에요.</p>
-    <form id="f">
-      <input type="email" id="email" placeholder="이메일" required>
-      <select id="type"><option>직장인</option><option>프리랜서</option><option>학생</option><option>광고주</option><option>기타</option></select>
-      <button class="btn">신청하기</button>
-    </form>
-    <div id="msg"></div>
+<!-- 내 포인트 -->
+<section class="view" id="me">
+  <div class="grid">
+    <div class="card"><div class="mute">보유 포인트</div><div class="big" id="pt"></div></div>
+    <div class="card"><div class="mute">오늘 적립</div><div class="big" id="today"></div></div>
+    <div class="card"><div class="mute">누적 시청</div><div class="big" id="cntAll"></div></div>
+    <div class="card"><div class="mute">연속 출석</div><div class="big" id="streakv"></div></div>
   </div>
-</div></section>
+  <div class="card" style="margin-top:14px"><div class="row"><h2>적립·사용 내역</h2><button class="btn ghost sm" id="reset">데모 초기화</button></div>
+    <table><thead><tr><th>시각</th><th>내용</th><th>포인트</th></tr></thead><tbody id="log"></tbody></table></div>
+</section>
+
+<!-- 교환소 -->
+<section class="view" id="shop">
+  <h2>교환소</h2><p class="mute">데모용 상품입니다. 실제 발송은 되지 않습니다. 1P = 1원 기준.</p>
+  <div class="slots" id="cats"></div>
+  <div class="grid" id="items"></div>
+</section>
+
+<!-- 광고주 -->
+<section class="view" id="biz">
+  <h2>광고주 센터</h2>
+  <p class="mute">평일 업무 시간 PC 앞 직장인이 <b>직접 선택해 끝까지 보고 확인 문제까지 맞힌 시청</b>만 청구합니다.</p>
+  <div class="g2">
+    <div class="card">
+      <h2>캠페인 등록</h2>
+      <label class="mute">광고 문구</label><input class="f" id="cTitle" placeholder="예: 점심 배달비 0원">
+      <label class="mute">브랜드명</label><input class="f" id="cBrand" placeholder="예: 배달앱 A">
+      <div class="row"><div style="flex:1"><label class="mute">완료 시청 1회 단가(원)</label><input class="f" id="cPrice" type="number" value="20" min="5"></div>
+      <div style="flex:1"><label class="mute">총 예산(원)</label><input class="f" id="cBudget" type="number" value="100000" min="1000"></div></div>
+      <label class="mute">노출 시간대</label>
+      <select class="f" id="cSlot"><option value="all">전체</option><option value="0">오전 9–12시</option><option value="1">점심 12–14시</option><option value="2">오후 14–18시</option><option value="3">저녁·기타</option></select>
+      <button class="btn" id="cAdd">캠페인 시작</button>
+      <p class="mute" id="cMsg"></p>
+    </div>
+    <div class="card">
+      <h2>수익 시뮬레이터</h2>
+      <label class="mute">완료 시청 1회 단가: <b id="sPv"></b>원</label><input type="range" id="sP" min="5" max="60" value="20">
+      <label class="mute">사용자 배분율: <b id="sSv"></b>%</label><input type="range" id="sS" min="10" max="90" step="5" value="50">
+      <label class="mute">1인 하루 시청: <b id="sNv"></b>편</label><input type="range" id="sN" min="1" max="40" value="15">
+      <label class="mute">일간 활성 사용자: <b id="sUv"></b>명</label><input type="range" id="sU" min="100" max="50000" step="100" value="5000">
+      <table><tbody>
+        <tr><td>사용자 1편당 몫</td><td id="o1"></td></tr>
+        <tr><td>사용자 1인 월 적립(20영업일)</td><td id="o2"></td></tr>
+        <tr><td>월 광고 매출</td><td id="o3"></td></tr>
+        <tr><td>월 회사 몫(배분 후)</td><td id="o4"></td></tr>
+      </tbody></table>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px"><h2>내 캠페인 성과</h2>
+    <table><thead><tr><th>캠페인</th><th>시간대</th><th>시작</th><th>완료</th><th>완료율</th><th>문제 정답률</th><th>집행액 / 예산</th><th></th></tr></thead><tbody id="ctab"></tbody></table></div>
+</section>
+
+<!-- 운영 -->
+<section class="view" id="ops">
+  <h2>운영 대시보드</h2>
+  <p class="mute">이 브라우저에서 일어난 데모 시청 기준입니다. 실제 서비스에선 서버에서 집계합니다.</p>
+  <div class="grid">
+    <div class="card"><div class="mute">광고 매출</div><div class="big" id="kRev"></div></div>
+    <div class="card"><div class="mute">사용자 지급 포인트</div><div class="big" id="kPay"></div></div>
+    <div class="card"><div class="mute">회사 몫</div><div class="big" id="kMar"></div></div>
+    <div class="card"><div class="mute">완료율 · 정답률</div><div class="big" id="kRate"></div></div>
+  </div>
+  <div class="g2">
+    <div class="card"><h2>운영 정책 (지금 값)</h2>
+      <label class="mute">사용자 배분율: <b id="pSv"></b>%</label><input type="range" id="pS" min="10" max="90" step="5">
+      <label class="mute">하루 적립 상한: <b id="pCv"></b>P</label><input type="range" id="pC" min="50" max="1000" step="50">
+      <label class="mute">출석 포인트: <b id="pAv"></b>P</label><input type="range" id="pA" min="0" max="50">
+      <label class="mute">5편 연속 보너스: <b id="pBv"></b>P</label><input type="range" id="pB" min="0" max="50">
+      <label class="mute"><input type="checkbox" id="pQ"> 시청 후 확인 문제 사용</label>
+      <div class="note">이 값들이 바로 사용자 화면에 반영돼요. 실제로 정해야 할 의사결정 항목들이기도 해요.</div>
+    </div>
+    <div class="card"><h2>어뷰징 신호</h2><div id="abuse"></div></div>
+  </div>
+</section>
 </main>
 
-<footer><div class="wrap">© 2026 데스크포인트 · 컨셉 검증용 페이지입니다.</div></footer>
+<div id="player"><div class="pbox">
+  <div id="screen"><span class="mute" id="pbrand"></span><b id="ptitle"></b><span class="mute" id="pmsg" style="margin-top:10px"></span><div class="quiz" id="quiz"></div></div>
+  <div class="pbar"><i id="pprog"></i></div>
+  <div class="pfoot"><span id="pstat"></span><button class="btn ghost" id="pclose">그만 보기</button></div>
+</div></div>
+
+<div id="modal"><div class="pbox" style="padding:24px">
+  <h2 id="aTitle">로그인하고 포인트 받기</h2>
+  <p class="mute" id="aSub">광고를 보고 포인트를 쌓으려면 계정이 필요해요. 처음이면 바로 가입돼요.</p>
+  <input class="f" id="aId" placeholder="아이디 (영문·숫자 4~16자)" maxlength="16" autocomplete="username">
+  <input class="f" id="aPw" type="password" placeholder="비밀번호 (6자 이상)" autocomplete="current-password">
+  <p class="mute" id="aMsg" style="color:var(--warn);min-height:1.2em;margin:0 0 8px"></p>
+  <div class="row"><button class="btn" id="aGo">로그인</button><button class="btn ghost" id="aSwitch">처음이에요 · 회원가입</button></div>
+  <div class="row" style="margin-top:12px"><span class="mute" style="font-size:12px">시연용: 계정은 이 브라우저에만 저장돼요.</span><a href="#" id="aClose" class="mute" style="font-size:13px">나중에 할게요</a></div>
+</div></div>
+<div class="toast" id="toast"></div>
 
 <script>
-const n=document.getElementById('n');
-function calc(){const v=+n.value,p=v*10*20;document.getElementById('nv').textContent=v;document.getElementById('out').textContent=p.toLocaleString()+'P';document.getElementById('eq').textContent='아메리카노 약 '+(p/4500).toFixed(1)+'잔'}
-n.oninput=calc;calc();
-// 사전 신청: 지금은 수집 백엔드가 없어 화면 안내만 합니다. (폼 서비스 연결 시 여기에 전송 코드 추가)
-document.getElementById('f').onsubmit=e=>{e.preventDefault();document.getElementById('msg').textContent='신청해주셔서 감사해요! (컨셉 검증 단계라 아직 실제로 저장되지는 않아요)'};
+const $=id=>document.getElementById(id);
+const now=()=>new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
+const dkey=d=>(d||new Date()).toDateString();
+const SEC=15;
+const SLOTS=["오전 9–12시","점심 12–14시","오후 14–18시","저녁·기타"];
+const curSlot=()=>{const h=new Date().getHours();return h>=9&&h<12?0:h>=12&&h<14?1:h>=14&&h<18?2:3};
+const COLORS=["#fdf1e6","#eef3ea","#eaf0f7","#f5edf3","#f3f1e4","#e9eef0","#f0ece4","#f7efe9"];
+const SEED=[["점심 배달비 0원","배달앱 A",1],["사무실 원두 정기배송","커피브랜드 B","all"],["연말정산 미리보기","세무앱 C",0],["목·어깨 편한 의자","가구 D",2],["퇴근길 운동 1회 무료","피트니스 E",3],["업무용 메모 앱 3개월 무료","SaaS F",0],["주말 근교 숙소 특가","여행 G",3],["오후 간식 묶음 배송","간식몰 H",2],["회의록 자동 정리 툴","SaaS I","all"],["점심 샐러드 구독","샐러드 J",1],["직장인 영어 첫 달 무료","교육 K","all"],["사원증 케이스 굿즈","문구 L",2]];
+
+let S;
+function fresh(){return{nick:'',guest:true,pt:0,policy:{share:50,cap:300,att:5,bonus:10,quiz:true},
+ camps:SEED.map((a,i)=>({id:i,title:a[0],brand:a[1],slot:a[2],price:20,budget:200000,spent:0,starts:0,done:0,quizOk:0,mine:false,color:COLORS[i%8],date:dkey()})),
+ day:dkey(),today:0,seen:[],todayCnt:0,cntAll:0,att:[],streak:0,mDone:[],log:[],quits:0,fastRuns:[]}}
+// 계정: 시연용으로 브라우저 저장소에 보관(비밀번호는 해시만 저장). 실제 서비스는 서버 인증으로 교체.
+const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+const st=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let DB=ld('ds_users')||{},cur=ld('ds_cur');
+if(cur&&!DB[cur])cur=null;
+function loadUser(){S=cur?DB[cur].state:fresh();if(S.day!==dkey()){S.day=dkey();S.today=0;S.seen=[];S.todayCnt=0;S.mDone=[]}}
+loadUser();
+const save=()=>{if(!cur)return;DB[cur].state=S;st('ds_users',DB)};
+async function hash(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('desksave:'+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return 'f'+h}}
+let after=null,signup=false;
+function needAuth(fn){if(cur)return true;after=fn;openAuth();return false}
+function openAuth(){signup=false;setMode();$('aMsg').textContent='';$('aPw').value='';$('modal').classList.add('on');setTimeout(()=>$('aId').focus(),50)}
+function setMode(){$('aTitle').textContent=signup?'회원가입':'로그인하고 포인트 받기';$('aGo').textContent=signup?'가입하고 시작':'로그인';$('aSwitch').textContent=signup?'이미 계정이 있어요':'처음이에요 · 회원가입';$('aSub').textContent=signup?'아이디와 비밀번호만 있으면 바로 시작할 수 있어요.':'광고를 보고 포인트를 쌓으려면 계정이 필요해요.'}
+$('aSwitch').onclick=()=>{signup=!signup;setMode();$('aMsg').textContent=''};
+$('aClose').onclick=e=>{e.preventDefault();after=null;$('modal').classList.remove('on')};
+$('aGo').onclick=async()=>{const id=$('aId').value.trim().toLowerCase(),pw=$('aPw').value;
+ if(!/^[a-z0-9]{4,16}$/.test(id)){$('aMsg').textContent='아이디는 영문·숫자 4~16자예요.';return}
+ if(pw.length<6){$('aMsg').textContent='비밀번호는 6자 이상이에요.';return}
+ const h=await hash(pw);
+ if(signup){if(DB[id]){$('aMsg').textContent='이미 있는 아이디예요. 로그인해주세요.';return}
+  const ns=fresh();ns.guest=false;ns.nick=id;ns.pt=100;ns.log=[[now(),'가입 축하 포인트','+100']];DB[id]={h,state:ns};toast('가입 완료! +100P')}
+ else{if(!DB[id]){$('aMsg').textContent='없는 아이디예요. 처음이면 회원가입을 눌러주세요.';return}
+  if(DB[id].h!==h){$('aMsg').textContent='비밀번호가 맞지 않아요.';return}toast(id+'님, 다시 오셨네요')}
+ cur=id;st('ds_cur',cur);st('ds_users',DB);loadUser();$('modal').classList.remove('on');renderAll();
+ const f=after;after=null;if(f)f()};
+$('aPw').onkeydown=e=>{if(e.key==='Enter')$('aGo').click()};
+$('authBtn').onclick=()=>{if(cur){cur=null;st('ds_cur',null);loadUser();renderAll();toast('로그아웃했어요')}else openAuth()};
+const P=()=>S.policy;
+const perPt=c=>Math.round(c.price*P().share/100);
+function toast(m){$('toast').textContent=m;$('toast').classList.add('on');setTimeout(()=>$('toast').classList.remove('on'),1800)}
+function add(n,what){n=Math.max(0,n);S.pt+=n;S.log.unshift([now(),what,'+'+n]);S.log=S.log.slice(0,80)}
+function earn(n,what){const room=P().cap-S.today;const a=Math.min(n,room);if(a<=0)return 0;S.today+=a;add(a,what);return a}
+
+// 현재 시간대에 볼 수 있는 캠페인
+const live=()=>S.camps.filter(c=>(c.slot==='all'||+c.slot===curSlot())&&c.spent+c.price<=c.budget);
+const avail=()=>live().filter(c=>!S.seen.includes(c.id));
+
+function renderWatch(){
+ const a=avail(),pp=a[0]?perPt(a[0]):Math.round(20*P().share/100);
+ $('hello').textContent=cur?cur+'님, 설치 없이 웹에서':'설치 없이 웹에서 · 둘러보고 마음에 들면 시작하세요';
+ $('perv1').textContent=pp;$('capv').textContent=P().cap;
+ $('meter').style.width=Math.min(100,S.today/P().cap*100)+'%';
+ $('todayv').textContent=`오늘 ${S.today}P 적립 · 지금 볼 수 있는 광고 ${a.length}편`;
+ $('slots').innerHTML=SLOTS.map((s,i)=>`<span class="slot ${i===curSlot()?'on':''}">${s}${i===curSlot()?' · 지금':''}</span>`).join('');
+ $('b1').textContent=`+${pp}P · 15초`;$('b3').textContent=`+${pp*3}P · 45초`;$('b5').textContent=`+${pp*5}P +보너스 ${P().bonus}P`;
+ document.querySelectorAll('.batch .btn').forEach(b=>b.disabled=a.length<1||S.today>=P().cap);
+ const l=live();
+ $('adlist').innerHTML=l.length?l.map(c=>{const d=S.seen.includes(c.id);return `<div class="card ad ${d?'done':''}"><div class="thumb" style="background:${c.color}">${c.title}</div><div class="row"><span class="mute">${c.brand}</span><button class="btn sm ${d?'ghost':''}" ${d||S.today>=P().cap?'disabled':''} onclick="play([${c.id}])">${d?'시청 완료':'▶ 보기 +'+perPt(c)+'P'}</button></div></div>`}).join(''):'<p class="mute">이 시간대 광고가 모두 소진됐어요.</p>';
+}
+const MISSIONS=[{id:'m3',t:'오늘 광고 3편 보기',need:3,r:10},{id:'m10',t:'오늘 광고 10편 보기',need:10,r:30},{id:'m5r',t:'5편 연속 보기 1회 완주',need:-1,r:15}];
+function renderMission(){
+ $('attv').textContent=P().att;$('att7v').textContent=P().att*4;
+ const days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(d)}
+ $('days').innerHTML=days.map(d=>`<div class="day ${S.att.includes(dkey(d))?'on':''}">${'일월화수목금토'[d.getDay()]}</div>`).join('');
+ const did=S.att.includes(dkey());$('attbtn').disabled=did;$('attbtn').textContent=did?'오늘 출석 완료':'오늘 출석하기';
+ $('missions').innerHTML=MISSIONS.map(m=>{const prog=m.need>0?Math.min(S.todayCnt,m.need):(S.mDone.includes('run5')?1:0);const need=m.need>0?m.need:1;const ok=prog>=need,claimed=S.mDone.includes(m.id);
+  return `<div class="mission"><div style="flex:1"><h3>${m.t}</h3><div class="meter"><i style="width:${prog/need*100}%"></i></div><span class="mute">${prog}/${need} · +${m.r}P</span></div><button class="btn sm ${claimed?'ghost':''}" ${!ok||claimed?'disabled':''} onclick="claim('${m.id}')">${claimed?'받음':'받기'}</button></div>`}).join('');
+}
+window.claim=id=>{if(!needAuth(()=>claim(id)))return;const m=MISSIONS.find(x=>x.id===id);if(S.mDone.includes(id))return;S.mDone.push(id);add(m.r,'미션: '+m.t);save();renderAll();toast(`+${m.r}P 미션 보상`)};
+$('attbtn').onclick=()=>{if(!needAuth(()=>$('attbtn').click()))return;const k=dkey();if(S.att.includes(k))return;const y=new Date();y.setDate(y.getDate()-1);S.streak=S.att.includes(dkey(y))?S.streak+1:1;S.att.push(k);S.att=S.att.slice(-30);add(P().att,'출석 체크');let m=`+${P().att}P 출석`;if(S.streak%7===0){add(P().att*4,'7일 연속 출석 보너스');m+=` · 7일 연속 보너스!`}save();renderAll();toast(m)};
+
+function renderMe(){
+ $('pt').textContent=S.pt.toLocaleString()+'P';$('hpt').textContent=S.pt.toLocaleString()+'P';
+ $('today').textContent=S.today+'P';$('cntAll').textContent=S.cntAll+'편';$('streakv').textContent=S.streak+'일';
+ $('log').innerHTML=S.log.length?S.log.slice(0,20).map(l=>`<tr><td>${l[0]}</td><td>${l[1]}</td><td>${l[2]}P</td></tr>`).join(''):'<tr><td colspan="3" class="mute">아직 내역이 없어요.</td></tr>';
+}
+const ITEMS=[["편의점","편의점 1천원권",1000],["편의점","편의점 3천원권",3000],["커피","아메리카노",4500],["커피","카페라떼",5000],["배달","배달 쿠폰 5천원",5000],["배달","치킨 세트",20000]];
+let cat='전체';
+function renderShop(){
+ const cs=['전체',...new Set(ITEMS.map(i=>i[0]))];
+ $('cats').innerHTML=cs.map(c=>`<button class="slot ${c===cat?'on':''}" onclick="setCat('${c}')">${c}</button>`).join('');
+ $('items').innerHTML=ITEMS.map((it,i)=>[it,i]).filter(([it])=>cat==='전체'||it[0]===cat).map(([it,i])=>`<div class="card"><span class="tag">${it[0]}</span><h3 style="margin-top:8px">${it[1]}</h3><div class="mute">${it[2].toLocaleString()}P</div><div class="meter"><i style="width:${Math.min(100,S.pt/it[2]*100)}%"></i></div><div style="margin-top:10px"><button class="btn sm ${S.pt<it[2]?'ghost':''}" ${S.pt<it[2]?'disabled':''} onclick="buy(${i})">${S.pt<it[2]?(it[2]-S.pt).toLocaleString()+'P 더 필요':'교환'}</button></div></div>`).join('');
+}
+window.setCat=c=>{cat=c;renderShop()};
+window.buy=i=>{if(!needAuth(()=>buy(i)))return;const it=ITEMS[i];if(S.pt<it[2])return;S.pt-=it[2];S.log.unshift([now(),'교환: '+it[1],'-'+it[2]]);save();renderAll();toast(`'${it[1]}' 교환 완료 (데모)`)};
+
+function renderBiz(){
+ const mine=S.camps.filter(c=>c.mine);
+ $('ctab').innerHTML=mine.length?mine.map(c=>`<tr><td>${c.title}<br><span class="mute">${c.brand}</span></td><td>${c.slot==='all'?'전체':SLOTS[c.slot]}</td><td>${c.starts}</td><td>${c.done}</td><td>${c.starts?Math.round(c.done/c.starts*100):0}%</td><td>${c.done?Math.round(c.quizOk/c.done*100):0}%</td><td>${c.spent.toLocaleString()} / ${c.budget.toLocaleString()}원</td><td><button class="btn ghost sm" onclick="stopC(${c.id})">${c.spent+c.price>c.budget?'종료됨':'중지'}</button></td></tr>`).join(''):'<tr><td colspan="8" class="mute">등록한 캠페인이 없어요. 왼쪽에서 하나 만들어보세요. 만든 광고는 해당 시간대 광고 목록에 바로 올라가요.</td></tr>';
+}
+window.stopC=id=>{const c=S.camps.find(x=>x.id===id);c.budget=c.spent;save();renderAll()};
+$('cAdd').onclick=()=>{const t=$('cTitle').value.trim(),b=$('cBrand').value.trim(),p=+$('cPrice').value,bu=+$('cBudget').value;
+ if(!t||!b||p<5||bu<p){$('cMsg').textContent='문구·브랜드를 채우고, 예산이 단가보다 커야 해요.';return}
+ const id=Math.max(...S.camps.map(c=>c.id))+1;S.camps.unshift({id,title:t,brand:b,slot:$('cSlot').value==='all'?'all':+$('cSlot').value,price:p,budget:bu,spent:0,starts:0,done:0,quizOk:0,mine:true,color:COLORS[id%8],date:dkey()});
+ $('cTitle').value='';$('cBrand').value='';$('cMsg').textContent='캠페인이 시작됐어요. 해당 시간대 광고 목록에서 확인할 수 있어요.';save();renderAll()};
+function calc(){const p=+$('sP').value,s=+$('sS').value/100,n=+$('sN').value,u=+$('sU').value;
+ $('sPv').textContent=p;$('sSv').textContent=Math.round(s*100);$('sNv').textContent=n;$('sUv').textContent=u.toLocaleString();
+ $('o1').textContent=(p*s).toFixed(1)+'원';$('o2').textContent=Math.round(p*s*n*20).toLocaleString()+'원';
+ $('o3').textContent=Math.round(p*n*u*20).toLocaleString()+'원';$('o4').textContent=Math.round(p*(1-s)*n*u*20).toLocaleString()+'원'}
+['sP','sS','sN','sU'].forEach(id=>$(id).oninput=calc);
+
+function renderOps(){
+ const rev=S.camps.reduce((a,c)=>a+c.spent,0),pay=S.log.filter(l=>l[2][0]==='+').reduce((a,l)=>a+ +l[2].slice(1),0);
+ const st=S.camps.reduce((a,c)=>a+c.starts,0),dn=S.camps.reduce((a,c)=>a+c.done,0),qo=S.camps.reduce((a,c)=>a+c.quizOk,0);
+ $('kRev').textContent=rev.toLocaleString()+'원';$('kPay').textContent=pay.toLocaleString()+'P';
+ $('kMar').textContent=(rev-pay).toLocaleString()+'원';$('kMar').style.color=rev-pay<0?'var(--warn)':'';
+ $('kRate').textContent=`${st?Math.round(dn/st*100):0}% · ${dn?Math.round(qo/dn*100):0}%`;
+ const p=P();$('pS').value=p.share;$('pC').value=p.cap;$('pA').value=p.att;$('pB').value=p.bonus;$('pQ').checked=p.quiz;
+ $('pSv').textContent=p.share;$('pCv').textContent=p.cap;$('pAv').textContent=p.att;$('pBv').textContent=p.bonus;
+ const sig=[];
+ if(S.quits>3)sig.push(['중간 이탈 '+S.quits+'회','시청 시작 후 그만두는 비율이 높음']);
+ if(dn&&qo/dn<.7)sig.push(['정답률 '+Math.round(qo/dn*100)+'%','틀어만 두고 안 볼 가능성']);
+ if(S.today>=p.cap)sig.push(['오늘 상한 도달','상한 도달 계정 비율 모니터링 필요']);
+ if(rev-pay<0)sig.push(['회사 몫 마이너스','출석·미션 보너스가 광고 매출보다 큼']);
+ $('abuse').innerHTML=(sig.length?sig.map(s=>`<div class="mission"><div><h3><span class="tag w">주의</span> ${s[0]}</h3><span class="mute">${s[1]}</span></div></div>`).join(''):'<p class="mute">지금은 특이 신호가 없어요.</p>')+'<div class="note">실제 서비스에선 IP·기기 지문, 동일 결제수단, 가상머신 감지, 시청 간격의 기계적 패턴 등을 함께 봐야 해요.</div>';
+}
+['pS','pC','pA','pB'].forEach(id=>$(id).oninput=()=>{S.policy={share:+$('pS').value,cap:+$('pC').value,att:+$('pA').value,bonus:+$('pB').value,quiz:$('pQ').checked};save();renderAll()});
+$('pQ').onchange=()=>{S.policy.quiz=$('pQ').checked;save();renderAll()};
+
+// 플레이어
+let queue=[],qi=0,t=0,timer=null,batchN=0,got=0,waitingQuiz=false;
+function play(ids){if(!needAuth(()=>play(ids)))return;if(S.today>=P().cap)return;queue=ids;qi=0;got=0;batchN=ids.length;$('pclose').textContent='그만 보기';$('player').classList.add('on');start()}
+window.play=play;
+function start(){t=0;waitingQuiz=false;const c=S.camps.find(x=>x.id===queue[qi]);c.starts++;save();
+ $('pbrand').textContent=c.brand+' · 광고';$('ptitle').textContent=c.title;$('screen').style.background=c.color;$('pmsg').textContent='';$('quiz').innerHTML='';$('pprog').style.width='0';
+ clearInterval(timer);timer=setInterval(tick,1000);tick(true)}
+function tick(first){
+ const label=batchN>1?`${qi+1}/${batchN}편 · `:'';
+ if(document.hidden){$('pstat').textContent=label+'탭을 벗어나 일시정지';return}
+ if(!first)t++;$('pprog').style.width=(t/SEC*100)+'%';$('pstat').textContent=label+`${Math.max(0,SEC-t)}초 남음`;
+ if(t>=SEC){clearInterval(timer);const c=S.camps.find(x=>x.id===queue[qi]);c.done++;
+  if(P().quiz)askQuiz(c);else settle(c,true)}
+}
+function askQuiz(c){waitingQuiz=true;const others=S.camps.filter(x=>x.brand!==c.brand).map(x=>x.brand);const opts=[c.brand,...others.sort(()=>Math.random()-.5).slice(0,2)].sort(()=>Math.random()-.5);
+ $('ptitle').textContent='방금 본 광고의 브랜드는?';$('pbrand').textContent='확인 문제';$('screen').style.background='#fff';
+ $('quiz').innerHTML=opts.map(o=>`<button class="btn ghost" onclick="answer(${c.id},'${o}')">${o}</button>`).join('');$('pstat').textContent='맞히면 적립돼요'}
+window.answer=(id,o)=>{if(!waitingQuiz)return;waitingQuiz=false;const c=S.camps.find(x=>x.id===id);settle(c,o===c.brand)};
+function settle(c,ok){$('quiz').innerHTML='';
+ if(ok){c.quizOk++;c.spent+=c.price;S.seen.push(c.id);S.todayCnt++;S.cntAll++;const a=earn(perPt(c),c.brand+' 광고 시청');got+=a;$('ptitle').textContent=`+${a}P 적립`;}
+ else{S.seen.push(c.id);$('ptitle').textContent='아쉽게도 오답이에요';$('pmsg').textContent='이 광고는 적립되지 않았어요';}
+ save();renderAll();qi++;
+ if(qi<queue.length&&S.today<P().cap){$('pmsg').textContent+=(ok?'':' · ')+'다음 광고로 넘어가요';setTimeout(start,1300)}else finish()}
+function finish(){let m=`총 ${got}P 적립`;
+ if(batchN>=5&&qi>=5&&got>=perPt(S.camps[0])*5*0.99){const b=earn(P().bonus,'5편 연속 보너스');m+=` + 보너스 ${b}P`;if(!S.mDone.includes('run5'))S.mDone.push('run5');save();renderAll()}
+ $('pmsg').textContent=m;$('pstat').textContent='시청 끝';$('pclose').textContent='닫기'}
+$('pclose').onclick=()=>{if($('pclose').textContent==='그만 보기'){S.quits++;save()}clearInterval(timer);waitingQuiz=false;$('player').classList.remove('on');renderAll()};
+document.querySelectorAll('.batch .btn').forEach(b=>b.onclick=()=>{const ids=avail().slice(0,+b.dataset.n).map(c=>c.id);if(ids.length)play(ids)});
+
+$('reset').onclick=()=>{if(!cur)return;const n=S.nick;S=fresh();S.guest=false;S.nick=n;save();renderAll();toast('데모 데이터를 초기화했어요')};
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,.view').forEach(x=>x.classList.remove('on'));b.classList.add('on');$(b.dataset.v).classList.add('on');renderAll()});
+function renderAll(){$('authBtn').textContent=cur?'로그아웃':'로그인';$('authBtn').className=cur?'btn ghost sm':'btn sm';renderWatch();renderMission();renderMe();renderShop();renderBiz();renderOps()}
+renderAll();calc();
 </script>
 </body>
 </html>
