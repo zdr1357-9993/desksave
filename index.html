@@ -3,30 +3,346 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>어떤 월급이 끌리세요?</title>
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<title>틈날때버는월급</title>
+<meta name="description" content="커피 한 잔, 스트레칭 한 번. 쉬는 틈을 내 시급으로 환산해 보여주고, 원하면 포인트도 쌓는 직장인 쉼 기록.">
+<meta name="theme-color" content="#1f6f5c">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:'Noto Sans KR',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#efeee9;color:#1d1d1b;padding:24px}
-h1{font-size:26px;margin:0 0 6px;text-align:center}p.s{color:#6b6a65;margin:0 0 28px;text-align:center}
-.wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:min(900px,100%)}
-@media(max-width:700px){.wrap{grid-template-columns:1fr}}
-a.opt{display:block;text-decoration:none;border-radius:22px;padding:34px 28px;transition:transform .15s,box-shadow .15s}
-a.opt:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(0,0,0,.12)}
-.a{background:#fff;color:#1d1d1b;border:1px solid #e2e0d8}.b{background:#16131f;color:#f2eefc}
-.k{font-size:13px;font-weight:700;opacity:.65}
-.n{font-size:36px;margin:10px 0}.a .n{font-family:'Gowun Dodum';color:#1f6f5c}.b .n{font-family:'Black Han Sans';color:#a98bff}
-.d{font-size:15px;opacity:.8;line-height:1.6}
-.go{display:inline-block;margin-top:20px;font-weight:700;padding:10px 16px;border-radius:12px}.a .go{background:#1f6f5c;color:#fff}.b .go{background:#6b3fd4;color:#fff}
-small{margin-top:24px;color:#8a8984}
+:root{--acc:#1f6f5c;--acc-d:#16523f;--acc2:#e6f2ec;--bg:#f6f5f1;--card:#fff;--ink:#1d1d1b;--mute:#6b6a65;--line:#e6e3da;--warm:#f4a259;--r:18px}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+button{font:inherit;cursor:pointer;color:inherit}a{color:var(--acc)}
+:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+header{position:sticky;top:0;z-index:10;background:rgba(246,245,241,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:58px;gap:10px}
+.logo{font-family:'Gowun Dodum';font-size:21px;font-weight:700;text-decoration:none;color:var(--ink)}.logo b{color:var(--acc)}
+.hr{display:flex;align-items:center;gap:8px;font-size:14px}
+.pill{background:var(--acc);color:#fff;border-radius:99px;padding:5px 12px;font-weight:700;font-variant-numeric:tabular-nums}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:12px 18px;font-weight:700;transition:transform .08s,background .15s}
+.btn:hover{background:var(--acc-d)}.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent;color:var(--acc);border:1px solid var(--acc)}.btn.ghost:hover{background:var(--acc2)}
+.btn.sm{padding:7px 12px;font-size:13px;border-radius:9px}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.link{background:none;border:0;color:var(--mute);text-decoration:underline;font-size:13px;padding:4px}
+.mute{color:var(--mute)}
+.hero{display:grid;grid-template-columns:1fr 420px;gap:32px;padding:36px 0 18px;align-items:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:20px;gap:18px}.intro{order:2}}
+.tag{display:inline-block;background:var(--acc2);color:var(--acc);font-weight:700;font-size:13px;padding:4px 10px;border-radius:99px}
+h1{font-family:'Gowun Dodum';font-size:42px;line-height:1.25;margin:12px 0;font-weight:700;letter-spacing:-.01em}
+@media(max-width:600px){h1{font-size:30px}}
+.lead{color:var(--mute);font-size:16px;max-width:480px}
+.steps{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.steps span{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px}.steps b{color:var(--acc)}
+.timer{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 10px 30px rgba(31,111,92,.08);position:relative;overflow:hidden}
+.timer.run{border-color:var(--acc);box-shadow:0 10px 40px rgba(31,111,92,.22)}
+.timer.run::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0,rgba(31,111,92,.10),transparent 60%);animation:breathe 4s ease-in-out infinite;pointer-events:none}
+@keyframes breathe{50%{opacity:.3}}
+.tt{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--mute)}
+.state{font-size:12px;font-weight:700;padding:3px 8px;border-radius:99px;background:var(--bg)}.timer.run .state{background:var(--acc);color:#fff}
+#tTime{font-size:60px;font-weight:800;font-variant-numeric:tabular-nums;text-align:center;letter-spacing:-.02em;margin:6px 0 0}
+.money{text-align:center;color:var(--mute);font-size:13px}#tMoney{display:block;font-size:30px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums}
+.kinds{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0 10px}
+.kind{border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:9px 4px;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.kind i{font-style:normal;font-size:22px}.kind.on{border-color:var(--acc);background:var(--acc2);color:var(--acc);font-weight:700}
+#go{width:100%;font-size:18px;padding:16px;border-radius:14px}
+.timer.run #go{background:var(--ink)}
+.gr{margin-top:14px;display:flex;align-items:center;gap:12px;background:var(--acc2);border-radius:14px;padding:10px 12px}
+.gr .em{font-size:26px}.gr b{display:block;color:var(--acc)}.gr small{display:block;color:var(--mute);font-size:12px}
+.gbar{height:6px;background:#fff;border-radius:99px;overflow:hidden;margin-top:5px}.gbar i{display:block;height:100%;background:var(--acc);transition:width .4s}
+.wi{font-size:12px;color:var(--mute);text-align:center;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.card h2{font-size:17px;margin:0}.card .sub{color:var(--mute);font-size:13px;margin:2px 0 12px}
+.ch{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}li:last-child{border:0}
+li.done span{color:var(--mute)}li.done b{color:var(--acc)}li.me{color:var(--acc);font-weight:700}
+.chk{display:inline-flex;width:18px;height:18px;border-radius:50%;border:2px solid var(--line);margin-right:6px;vertical-align:-3px;align-items:center;justify-content:center;font-size:11px}
+li.done .chk{background:var(--acc);border-color:var(--acc);color:#fff}
+.weekbox{display:flex;gap:8px;align-items:flex-end;height:120px}
+.wk{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--mute)}
+.wb{width:100%;height:92px;background:var(--acc2);border-radius:8px;display:flex;align-items:flex-end;overflow:hidden}.wb i{display:block;width:100%;background:var(--acc);border-radius:8px;transition:height .4s}
+.wk.today span{color:var(--acc);font-weight:700}
+.kindsum{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.kindsum span{font-size:12px;background:var(--bg);border-radius:99px;padding:3px 9px}
+.item{display:grid;grid-template-columns:1fr 80px auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}.item:last-child{border:0}.item span{display:block;color:var(--mute);font-size:12px}
+.mb{height:6px;background:var(--acc2);border-radius:99px;overflow:hidden}.mb i{display:block;height:100%;background:var(--acc)}
+.bonus{background:linear-gradient(135deg,#fff7ec,#fff);border-color:#f3dfc3}
+.bonus .btn{background:var(--warm)}.bonus .btn:hover{background:#e08d43}.bonus .btn.ghost{background:transparent;color:#b86a23;border-color:var(--warm)}
+#slip{background:#fffdf7;border:1px solid #e9e1c9;border-radius:12px;padding:16px;font-size:14px}
+.sl-h{font-weight:800;font-size:16px;display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:4px}.sl-h span{font-weight:400;font-size:12px;color:var(--mute)}
+.sl-r{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dotted #d8d2bf}.sl-r span{color:var(--mute)}.sl-r .acc{color:var(--acc)}
+.sl-f{margin-top:10px;font-size:12px;color:var(--mute);text-align:center}
+.two{display:flex;gap:8px;margin-top:10px}.two .btn{flex:1}
+.ov{position:fixed;inset:0;background:rgba(20,20,18,.5);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}.ov.on{display:flex}
+.box{background:var(--card);border-radius:20px;width:min(440px,100%);padding:24px;max-height:92vh;overflow:auto;animation:pop .18s ease-out}
+@keyframes pop{from{transform:scale(.96);opacity:0}}
+.box h2{margin:0 0 6px;font-family:'Gowun Dodum';font-size:22px}
+.box input,.box select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:inherit;margin:4px 0 8px;background:var(--bg)}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}.presets button{border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:5px 11px;font-size:13px}.presets button.on{border-color:var(--acc);color:var(--acc);background:var(--acc2)}
+.err{color:#c0392b;font-size:13px;min-height:18px}
+.row{display:flex;gap:8px;justify-content:flex-end;align-items:center;flex-wrap:wrap}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:14px}.dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}.dots i.on{background:var(--acc);width:18px;border-radius:99px}
+.scr{min-height:200px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px;background:var(--acc2)}
+.scr.c0{background:#fdf1e6}.scr.c1{background:#eef3ea}.scr.c2{background:#eaf0f7}.scr.c3{background:#f5edf3}
+#pTitle{font-size:22px;font-weight:800}
+#pQuiz{display:flex;flex-direction:column;gap:6px;width:100%;margin-top:10px}#pQuiz button{padding:10px;border:1px solid var(--line);background:#fff;border-radius:10px}#pQuiz button:hover{border-color:var(--acc)}
+.pb{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin:12px 0}.pb i{display:block;height:100%;width:0;background:var(--warm);transition:width .3s linear}
+.nudge{position:fixed;right:18px;bottom:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.12);display:none;z-index:15;max-width:300px}.nudge.on{display:block;animation:pop .2s}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:99px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:30;max-width:90vw;text-align:center}.toast.on{opacity:1}
+footer{color:var(--mute);font-size:12px;padding:24px 0 40px;line-height:1.7}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<h1>쉬는 시간, 어떤 이름으로 부를까요?</h1>
-<p class="s">두 가지 컨셉 중 더 끌리는 쪽을 골라 써보세요.</p>
-<div class="wrap">
-  <a class="opt a" href="a.html"><div class="k">A안</div><div class="n">틈날때버는월급</div><div class="d">커피 한 잔, 스트레칭 한 번.<br>잘 쉬는 것도 일의 일부라고 말해주는 따뜻한 버전.</div><span class="go">A안 써보기 →</span></a>
-  <a class="opt b" href="b.html"><div class="k">B안</div><div class="n">월급루팡</div><div class="d">월급은 회사가, 루팡은 내가.<br>등급 올리고 업종 대항전 하는 장난스러운 버전.</div><span class="go">B안 써보기 →</span></a>
-</div>
-<small>두 안은 기록이 따로 저장돼요 · 시연용 페이지</small>
+<header><div class="wrap">
+  <a class="logo" href="#">틈날때<b>버는</b>월급</a>
+  <div class="hr"><span id="who" class="mute"></span><button class="btn ghost sm" id="authBtn">로그인</button><span class="pill" id="ptTop" title="보유 포인트">0P</span></div>
+</div></header>
+<main class="wrap">
+  <section class="hero">
+    <div class="intro">
+      <span class="tag">쉬는 시간도 월급이 된다</span>
+      <h1>틈날 때마다,<br>월급이 조금씩 더 쌓여요</h1>
+      <p class="lead">커피 한 잔, 스트레칭 한 번, 창밖 보기 5분. 그 틈을 기록하면 내 시급으로 얼마인지 보여드려요. 잘 쉬는 것도 일의 일부니까요.</p>
+      <div class="steps"><span><b>1</b> 틈 종류 고르고</span><span><b>2</b> 쉬는 동안 켜두고</span><span><b>3</b> 오늘의 명세서 받기</span></div>
+    </div>
+    <div class="timer" id="timer" aria-live="polite">
+      <div class="tt"><span>오늘의 틈</span><span class="state" id="state">대기 중</span></div>
+      <div id="tTime">0:00</div>
+      <div class="money">틈으로 번 월급<span id="tMoney">0원</span></div>
+      <div class="kinds" id="kinds" role="radiogroup" aria-label="틈 종류"></div>
+      <button class="btn" id="go">▶ 틈 시작</button>
+      <div class="gr"><span class="em" id="gEm">🌱</span><div style="flex:1"><b id="gName"></b><small id="gNext"></small><div class="gbar"><i id="gBar"></i></div></div></div>
+      <div class="wi" id="wageInfo"></div>
+    </div>
+  </section>
+  <section class="grid">
+    <div class="card"><div class="ch"><h2>이번 주 틈</h2><span class="mute" style="font-size:13px" id="weekSum"></span></div><p class="sub" id="weekSub"></p><div class="weekbox" id="week"></div><div class="kindsum" id="kindsum"></div></div>
+    <div class="card"><h2>오늘의 미션</h2><p class="sub">달성하면 포인트가 자동으로 들어와요</p><ul id="miss"></ul></div>
+    <div class="card"><h2>업종별 오늘의 쉼</h2><p class="sub">오늘 가장 잘 쉰 업종은? (예시 수치)</p><ul id="league"></ul></div>
+  </section>
+  <section class="grid">
+    <div class="card"><h2>오늘의 명세서</h2><p class="sub">이미지로 저장하거나 복사해서 공유해 보세요</p><div id="slip"></div>
+      <div class="two"><button class="btn sm" id="saveSlip">이미지 저장</button><button class="btn ghost sm" id="copySlip">텍스트 복사</button></div></div>
+    <div class="card bonus"><h2>☕ 보너스 타임</h2><p class="sub">원할 때만, 15초 광고 보고 진짜 포인트 받기</p>
+      <div class="row" style="justify-content:flex-start"><button class="btn" data-ad="1">1편 보기 +10P</button><button class="btn ghost" data-ad="3">3편 연속</button></div>
+      <p class="sub" id="adLeft" style="margin-top:12px"></p>
+      <p class="sub" style="font-size:12px">광고가 끝나면 브랜드 맞히기 문제가 하나 나와요. 맞히면 적립돼요.</p></div>
+    <div class="card"><h2>포인트 교환</h2><p class="sub">1P = 1원 · 교환할 때만 로그인이 필요해요</p><div id="shop"></div></div>
+  </section>
+  <section class="card"><div class="ch"><h2>최근 기록</h2><button class="link" id="settingsBtn">연봉·업종 설정</button></div><ul id="log" style="margin-top:8px"></ul></section>
+  <footer>틈날때버는월급 · 시연용 페이지예요. 기록·계정은 이 브라우저에만 저장되고, 교환은 실제로 발송되지 않아요.<br>'틈으로 번 월급'은 연봉 ÷ 12개월 ÷ 월 209시간으로 계산한 재미용 환산 금액이에요. 실제 포인트는 미션과 보너스 광고로만 쌓여요.</footer>
+</main>
+
+<div class="ov" id="onb"><div class="box"><div id="onbBody"></div><div class="dots" id="onbDots"></div></div></div>
+<div class="ov" id="setup"><div class="box">
+  <h2>내 연봉을 알려주세요</h2>
+  <p class="mute" style="font-size:14px;margin-top:0">쉬는 시간을 시급으로 환산하는 데만 쓰여요. 이 브라우저에만 저장돼요.</p>
+  <label class="mute" style="font-size:13px" for="sWage">연봉 (만원)</label>
+  <div class="presets" id="presets"></div>
+  <input id="sWage" type="number" inputmode="numeric" placeholder="직접 입력 (예: 4200)">
+  <label class="mute" style="font-size:13px" for="sJob">업종</label><select id="sJob"></select>
+  <div class="err" id="sErr"></div>
+  <div class="row"><button class="link" id="sAvg">잘 모르겠어요 (3,600만원으로)</button><button class="btn sm" id="sGo">저장하고 시작</button></div>
+</div></div>
+<div class="ov" id="auth"><div class="box">
+  <h2 id="aT">로그인</h2><p id="aS" class="mute" style="font-size:14px;margin-top:0"></p>
+  <input id="aId" placeholder="아이디 (영문·숫자 4~16자)" maxlength="16" autocomplete="username">
+  <input id="aPw" type="password" placeholder="비밀번호 (6자 이상)" autocomplete="current-password">
+  <div class="err" id="aErr"></div>
+  <p class="mute" style="font-size:12px">시연용이라 이 브라우저에만 저장돼요. 평소 쓰는 비밀번호는 넣지 마세요.</p>
+  <div class="row"><button class="link" id="aSkip" style="margin-right:auto">로그인 건너뛰기</button><button class="btn ghost sm" id="aSw">회원가입</button><button class="btn sm" id="aGo">로그인</button></div>
+  <div style="text-align:right;margin-top:6px"><button class="link" id="aX">닫기</button></div>
+</div></div>
+<div class="ov" id="player"><div class="box">
+  <div class="scr" id="pScr"><small id="pBrand" class="mute"></small><div id="pTitle"></div><small id="pMsg" class="mute" style="margin-top:6px"></small><div id="pQuiz"></div></div>
+  <div class="pb"><i id="pBar"></i></div>
+  <div class="row" style="justify-content:space-between"><span class="mute" style="font-size:13px"><span id="pCnt"></span> <span id="pStat"></span></span><button class="btn ghost sm" id="pClose">그만 보기</button></div>
+</div></div>
+<div class="nudge" id="nudge"><b>50분째 일하고 있어요 🌿</b><p class="mute" style="font-size:13px;margin:4px 0 10px">잠깐 틈을 내볼까요? 물 한 잔도 좋아요.</p><div class="row"><button class="link" id="nLater">나중에</button><button class="btn sm" id="nGo">틈 시작</button></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const won=n=>Math.round(n).toLocaleString()+'원';
+const dkey=d=>(d||new Date()).toDateString();
+const now=()=>new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
+const mmss=s=>{s=Math.floor(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+':':'')+String(m).padStart(h?2:1,'0')+':'+String(x).padStart(2,'0')};
+const P='tm_';
+const ld=k=>{try{return JSON.parse(localStorage.getItem(P+k))}catch(e){return null}};
+const st=(k,v)=>{try{localStorage.setItem(P+k,JSON.stringify(v))}catch(e){}};
+const SEC=15,PER=10,CAP=300,NUDGE_MIN=50;
+const KINDS=[['coffee','☕','커피'],['stretch','🧘','스트레칭'],['walk','🚶','산책'],['window','🌤','멍때리기']];
+const GRADES=[[0,'🌱','새싹 쉼표'],[5,'☕','커피 한 잔'],[15,'🚶','산책 고수'],[30,'🪴','틈새 장인'],[60,'🌳','여유 대표']];
+const MISS=[['m5','오늘 5분 틈 만들기',5],['k2','두 가지 종류로 쉬기',5],['m15','오늘 15분 쉬기',10],['lunch','점심 후(13~15시) 1분 이상 쉬기',5],['ad1','보너스 광고 1편 보기',5]];
+const JOBS=['IT·개발','마케팅·광고','영업','디자인','경영지원','제조·생산','금융','공공·교육','서비스·유통','기타'];
+const ADS=[['점심 배달비 0원','배달앱 A'],['사무실 원두 정기배송','커피브랜드 B'],['오후 간식 묶음 배송','간식몰 C'],['목·어깨 편한 의자','가구 D'],['퇴근길 운동 1회 무료','피트니스 E'],['회의록 자동 정리 툴','SaaS F'],['주말 근교 숙소 특가','여행 G'],['직장인 영어 첫 달 무료','교육 H']].map((a,i)=>({id:i,title:a[0],brand:a[1]}));
+const ITEMS=[['편의점 1천원권',1000],['아메리카노',4500],['배달 쿠폰 5천원',5000],['치킨 세트',20000]];
+
+const fresh=()=>({wage:0,job:'',pt:0,day:dkey(),secToday:0,secAll:0,days:{},kindsToday:{},seen:[],ptToday:0,log:[],missions:[],run:null,kind:'coffee'});
+let DB=ld('users')||{},cur=ld('cur');if(cur&&!DB[cur])cur=null;
+let S;
+function rollDay(){if(S.day!==dkey()){if(S.run)finishRun(true);S.day=dkey();S.secToday=0;S.kindsToday={};S.seen=[];S.ptToday=0;S.missions=[]}}
+function loadU(){S=Object.assign(fresh(),cur?DB[cur].s:(ld('guest')||{}));rollDay()}
+const perSec=()=>S.wage?S.wage*10000/12/209/3600:0;
+const liveSec=()=>S.secToday+(S.run?(Date.now()-S.run.t)/1000:0);
+const liveKinds=()=>{const k=Object.assign({},S.kindsToday);if(S.run)k[S.run.k]=(k[S.run.k]||0)+(Date.now()-S.run.t)/1000;return k};
+function save(){S.days[dkey()]=liveSec();if(cur){DB[cur].s=S;st('users',DB)}else st('guest',S)}
+loadU();
+
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),2200)}
+function open(id){$(id).classList.add('on')}function close(id){$(id).classList.remove('on')}
+document.querySelectorAll('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o&&(o.id==='setup'||o.id==='auth'))close(o.id)}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')['setup','auth'].forEach(close)});
+
+// 첫 방문 안내
+const ONB=[['🌿','틈날 때 버는 월급','일하다 잠깐 쉬는 시간, 그냥 흘려보내지 말고 기록해 보세요.'],['⏱','쉬는 동안 켜두기만','커피, 스트레칭, 산책, 멍때리기. 고르고 시작을 누르면 끝이에요.'],['💰','내 시급으로 보여드려요','연봉을 넣으면 쉰 시간이 얼마짜리였는지 알려드려요. 미션을 깨면 진짜 포인트도 쌓여요.']];
+let ob=0;
+function drawOnb(){const s=ONB[ob];$('onbBody').innerHTML=`<div style="font-size:44px;text-align:center">${s[0]}</div><h2 style="text-align:center">${s[1]}</h2><p class="mute" style="text-align:center">${s[2]}</p><div class="row" style="justify-content:space-between;margin-top:16px"><button class="link" id="obSkip">건너뛰기</button><button class="btn" id="obNext">${ob<ONB.length-1?'다음':'연봉 넣고 시작하기'}</button></div>`;
+ $('onbDots').innerHTML=ONB.map((_,i)=>`<i class="${i===ob?'on':''}"></i>`).join('');
+ $('obNext').onclick=()=>{if(ob<ONB.length-1){ob++;drawOnb()}else{st('onb',1);close('onb');openSetup()}};
+ $('obSkip').onclick=()=>{st('onb',1);close('onb')}}
+
+// 연봉 설정
+let afterSetup=null;
+function openSetup(fn){afterSetup=fn||null;$('sErr').textContent='';$('sWage').value=S.wage||'';
+ $('presets').innerHTML=[3000,4000,5000,6000,8000].map(v=>`<button data-v="${v}" class="${S.wage===v?'on':''}">${v.toLocaleString()}</button>`).join('');
+ $('sJob').innerHTML=JOBS.map(j=>`<option ${j===S.job?'selected':''}>${j}</option>`).join('');open('setup');setTimeout(()=>$('sWage').focus(),60)}
+$('presets').onclick=e=>{const b=e.target.closest('button');if(!b)return;$('sWage').value=b.dataset.v;[...$('presets').children].forEach(x=>x.classList.toggle('on',x===b))};
+function applySetup(w){S.wage=w;S.job=$('sJob').value;save();close('setup');render();toast(`1분 쉬면 ${won(perSec()*60)}이에요`);const f=afterSetup;afterSetup=null;if(f)f()}
+$('sGo').onclick=()=>{const w=+$('sWage').value;if(!(w>=1000&&w<=100000))return $('sErr').textContent='연봉을 만원 단위로 넣어주세요 (예: 4200)';applySetup(w)};
+$('sWage').onkeydown=e=>{if(e.key==='Enter')$('sGo').click()};
+$('sAvg').onclick=()=>applySetup(3600);
+$('settingsBtn').onclick=()=>openSetup();
+
+// 틈 타이머 (시작 시각을 저장해 새로고침해도 이어짐)
+const kn=k=>KINDS.find(x=>x[0]===k)||KINDS[0];
+$('kinds').innerHTML=KINDS.map(k=>`<button class="kind" role="radio" data-k="${k[0]}"><i>${k[1]}</i>${k[2]}</button>`).join('');
+$('kinds').onclick=e=>{const b=e.target.closest('.kind');if(!b)return;
+ if(S.run&&S.run.k!==b.dataset.k){const add=(Date.now()-S.run.t)/1000;S.secToday+=add;S.secAll+=add;S.kindsToday[S.run.k]=(S.kindsToday[S.run.k]||0)+add;S.run={k:b.dataset.k,t:Date.now(),s0:S.run.s0};toast(kn(b.dataset.k)[2]+'(으)로 바꿨어요')}
+ S.kind=b.dataset.k;save();render()};
+let lastWork=Date.now(),nudged=false;
+function startRun(){if(!S.wage)return openSetup(startRun);S.run={k:S.kind,t:Date.now(),s0:Date.now()};close('nudge');save();render()}
+function finishRun(silent){if(!S.run)return;const add=(Date.now()-S.run.t)/1000,total=(Date.now()-S.run.s0)/1000,k=S.run.k;
+ S.secToday+=add;S.secAll+=add;S.kindsToday[k]=(S.kindsToday[k]||0)+add;S.run=null;lastWork=Date.now();nudged=false;
+ if(total>=5){S.log.unshift([now(),`${kn(k)[1]} ${kn(k)[2]} ${mmss(total)} · ${won(total*perSec())} 상당`,0]);S.log=S.log.slice(0,60);if(!silent)toast(`${mmss(total)} 쉬었어요. ${won(total*perSec())}어치 잘 쉬었네요 🌿`)}
+ save();checkMissions();render()}
+$('go').onclick=()=>S.run?finishRun():startRun();
+
+// 등급·미션
+const grade=sec=>{let g=GRADES[0];for(const x of GRADES)if(sec/60>=x[0])g=x;return g};
+function mOk(id,sec){const h=new Date().getHours(),k=liveKinds();
+ if(id==='m5')return sec>=300;if(id==='m15')return sec>=900;if(id==='k2')return Object.values(k).filter(v=>v>=30).length>=2;
+ if(id==='lunch')return !!(S.run&&h>=13&&h<15&&Date.now()-S.run.s0>=60000);if(id==='ad1')return S.seen.length>=1;return false}
+function checkMissions(){const sec=liveSec();let hit=false;
+ MISS.forEach(m=>{if(!S.missions.includes(m[0])&&mOk(m[0],sec)){S.missions.push(m[0]);const a=Math.max(0,Math.min(m[2],CAP-S.ptToday));S.pt+=a;S.ptToday+=a;S.log.unshift([now(),'미션 달성: '+m[1],a]);toast(`🎉 미션 달성! ${m[1]} +${a}P`);hit=true}});
+ if(hit){save();render()}}
+
+// 넛지
+$('nLater').onclick=()=>{close('nudge');lastWork=Date.now();nudged=false};
+$('nGo').onclick=()=>{close('nudge');startRun()};
+
+// 매 0.5초 갱신
+function tick(){rollDay();const sec=liveSec(),run=!!S.run;
+ $('timer').classList.toggle('run',run);$('state').textContent=run?kn(S.run.k)[1]+' 쉬는 중':'대기 중';
+ $('tTime').textContent=mmss(sec);$('tMoney').textContent=won(sec*perSec());
+ $('go').textContent=run?'■ 틈 끝내기':'▶ 틈 시작';
+ const g=grade(sec),i=GRADES.indexOf(g),nx=GRADES[i+1];
+ $('gEm').textContent=g[1];$('gName').textContent=g[2];
+ $('gNext').textContent=nx?`'${nx[2]}'까지 ${Math.ceil(nx[0]-sec/60)}분`:'오늘 충분히 쉬었어요';
+ $('gBar').style.width=(nx?((sec/60-g[0])/(nx[0]-g[0]))*100:100)+'%';
+ document.title=run?`${kn(S.run.k)[1]} ${mmss(sec)} · ${won(sec*perSec())} — 틈날때버는월급`:'틈날때버는월급';
+ if(run&&Math.floor(sec)%15===0)checkMissions();
+ if(!run&&!nudged&&Date.now()-lastWork>NUDGE_MIN*60000&&!document.hidden){nudged=true;open('nudge')}}
+
+// 보너스 광고
+let Q=[],qi=0,t=0,tm=null,quizOn=false,got=0;
+const avail=()=>ADS.filter(a=>!S.seen.includes(a.id));
+function play(n){if(!guard(()=>play(n)))return;if(S.ptToday>=CAP)return toast('오늘 적립 한도를 채웠어요');Q=avail().slice(0,n);if(!Q.length)return toast('오늘 보너스 광고를 다 봤어요');qi=0;got=0;$('pClose').textContent='그만 보기';open('player');startAd()}
+function startAd(){t=0;quizOn=false;const a=Q[qi];$('pBrand').textContent=a.brand+' · 광고';$('pTitle').textContent=a.title;$('pQuiz').innerHTML='';$('pMsg').textContent='';$('pBar').style.width=0;$('pScr').className='scr c'+(a.id%4);$('pCnt').textContent=Q.length>1?`${qi+1}/${Q.length}편 ·`:'';clearInterval(tm);tm=setInterval(adTick,1000);adTick(true)}
+function adTick(first){if(document.hidden){$('pStat').textContent='탭을 벗어나 일시정지';return}if(!first)t++;$('pBar').style.width=t/SEC*100+'%';$('pStat').textContent=(SEC-t)+'초 남음';
+ if(t>=SEC){clearInterval(tm);const a=Q[qi];quizOn=true;const o=[a.brand,...ADS.filter(x=>x.id!==a.id).map(x=>x.brand).sort(()=>Math.random()-.5).slice(0,2)].sort(()=>Math.random()-.5);
+  $('pBrand').textContent='확인 문제';$('pTitle').textContent='방금 본 광고의 브랜드는?';$('pScr').className='scr';$('pStat').textContent='';$('pQuiz').innerHTML=o.map(x=>`<button data-b="${x}">${x}</button>`).join('')}}
+$('pQuiz').onclick=e=>{const b=e.target.closest('button');if(!b||!quizOn)return;quizOn=false;const a=Q[qi],ok=b.dataset.b===a.brand;S.seen.push(a.id);$('pQuiz').innerHTML='';
+ if(ok){const g=Math.min(PER,CAP-S.ptToday);S.pt+=g;S.ptToday+=g;got+=g;S.log.unshift([now(),a.brand+' 보너스 광고',g]);$('pTitle').textContent=`+${g}P`}else{$('pTitle').textContent='아쉽게 오답이에요';$('pMsg').textContent='이번 광고는 적립되지 않았어요'}
+ save();checkMissions();render();qi++;if(qi<Q.length&&S.ptToday<CAP)setTimeout(startAd,1200);else{$('pMsg').textContent=`이번에 ${got}P 받았어요`;$('pClose').textContent='닫기'}};
+$('pClose').onclick=()=>{clearInterval(tm);quizOn=false;close('player')};
+document.querySelectorAll('[data-ad]').forEach(b=>b.onclick=()=>play(+b.dataset.ad));
+
+// 로그인 (건너뛰기 가능, 교환할 때만 필수)
+let skip=!!ld('skip'),after=null,signup=false,must=false;
+function guard(fn,need){if(cur||(skip&&!need))return true;after=fn;must=!!need;signup=false;mode();$('aErr').textContent='';$('aPw').value='';open('auth');setTimeout(()=>$('aId').focus(),60);return false}
+function mode(){$('aT').textContent=signup?'회원가입':'로그인';$('aGo').textContent=signup?'가입하기':'로그인';$('aSw').textContent=signup?'로그인으로':'회원가입';$('aSkip').style.display=must?'none':'';
+ $('aS').innerHTML=must?'<b>교환은 로그인이 필요해요.</b> 지금까지 모은 기록과 포인트는 로그인하면 그대로 옮겨져요.':(signup?'아이디·비밀번호만 있으면 돼요. 가입하면 100P를 드려요.':'지금은 <b>건너뛰어도 괜찮아요.</b> 기록은 이 브라우저에 보관되고, 교환할 때 로그인하면 계정으로 옮겨져요.')}
+$('aSw').onclick=()=>{signup=!signup;mode();$('aErr').textContent=''};
+$('aX').onclick=()=>{after=null;close('auth')};
+$('aSkip').onclick=()=>{skip=true;st('skip',1);close('auth');render();const f=after;after=null;if(f)f()};
+$('aPw').onkeydown=e=>{if(e.key==='Enter')$('aGo').click()};
+async function hash(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('tm:'+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return'f'+h}}
+$('aGo').onclick=async()=>{const id=$('aId').value.trim().toLowerCase(),pw=$('aPw').value;
+ if(!/^[a-z0-9]{4,16}$/.test(id))return $('aErr').textContent='아이디는 영문·숫자 4~16자예요.';if(pw.length<6)return $('aErr').textContent='비밀번호는 6자 이상이에요.';
+ const h=await hash(pw);
+ if(signup){if(DB[id])return $('aErr').textContent='이미 있는 아이디예요. 로그인해 주세요.';DB[id]={h,s:fresh()};DB[id].s.pt=100;DB[id].s.log=[[now(),'가입 축하',100]]}
+ else{if(!DB[id])return $('aErr').textContent='없는 아이디예요. 처음이면 회원가입을 눌러주세요.';if(DB[id].h!==h)return $('aErr').textContent='비밀번호가 맞지 않아요.'}
+ if(S.run)finishRun(true);
+ const g=ld('guest'),A=Object.assign(fresh(),DB[id].s);
+ if(g){A.pt+=g.pt||0;A.secAll+=g.secAll||0;A.log=[...(g.log||[]),...A.log].slice(0,60);if(!A.wage){A.wage=g.wage;A.job=g.job}
+  for(const d in (g.days||{}))A.days[d]=Math.max(A.days[d]||0,g.days[d]);
+  if(A.day===g.day){A.secToday+=g.secToday||0;for(const k in (g.kindsToday||{}))A.kindsToday[k]=(A.kindsToday[k]||0)+g.kindsToday[k];A.seen=[...new Set([...A.seen,...(g.seen||[])])];A.ptToday+=g.ptToday||0;A.missions=[...new Set([...A.missions,...(g.missions||[])])]}
+  st('guest',null)}
+ DB[id].s=A;cur=id;st('cur',id);st('users',DB);loadU();close('auth');toast(signup?'가입 완료! +100P 드렸어요':id+' 님, 다시 오셨네요');render();const f=after;after=null;if(f)f()};
+$('authBtn').onclick=()=>{if(cur){if(S.run)finishRun(true);cur=null;st('cur',null);loadU();render();toast('로그아웃했어요')}else guard(null)};
+function buy(i){if(!guard(()=>buy(i),true))return;const it=ITEMS[i];if(S.pt<it[1])return toast(`${(it[1]-S.pt).toLocaleString()}P 더 모으면 돼요`);S.pt-=it[1];S.log.unshift([now(),'교환: '+it[0],-it[1]]);save();render();toast(`'${it[0]}' 교환 완료 (시연용)`)}
+$('shop').onclick=e=>{const b=e.target.closest('[data-buy]');if(b)buy(+b.dataset.buy)};
+
+// 업종 리그 (예시 수치 + 내 기록 반영)
+function league(){const seed=new Date().getDate(),me=liveSec()/60,base=JOBS.slice(0,8);if(S.job&&!base.includes(S.job))base.push(S.job);
+ return base.map((j,i)=>{let m=Math.round(14+((i*37+seed*13)%22));if(j===S.job)m=Math.max(m,Math.round((m*20+me)/21));return{j,m}}).sort((a,b)=>b.m-a.m)}
+
+// 명세서
+function weekSec(){let s=0;for(let i=0;i<7;i++){const d=new Date();d.setDate(d.getDate()-i);s+=i===0?liveSec():(S.days[dkey(d)]||0)}return s}
+function topKind(){const k=liveKinds();let b=null;for(const x in k)if(!b||k[x]>k[b])b=x;return b?kn(b):null}
+function slipRows(){const sec=liveSec(),g=grade(sec),tk=topKind();return[['성명',cur||'익명의 직장인'],['소속',S.job||'-'],['오늘의 틈',mmss(sec)],['틈 월급(상당)',won(sec*perSec()),1],['가장 많이 한 쉼',tk?tk[1]+' '+tk[2]:'-'],['이번 주 누계',won(weekSec()*perSec())],['오늘의 등급',g[1]+' '+g[2]]]}
+$('copySlip').onclick=async()=>{const txt=`🌿 틈날때버는월급 · 오늘의 명세서 (${new Date().toLocaleDateString('ko-KR')})\n`+slipRows().map(r=>`${r[0]}: ${r[1]}`).join('\n')+`\n잘 쉬는 것도 일의 일부 ☕\n${location.href}`;
+ try{await navigator.clipboard.writeText(txt);toast('복사했어요! 단톡방에 붙여넣어 보세요')}catch(e){toast('복사가 막혀 있어요. 이미지 저장을 써보세요')}};
+function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
+$('saveSlip').onclick=()=>{const W=720,H=860,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');if(!x)return toast('이미지를 만들 수 없는 브라우저예요');
+ x.fillStyle='#f6f5f1';x.fillRect(0,0,W,H);x.fillStyle='#fffdf7';rr(x,40,40,W-80,H-80,28);x.fill();x.strokeStyle='#e9e1c9';x.lineWidth=2;x.stroke();
+ x.fillStyle='#1f6f5c';x.font='700 26px "Gowun Dodum", sans-serif';x.fillText('🌿 틈날때버는월급',80,110);
+ x.fillStyle='#1d1d1b';x.font='800 40px "Noto Sans KR", sans-serif';x.fillText('오늘의 명세서',80,170);
+ x.fillStyle='#6b6a65';x.font='22px "Noto Sans KR", sans-serif';x.fillText(new Date().toLocaleDateString('ko-KR'),80,206);
+ x.fillStyle='#1d1d1b';x.fillRect(80,228,W-160,3);
+ let y=290;slipRows().forEach(r=>{x.fillStyle='#6b6a65';x.font='24px "Noto Sans KR", sans-serif';x.fillText(r[0],80,y);x.fillStyle=r[2]?'#1f6f5c':'#1d1d1b';x.font=(r[2]?'800 32px':'700 26px')+' "Noto Sans KR", sans-serif';const w=x.measureText(r[1]).width;x.fillText(r[1],W-80-w,y);x.strokeStyle='#d8d2bf';x.setLineDash([3,5]);x.beginPath();x.moveTo(80,y+22);x.lineTo(W-80,y+22);x.stroke();x.setLineDash([]);y+=72});
+ x.fillStyle='#6b6a65';x.font='22px "Noto Sans KR", sans-serif';const f='잘 쉬는 것도 일의 일부 ☕';x.fillText(f,(W-x.measureText(f).width)/2,H-90);
+ c.toBlob(b=>{if(!b)return toast('이미지를 만들지 못했어요');const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`틈날때버는월급_${new Date().toISOString().slice(0,10)}.png`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);toast('명세서 이미지를 저장했어요')})};
+
+// 렌더
+function render(){
+ $('who').textContent=cur?cur+' 님':'';$('authBtn').textContent=cur?'로그아웃':'로그인';
+ $('ptTop').textContent=S.pt.toLocaleString()+'P';
+ [...$('kinds').children].forEach(b=>{const on=(S.run?S.run.k:S.kind)===b.dataset.k;b.classList.toggle('on',on);b.setAttribute('aria-checked',on)});
+ $('wageInfo').innerHTML=S.wage?`연봉 ${S.wage.toLocaleString()}만원 · ${S.job} · 1분 쉬면 <b>${won(perSec()*60)}</b>`:'연봉을 넣으면 쉰 시간이 돈으로 보여요';
+ tick();
+ const days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push([d,i===0?liveSec():(S.days[dkey(d)]||0),i===0])}
+ const mx=Math.max(600,...days.map(x=>x[1]));
+ $('week').innerHTML=days.map(([d,s,td])=>`<div class="wk ${td?'today':''}" title="${mmss(s)}"><div class="wb"><i style="height:${s/mx*100}%"></i></div><span>${td?'오늘':'일월화수목금토'[d.getDay()]}</span></div>`).join('');
+ const ws=weekSec();$('weekSum').textContent=mmss(ws);$('weekSub').textContent=ws?`이번 주 ${won(ws*perSec())}어치 쉬었어요`:'아직 이번 주 기록이 없어요';
+ const k=liveKinds();$('kindsum').innerHTML=KINDS.filter(x=>k[x[0]]>=1).map(x=>`<span>${x[1]} ${x[2]} ${mmss(k[x[0]])}</span>`).join('');
+ $('miss').innerHTML=MISS.map(m=>{const d=S.missions.includes(m[0]);return `<li class="${d?'done':''}"><span><span class="chk">${d?'✓':''}</span>${m[1]}</span><b>+${m[2]}P</b></li>`}).join('');
+ $('league').innerHTML=league().map((x,i)=>`<li class="${x.j===S.job?'me':''}"><span>${i+1}. ${x.j}${x.j===S.job?' · 우리':''}</span><b>평균 ${x.m}분</b></li>`).join('');
+ const av=avail().length;document.querySelectorAll('[data-ad]').forEach(b=>b.disabled=!av||S.ptToday>=CAP);$('adLeft').textContent=`오늘 남은 광고 ${av}편 · 오늘 적립 ${S.ptToday}/${CAP}P`;
+ $('shop').innerHTML=ITEMS.map((it,i)=>{const r=Math.min(1,S.pt/it[1]);return `<div class="item"><div><b>${it[0]}</b><span>${it[1].toLocaleString()}P</span></div><div class="mb" title="${Math.round(r*100)}%"><i style="width:${r*100}%"></i></div><button class="btn sm ${r<1?'ghost':''}" data-buy="${i}" ${r<1?'disabled':''}>${r<1?(it[1]-S.pt).toLocaleString()+'P 남음':'교환'}</button></div>`}).join('');
+ $('slip').innerHTML=`<div class="sl-h">오늘의 명세서<span>${new Date().toLocaleDateString('ko-KR')}</span></div>`+slipRows().map(r=>`<div class="sl-r"><span>${r[0]}</span><b class="${r[2]?'acc':''}">${r[1]}</b></div>`).join('')+'<div class="sl-f">잘 쉬는 것도 일의 일부 ☕</div>';
+ $('log').innerHTML=S.log.length?S.log.slice(0,8).map(l=>`<li><span>${l[0]} · ${l[1]}</span><b style="color:${l[2]>0?'var(--acc)':'var(--mute)'}">${l[2]?(l[2]>0?'+':'')+l[2]+'P':''}</b></li>`).join(''):'<li class="mute">첫 틈을 시작해 보세요</li>';
+}
+setInterval(tick,500);
+let lastR=0;setInterval(()=>{if(S.run&&Date.now()-lastR>5000){lastR=Date.now();render();save()}},1000);
+window.addEventListener('beforeunload',save);
+render();
+if(!ld('onb')&&!S.wage){drawOnb();open('onb')}
+})();
+</script>
 </body>
 </html>
