@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>틈날때버는월급</title>
-<meta name="description" content="커피 한 잔, 스트레칭 한 번. 쉬는 틈을 내 시급으로 환산해 보여주고, 원하면 포인트도 쌓는 직장인 쉼 기록.">
+<meta name="description" content="커피 한 잔, 스트레칭 한 번. 쉬는 틈에 짧은 광고 한 편 보고 포인트를 쌓는 직장인 쉼 기록.">
 <meta name="theme-color" content="#1f6f5c">
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
@@ -49,6 +49,7 @@ h1{font-family:'Gowun Dodum';font-size:42px;line-height:1.25;margin:12px 0;font-
 .gr{margin-top:14px;display:flex;align-items:center;gap:12px;background:var(--acc2);border-radius:14px;padding:10px 12px}
 .gr .em{font-size:26px}.gr b{display:block;color:var(--acc)}.gr small{display:block;color:var(--mute);font-size:12px}
 .gbar{height:6px;background:#fff;border-radius:99px;overflow:hidden;margin-top:5px}.gbar i{display:block;height:100%;background:var(--acc);transition:width .4s}
+.tad{display:none;margin-top:10px;background:#fff7ec;border:1px solid #f3dfc3;border-radius:14px;padding:12px;text-align:center}.timer.run .tad{display:block}.tad .btn{background:var(--warm);width:100%}.tad .btn:hover{background:#e08d43}.tad small{display:block;color:var(--mute);font-size:12px;margin-top:6px}
 .wi{font-size:12px;color:var(--mute);text-align:center;margin-top:10px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
 @media(max-width:900px){.grid{grid-template-columns:1fr}}
@@ -102,17 +103,18 @@ footer{color:var(--mute);font-size:12px;padding:24px 0 40px;line-height:1.7}
 <main class="wrap">
   <section class="hero">
     <div class="intro">
-      <span class="tag">쉬는 시간도 월급이 된다</span>
+      <span class="tag">쉬는 틈에, 광고 한 편</span>
       <h1>틈날 때마다,<br>월급이 조금씩 더 쌓여요</h1>
-      <p class="lead">커피 한 잔, 스트레칭 한 번, 창밖 보기 5분. 그 틈을 기록하면 내 시급으로 얼마인지 보여드려요. 잘 쉬는 것도 일의 일부니까요.</p>
-      <div class="steps"><span><b>1</b> 틈 종류 고르고</span><span><b>2</b> 쉬는 동안 켜두고</span><span><b>3</b> 오늘의 명세서 받기</span></div>
+      <p class="lead">커피 한 잔, 스트레칭 한 번, 창밖 보기 5분. 틈을 켜두고 쉬다가 15초 광고 한 편 보면 포인트가 쌓여요. 모은 포인트는 커피 쿠폰으로 돌아와요.</p>
+      <div class="steps"><span><b>1</b> 틈 시작</span><span><b>2</b> 쉬면서 광고 한 편</span><span><b>3</b> 포인트로 커피 한 잔</span></div>
     </div>
     <div class="timer" id="timer" aria-live="polite">
       <div class="tt"><span>오늘의 틈</span><span class="state" id="state">대기 중</span></div>
       <div id="tTime">0:00</div>
-      <div class="money">틈으로 번 월급<span id="tMoney">0원</span></div>
+      <div class="money">오늘 틈에 받은 포인트<span id="tMoney">0P</span></div>
       <div class="kinds" id="kinds" role="radiogroup" aria-label="틈 종류"></div>
       <button class="btn" id="go">▶ 틈 시작</button>
+      <div class="tad" id="tAd"></div>
       <div class="gr"><span class="em" id="gEm">🌱</span><div style="flex:1"><b id="gName"></b><small id="gNext"></small><div class="gbar"><i id="gBar"></i></div></div></div>
       <div class="wi" id="wageInfo"></div>
     </div>
@@ -120,24 +122,24 @@ footer{color:var(--mute);font-size:12px;padding:24px 0 40px;line-height:1.7}
   <section class="grid">
     <div class="card"><div class="ch"><h2>이번 주 틈</h2><span class="mute" style="font-size:13px" id="weekSum"></span></div><p class="sub" id="weekSub"></p><div class="weekbox" id="week"></div><div class="kindsum" id="kindsum"></div></div>
     <div class="card"><h2>오늘의 미션</h2><p class="sub">달성하면 포인트가 자동으로 들어와요</p><ul id="miss"></ul></div>
-    <div class="card"><h2>업종별 오늘의 쉼</h2><p class="sub">오늘 가장 잘 쉰 업종은? (예시 수치)</p><ul id="league"></ul></div>
+    <div class="card"><h2>오늘의 틈 광고</h2><p class="sub">쉬는 동안 하나씩 골라 봐도 돼요</p><ul id="adlist"></ul></div>
   </section>
   <section class="grid">
     <div class="card"><h2>오늘의 명세서</h2><p class="sub">이미지로 저장하거나 복사해서 공유해 보세요</p><div id="slip"></div>
       <div class="two"><button class="btn sm" id="saveSlip">이미지 저장</button><button class="btn ghost sm" id="copySlip">텍스트 복사</button></div></div>
-    <div class="card bonus"><h2>☕ 보너스 타임</h2><p class="sub">원할 때만, 15초 광고 보고 진짜 포인트 받기</p>
+    <div class="card bonus"><h2>☕ 틈 광고</h2><p class="sub">15초 광고 한 편에 10P · 틈 중에 보면 미션도 함께 채워져요</p>
       <div class="row" style="justify-content:flex-start"><button class="btn" data-ad="1">1편 보기 +10P</button><button class="btn ghost" data-ad="3">3편 연속</button></div>
       <p class="sub" id="adLeft" style="margin-top:12px"></p>
       <p class="sub" style="font-size:12px">광고가 끝나면 브랜드 맞히기 문제가 하나 나와요. 맞히면 적립돼요.</p></div>
     <div class="card"><h2>포인트 교환</h2><p class="sub">1P = 1원 · 교환할 때만 로그인이 필요해요</p><div id="shop"></div></div>
   </section>
-  <section class="card"><div class="ch"><h2>최근 기록</h2><button class="link" id="settingsBtn">연봉·업종 설정</button></div><ul id="log" style="margin-top:8px"></ul></section>
-  <footer>틈날때버는월급 · 시연용 페이지예요. 기록·계정은 이 브라우저에만 저장되고, 교환은 실제로 발송되지 않아요.<br>'틈으로 번 월급'은 연봉 ÷ 12개월 ÷ 월 209시간으로 계산한 재미용 환산 금액이에요. 실제 포인트는 미션과 보너스 광고로만 쌓여요.</footer>
+  <section class="card"><div class="ch"><h2>최근 기록</h2></div><ul id="log" style="margin-top:8px"></ul></section>
+  <footer>틈날때버는월급 · 시연용 페이지예요. 기록·계정은 이 브라우저에만 저장되고, 광고는 예시이며 교환은 실제로 발송되지 않아요.</footer>
 </main>
 
 <div class="ov" id="onb"><div class="box"><div id="onbBody"></div><div class="dots" id="onbDots"></div></div></div>
-<div class="ov" id="setup"><div class="box">
-  <h2>내 연봉을 알려주세요</h2>
+<div class="ov" id="setup" hidden><div class="box">
+  <h2>설정</h2>
   <p class="mute" style="font-size:14px;margin-top:0">쉬는 시간을 시급으로 환산하는 데만 쓰여요. 이 브라우저에만 저장돼요.</p>
   <label class="mute" style="font-size:13px" for="sWage">연봉 (만원)</label>
   <div class="presets" id="presets"></div>
@@ -176,7 +178,7 @@ const st=(k,v)=>{try{localStorage.setItem(P+k,JSON.stringify(v))}catch(e){}};
 const SEC=15,PER=10,CAP=300,NUDGE_MIN=50;
 const KINDS=[['coffee','☕','커피'],['stretch','🧘','스트레칭'],['walk','🚶','산책'],['window','🌤','멍때리기']];
 const GRADES=[[0,'🌱','새싹 쉼표'],[5,'☕','커피 한 잔'],[15,'🚶','산책 고수'],[30,'🪴','틈새 장인'],[60,'🌳','여유 대표']];
-const MISS=[['m5','오늘 5분 틈 만들기',5],['k2','두 가지 종류로 쉬기',5],['m15','오늘 15분 쉬기',10],['lunch','점심 후(13~15시) 1분 이상 쉬기',5],['ad1','보너스 광고 1편 보기',5]];
+const MISS=[['m5','오늘 5분 틈 만들기',5],['k2','두 가지 종류로 쉬기',5],['m15','오늘 15분 쉬기',10],['lunch','점심 후(13~15시) 1분 이상 쉬기',5],['ad1','틈 광고 1편 보기',5],['ad3','틈 광고 3편 보기',10]];
 const JOBS=['IT·개발','마케팅·광고','영업','디자인','경영지원','제조·생산','금융','공공·교육','서비스·유통','기타'];
 const ADS=[['점심 배달비 0원','배달앱 A'],['사무실 원두 정기배송','커피브랜드 B'],['오후 간식 묶음 배송','간식몰 C'],['목·어깨 편한 의자','가구 D'],['퇴근길 운동 1회 무료','피트니스 E'],['회의록 자동 정리 툴','SaaS F'],['주말 근교 숙소 특가','여행 G'],['직장인 영어 첫 달 무료','교육 H']].map((a,i)=>({id:i,title:a[0],brand:a[1]}));
 const ITEMS=[['편의점 1천원권',1000],['아메리카노',4500],['배달 쿠폰 5천원',5000],['치킨 세트',20000]];
@@ -198,11 +200,11 @@ document.querySelectorAll('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.
 document.addEventListener('keydown',e=>{if(e.key==='Escape')['setup','auth'].forEach(close)});
 
 // 첫 방문 안내
-const ONB=[['🌿','틈날 때 버는 월급','일하다 잠깐 쉬는 시간, 그냥 흘려보내지 말고 기록해 보세요.'],['⏱','쉬는 동안 켜두기만','커피, 스트레칭, 산책, 멍때리기. 고르고 시작을 누르면 끝이에요.'],['💰','내 시급으로 보여드려요','연봉을 넣으면 쉰 시간이 얼마짜리였는지 알려드려요. 미션을 깨면 진짜 포인트도 쌓여요.']];
+const ONB=[['🌿','틈날 때 버는 월급','일하다 잠깐 쉬는 시간, 그냥 흘려보내지 말고 기록해 보세요.'],['⏱','틈을 켜두고 쉬어요','커피, 스트레칭, 산책, 멍때리기. 고르고 시작을 누르면 돼요.'],['🎁','쉬면서 광고 한 편','15초 광고를 보면 10P. 모은 포인트는 커피·편의점 쿠폰으로 바꿀 수 있어요.']];
 let ob=0;
-function drawOnb(){const s=ONB[ob];$('onbBody').innerHTML=`<div style="font-size:44px;text-align:center">${s[0]}</div><h2 style="text-align:center">${s[1]}</h2><p class="mute" style="text-align:center">${s[2]}</p><div class="row" style="justify-content:space-between;margin-top:16px"><button class="link" id="obSkip">건너뛰기</button><button class="btn" id="obNext">${ob<ONB.length-1?'다음':'연봉 넣고 시작하기'}</button></div>`;
+function drawOnb(){const s=ONB[ob];$('onbBody').innerHTML=`<div style="font-size:44px;text-align:center">${s[0]}</div><h2 style="text-align:center">${s[1]}</h2><p class="mute" style="text-align:center">${s[2]}</p><div class="row" style="justify-content:space-between;margin-top:16px"><button class="link" id="obSkip">건너뛰기</button><button class="btn" id="obNext">${ob<ONB.length-1?'다음':'시작하기'}</button></div>`;
  $('onbDots').innerHTML=ONB.map((_,i)=>`<i class="${i===ob?'on':''}"></i>`).join('');
- $('obNext').onclick=()=>{if(ob<ONB.length-1){ob++;drawOnb()}else{st('onb',1);close('onb');openSetup()}};
+ $('obNext').onclick=()=>{if(ob<ONB.length-1){ob++;drawOnb()}else{st('onb',1);close('onb')}};
  $('obSkip').onclick=()=>{st('onb',1);close('onb')}}
 
 // 연봉 설정
@@ -215,7 +217,7 @@ function applySetup(w){S.wage=w;S.job=$('sJob').value;save();close('setup');rend
 $('sGo').onclick=()=>{const w=+$('sWage').value;if(!(w>=1000&&w<=100000))return $('sErr').textContent='연봉을 만원 단위로 넣어주세요 (예: 4200)';applySetup(w)};
 $('sWage').onkeydown=e=>{if(e.key==='Enter')$('sGo').click()};
 $('sAvg').onclick=()=>applySetup(3600);
-$('settingsBtn').onclick=()=>openSetup();
+
 
 // 틈 타이머 (시작 시각을 저장해 새로고침해도 이어짐)
 const kn=k=>KINDS.find(x=>x[0]===k)||KINDS[0];
@@ -224,10 +226,10 @@ $('kinds').onclick=e=>{const b=e.target.closest('.kind');if(!b)return;
  if(S.run&&S.run.k!==b.dataset.k){const add=(Date.now()-S.run.t)/1000;S.secToday+=add;S.secAll+=add;S.kindsToday[S.run.k]=(S.kindsToday[S.run.k]||0)+add;S.run={k:b.dataset.k,t:Date.now(),s0:S.run.s0};toast(kn(b.dataset.k)[2]+'(으)로 바꿨어요')}
  S.kind=b.dataset.k;save();render()};
 let lastWork=Date.now(),nudged=false;
-function startRun(){if(!S.wage)return openSetup(startRun);S.run={k:S.kind,t:Date.now(),s0:Date.now()};close('nudge');save();render()}
+function startRun(){S.run={k:S.kind,t:Date.now(),s0:Date.now()};S.run0pt=S.ptToday;close('nudge');save();render()}
 function finishRun(silent){if(!S.run)return;const add=(Date.now()-S.run.t)/1000,total=(Date.now()-S.run.s0)/1000,k=S.run.k;
  S.secToday+=add;S.secAll+=add;S.kindsToday[k]=(S.kindsToday[k]||0)+add;S.run=null;lastWork=Date.now();nudged=false;
- if(total>=5){S.log.unshift([now(),`${kn(k)[1]} ${kn(k)[2]} ${mmss(total)} · ${won(total*perSec())} 상당`,0]);S.log=S.log.slice(0,60);if(!silent)toast(`${mmss(total)} 쉬었어요. ${won(total*perSec())}어치 잘 쉬었네요 🌿`)}
+ const gotRun=S.ptToday-(S.run0pt||0);if(total>=5){S.log.unshift([now(),`${kn(k)[1]} ${kn(k)[2]} ${mmss(total)}`+(gotRun>0?` · 틈에 ${gotRun}P`:''),0]);S.log=S.log.slice(0,60);if(!silent)toast(gotRun>0?`${mmss(total)} 쉬면서 ${gotRun}P 받았어요 🌿`:`${mmss(total)} 잘 쉬었어요 🌿`)}
  save();checkMissions();render()}
 $('go').onclick=()=>S.run?finishRun():startRun();
 
@@ -235,7 +237,7 @@ $('go').onclick=()=>S.run?finishRun():startRun();
 const grade=sec=>{let g=GRADES[0];for(const x of GRADES)if(sec/60>=x[0])g=x;return g};
 function mOk(id,sec){const h=new Date().getHours(),k=liveKinds();
  if(id==='m5')return sec>=300;if(id==='m15')return sec>=900;if(id==='k2')return Object.values(k).filter(v=>v>=30).length>=2;
- if(id==='lunch')return !!(S.run&&h>=13&&h<15&&Date.now()-S.run.s0>=60000);if(id==='ad1')return S.seen.length>=1;return false}
+ if(id==='lunch')return !!(S.run&&h>=13&&h<15&&Date.now()-S.run.s0>=60000);if(id==='ad1')return S.seen.length>=1;if(id==='ad3')return S.seen.length>=3;return false}
 function checkMissions(){const sec=liveSec();let hit=false;
  MISS.forEach(m=>{if(!S.missions.includes(m[0])&&mOk(m[0],sec)){S.missions.push(m[0]);const a=Math.max(0,Math.min(m[2],CAP-S.ptToday));S.pt+=a;S.ptToday+=a;S.log.unshift([now(),'미션 달성: '+m[1],a]);toast(`🎉 미션 달성! ${m[1]} +${a}P`);hit=true}});
  if(hit){save();render()}}
@@ -247,29 +249,31 @@ $('nGo').onclick=()=>{close('nudge');startRun()};
 // 매 0.5초 갱신
 function tick(){rollDay();const sec=liveSec(),run=!!S.run;
  $('timer').classList.toggle('run',run);$('state').textContent=run?kn(S.run.k)[1]+' 쉬는 중':'대기 중';
- $('tTime').textContent=mmss(sec);$('tMoney').textContent=won(sec*perSec());
+ $('tTime').textContent=mmss(sec);$('tMoney').textContent=S.ptToday.toLocaleString()+'P';
  $('go').textContent=run?'■ 틈 끝내기':'▶ 틈 시작';
  const g=grade(sec),i=GRADES.indexOf(g),nx=GRADES[i+1];
  $('gEm').textContent=g[1];$('gName').textContent=g[2];
  $('gNext').textContent=nx?`'${nx[2]}'까지 ${Math.ceil(nx[0]-sec/60)}분`:'오늘 충분히 쉬었어요';
  $('gBar').style.width=(nx?((sec/60-g[0])/(nx[0]-g[0]))*100:100)+'%';
- document.title=run?`${kn(S.run.k)[1]} ${mmss(sec)} · ${won(sec*perSec())} — 틈날때버는월급`:'틈날때버는월급';
+ document.title=run?`${kn(S.run.k)[1]} ${mmss(sec)} 쉬는 중 — 틈날때버는월급`:'틈날때버는월급';
  if(run&&Math.floor(sec)%15===0)checkMissions();
  if(!run&&!nudged&&Date.now()-lastWork>NUDGE_MIN*60000&&!document.hidden){nudged=true;open('nudge')}}
 
 // 보너스 광고
 let Q=[],qi=0,t=0,tm=null,quizOn=false,got=0;
 const avail=()=>ADS.filter(a=>!S.seen.includes(a.id));
-function play(n){if(!guard(()=>play(n)))return;if(S.ptToday>=CAP)return toast('오늘 적립 한도를 채웠어요');Q=avail().slice(0,n);if(!Q.length)return toast('오늘 보너스 광고를 다 봤어요');qi=0;got=0;$('pClose').textContent='그만 보기';open('player');startAd()}
+function play(n){playIds(avail().slice(0,n).map(a=>a.id))}
+function playIds(ids){if(!guard(()=>playIds(ids)))return;if(S.ptToday>=CAP)return toast('오늘 적립 한도를 채웠어요');Q=ADS.filter(a=>ids.includes(a.id)&&!S.seen.includes(a.id));if(!Q.length)return toast('오늘 틈 광고를 다 봤어요');qi=0;got=0;$('pClose').textContent='그만 보기';open('player');startAd()}
 function startAd(){t=0;quizOn=false;const a=Q[qi];$('pBrand').textContent=a.brand+' · 광고';$('pTitle').textContent=a.title;$('pQuiz').innerHTML='';$('pMsg').textContent='';$('pBar').style.width=0;$('pScr').className='scr c'+(a.id%4);$('pCnt').textContent=Q.length>1?`${qi+1}/${Q.length}편 ·`:'';clearInterval(tm);tm=setInterval(adTick,1000);adTick(true)}
 function adTick(first){if(document.hidden){$('pStat').textContent='탭을 벗어나 일시정지';return}if(!first)t++;$('pBar').style.width=t/SEC*100+'%';$('pStat').textContent=(SEC-t)+'초 남음';
  if(t>=SEC){clearInterval(tm);const a=Q[qi];quizOn=true;const o=[a.brand,...ADS.filter(x=>x.id!==a.id).map(x=>x.brand).sort(()=>Math.random()-.5).slice(0,2)].sort(()=>Math.random()-.5);
   $('pBrand').textContent='확인 문제';$('pTitle').textContent='방금 본 광고의 브랜드는?';$('pScr').className='scr';$('pStat').textContent='';$('pQuiz').innerHTML=o.map(x=>`<button data-b="${x}">${x}</button>`).join('')}}
 $('pQuiz').onclick=e=>{const b=e.target.closest('button');if(!b||!quizOn)return;quizOn=false;const a=Q[qi],ok=b.dataset.b===a.brand;S.seen.push(a.id);$('pQuiz').innerHTML='';
- if(ok){const g=Math.min(PER,CAP-S.ptToday);S.pt+=g;S.ptToday+=g;got+=g;S.log.unshift([now(),a.brand+' 보너스 광고',g]);$('pTitle').textContent=`+${g}P`}else{$('pTitle').textContent='아쉽게 오답이에요';$('pMsg').textContent='이번 광고는 적립되지 않았어요'}
+ if(ok){const g=Math.min(PER,CAP-S.ptToday);S.pt+=g;S.ptToday+=g;got+=g;S.log.unshift([now(),a.brand+' 틈 광고',g]);$('pTitle').textContent=`+${g}P`;render()}else{$('pTitle').textContent='아쉽게 오답이에요';$('pMsg').textContent='이번 광고는 적립되지 않았어요'}
  save();checkMissions();render();qi++;if(qi<Q.length&&S.ptToday<CAP)setTimeout(startAd,1200);else{$('pMsg').textContent=`이번에 ${got}P 받았어요`;$('pClose').textContent='닫기'}};
 $('pClose').onclick=()=>{clearInterval(tm);quizOn=false;close('player')};
 document.querySelectorAll('[data-ad]').forEach(b=>b.onclick=()=>play(+b.dataset.ad));
+$('adlist').onclick=e=>{const b=e.target.closest('[data-one]');if(b)playIds([+b.dataset.one])};
 
 // 로그인 (건너뛰기 가능, 교환할 때만 필수)
 let skip=!!ld('skip'),after=null,signup=false,must=false;
@@ -304,7 +308,7 @@ function league(){const seed=new Date().getDate(),me=liveSec()/60,base=JOBS.slic
 // 명세서
 function weekSec(){let s=0;for(let i=0;i<7;i++){const d=new Date();d.setDate(d.getDate()-i);s+=i===0?liveSec():(S.days[dkey(d)]||0)}return s}
 function topKind(){const k=liveKinds();let b=null;for(const x in k)if(!b||k[x]>k[b])b=x;return b?kn(b):null}
-function slipRows(){const sec=liveSec(),g=grade(sec),tk=topKind();return[['성명',cur||'익명의 직장인'],['소속',S.job||'-'],['오늘의 틈',mmss(sec)],['틈 월급(상당)',won(sec*perSec()),1],['가장 많이 한 쉼',tk?tk[1]+' '+tk[2]:'-'],['이번 주 누계',won(weekSec()*perSec())],['오늘의 등급',g[1]+' '+g[2]]]}
+function slipRows(){const sec=liveSec(),g=grade(sec),tk=topKind();return[['이름',cur||'익명의 직장인'],['오늘의 틈',mmss(sec)],['가장 많이 한 쉼',tk?tk[1]+' '+tk[2]:'-'],['틈에 본 광고',S.seen.length+'편'],['오늘 받은 포인트',S.ptToday.toLocaleString()+'P',1],['이번 주 틈',mmss(weekSec())],['오늘의 등급',g[1]+' '+g[2]]]}
 $('copySlip').onclick=async()=>{const txt=`🌿 틈날때버는월급 · 오늘의 명세서 (${new Date().toLocaleDateString('ko-KR')})\n`+slipRows().map(r=>`${r[0]}: ${r[1]}`).join('\n')+`\n잘 쉬는 것도 일의 일부 ☕\n${location.href}`;
  try{await navigator.clipboard.writeText(txt);toast('복사했어요! 단톡방에 붙여넣어 보세요')}catch(e){toast('복사가 막혀 있어요. 이미지 저장을 써보세요')}};
 function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
@@ -323,15 +327,16 @@ function render(){
  $('who').textContent=cur?cur+' 님':'';$('authBtn').textContent=cur?'로그아웃':'로그인';
  $('ptTop').textContent=S.pt.toLocaleString()+'P';
  [...$('kinds').children].forEach(b=>{const on=(S.run?S.run.k:S.kind)===b.dataset.k;b.classList.toggle('on',on);b.setAttribute('aria-checked',on)});
- $('wageInfo').innerHTML=S.wage?`연봉 ${S.wage.toLocaleString()}만원 · ${S.job} · 1분 쉬면 <b>${won(perSec()*60)}</b>`:'연봉을 넣으면 쉰 시간이 돈으로 보여요';
+ $('wageInfo').textContent=S.run?'':'쉬러 갈 때 켜두세요. 틈 중에 광고를 보면 미션이 더 빨리 채워져요.';
+ const av0=avail().length;$('tAd').innerHTML=av0&&S.ptToday<CAP?`<button class="btn" id="tAdBtn">🎁 쉬면서 광고 한 편 +10P</button><small>15초 · 남은 광고 ${av0}편</small>`:'<small>오늘 틈 광고를 다 봤어요. 푹 쉬세요 🌿</small>';const tb=$('tAdBtn');if(tb)tb.onclick=()=>play(1);
  tick();
  const days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push([d,i===0?liveSec():(S.days[dkey(d)]||0),i===0])}
  const mx=Math.max(600,...days.map(x=>x[1]));
  $('week').innerHTML=days.map(([d,s,td])=>`<div class="wk ${td?'today':''}" title="${mmss(s)}"><div class="wb"><i style="height:${s/mx*100}%"></i></div><span>${td?'오늘':'일월화수목금토'[d.getDay()]}</span></div>`).join('');
- const ws=weekSec();$('weekSum').textContent=mmss(ws);$('weekSub').textContent=ws?`이번 주 ${won(ws*perSec())}어치 쉬었어요`:'아직 이번 주 기록이 없어요';
+ const ws=weekSec();$('weekSum').textContent=mmss(ws);$('weekSub').textContent=ws?`이번 주 ${Math.round(ws/60)}분 쉬었어요`:'아직 이번 주 기록이 없어요';
  const k=liveKinds();$('kindsum').innerHTML=KINDS.filter(x=>k[x[0]]>=1).map(x=>`<span>${x[1]} ${x[2]} ${mmss(k[x[0]])}</span>`).join('');
  $('miss').innerHTML=MISS.map(m=>{const d=S.missions.includes(m[0]);return `<li class="${d?'done':''}"><span><span class="chk">${d?'✓':''}</span>${m[1]}</span><b>+${m[2]}P</b></li>`}).join('');
- $('league').innerHTML=league().map((x,i)=>`<li class="${x.j===S.job?'me':''}"><span>${i+1}. ${x.j}${x.j===S.job?' · 우리':''}</span><b>평균 ${x.m}분</b></li>`).join('');
+ $('adlist').innerHTML=ADS.map(a=>{const d=S.seen.includes(a.id);return `<li class="${d?'done':''}"><span><span class="chk">${d?'✓':''}</span>${a.title} <small class="mute">${a.brand}</small></span>${d?'<b>+10P</b>':`<button class="btn sm ghost" data-one="${a.id}" ${S.ptToday>=CAP?'disabled':''}>보기</button>`}</li>`}).join('');
  const av=avail().length;document.querySelectorAll('[data-ad]').forEach(b=>b.disabled=!av||S.ptToday>=CAP);$('adLeft').textContent=`오늘 남은 광고 ${av}편 · 오늘 적립 ${S.ptToday}/${CAP}P`;
  $('shop').innerHTML=ITEMS.map((it,i)=>{const r=Math.min(1,S.pt/it[1]);return `<div class="item"><div><b>${it[0]}</b><span>${it[1].toLocaleString()}P</span></div><div class="mb" title="${Math.round(r*100)}%"><i style="width:${r*100}%"></i></div><button class="btn sm ${r<1?'ghost':''}" data-buy="${i}" ${r<1?'disabled':''}>${r<1?(it[1]-S.pt).toLocaleString()+'P 남음':'교환'}</button></div>`}).join('');
  $('slip').innerHTML=`<div class="sl-h">오늘의 명세서<span>${new Date().toLocaleDateString('ko-KR')}</span></div>`+slipRows().map(r=>`<div class="sl-r"><span>${r[0]}</span><b class="${r[2]?'acc':''}">${r[1]}</b></div>`).join('')+'<div class="sl-f">잘 쉬는 것도 일의 일부 ☕</div>';
@@ -341,7 +346,7 @@ setInterval(tick,500);
 let lastR=0;setInterval(()=>{if(S.run&&Date.now()-lastR>5000){lastR=Date.now();render();save()}},1000);
 window.addEventListener('beforeunload',save);
 render();
-if(!ld('onb')&&!S.wage){drawOnb();open('onb')}
+if(!ld('onb')){drawOnb();open('onb')}
 })();
 </script>
 </body>
