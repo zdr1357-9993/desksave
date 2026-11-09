@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>데스크포인트 — 쉬는 틈에, 광고 보고 커피값</title>
+<meta name="description" content="설치 없이 웹에서. 직장인이 쉬는 틈에 버튼 하나로 광고를 보고 포인트를 모아 기프티콘으로 바꾸는 서비스.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f5f1;--ink:#1d1d1b;--mute:#6b6a65;--line:#e2e0d8;--acc:#1f6f5c;--acc2:#e9f3ef}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:0;background:rgba(246,245,241,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font-weight:800;font-size:20px;text-decoration:none}.logo span{color:var(--acc)}
+.navl{display:flex;gap:22px;align-items:center;font-size:15px}.navl a{text-decoration:none;color:var(--mute)}
+.btn{display:inline-block;background:var(--acc);color:#fff;border:0;border-radius:12px;padding:14px 22px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--acc);border:1px solid var(--acc)}
+.btn.sm{padding:9px 16px;font-size:14px}
+.hero{padding:88px 0 64px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+@media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:56px}.navl a:not(.btn){display:none}}
+.tag{display:inline-block;font-size:13px;padding:4px 10px;border-radius:99px;background:var(--acc2);color:var(--acc);font-weight:600}
+h1{font-size:46px;line-height:1.25;margin:16px 0;letter-spacing:-.02em}
+@media(max-width:600px){h1{font-size:34px}}
+.lead{font-size:18px;color:var(--mute);max-width:520px}
+.cta{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
+/* 히어로 목업 */
+.mock{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.08);overflow:hidden}
+.mock .bar{display:flex;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line)}.mock .bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.mock .scr{padding:22px}
+.mock .ad{height:150px;border-radius:12px;background:#fdf1e6;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:20px}
+.mock .ad small{font-weight:400;font-size:13px;color:var(--mute)}
+.prog{height:6px;background:var(--line);border-radius:99px;margin:14px 0;overflow:hidden}.prog i{display:block;height:100%;width:0;background:var(--acc);animation:p 15s linear infinite}
+@keyframes p{to{width:100%}}
+.mrow{display:flex;justify-content:space-between;font-size:14px;color:var(--mute)}.mrow b{color:var(--ink);font-size:18px}
+section{padding:72px 0}
+h2{font-size:32px;margin:0 0 12px;letter-spacing:-.01em}
+.sub{color:var(--mute);font-size:17px;margin:0 0 32px;max-width:620px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
+.card .n{width:34px;height:34px;border-radius:10px;background:var(--acc2);color:var(--acc);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:14px}
+.card h3{margin:0 0 6px;font-size:18px}.card p{margin:0;color:var(--mute);font-size:15px}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+@media(max-width:760px){.calc{grid-template-columns:1fr}}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.result{font-size:44px;font-weight:800;color:var(--acc)}
+.dark{background:var(--ink);color:#fff;border-radius:24px;padding:48px}
+.dark .sub{color:#bdbcb6}
+.dark .card{background:#2a2a27;border-color:#3a3a36}.dark .card p{color:#bdbcb6}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:10px}
+summary{font-weight:600;cursor:pointer}details p{color:var(--mute);margin:10px 0 0}
+form{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+form input,form select{flex:1;min-width:200px;padding:14px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff}
+#msg{margin-top:12px;color:var(--acc);font-weight:600}
+footer{padding:40px 0;color:var(--mute);font-size:14px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="#">데스크<span>포인트</span></a>
+  <nav class="navl"><a href="#how">이용 방법</a><a href="#calc">얼마나 모일까</a><a href="#biz">광고주</a><a href="#faq">FAQ</a><a class="btn sm" href="#join">사전 신청</a></nav>
+</div></header>
+
+<main>
+<div class="wrap hero">
+  <div>
+    <span class="tag">설치 없이 웹에서 · 사전 신청 중</span>
+    <h1>쉬는 틈에 버튼 하나,<br>광고 보고 커피값.</h1>
+    <p class="lead">업무 중 잠깐 숨 돌릴 때, 브라우저 탭 하나에서 15초 광고를 보고 포인트를 모으세요. 모은 포인트는 편의점·커피·배달 기프티콘으로 바꿀 수 있어요.</p>
+    <div class="cta"><a class="btn" href="#join">사전 신청하기</a><a class="btn ghost" href="demo.html">데모 체험해보기</a></div>
+  </div>
+  <div class="mock" aria-hidden="true">
+    <div class="bar"><i></i><i></i><i></i></div>
+    <div class="scr">
+      <div class="ad">점심 배달비 0원<small>배달앱 A · 광고</small></div>
+      <div class="prog"><i></i></div>
+      <div class="mrow"><span>1/5편 · 끝까지 보면 +10P</span><b>2,340P</b></div>
+    </div>
+  </div>
+</div>
+
+<section id="how"><div class="wrap">
+  <h2>이렇게 써요</h2>
+  <p class="sub">설치할 프로그램도, 켜둬야 할 창도 없어요. 보고 싶을 때만 누르면 됩니다.</p>
+  <div class="grid">
+    <div class="card"><div class="n">1</div><h3>버튼을 눌러요</h3><p>1개만 볼지, 3개·5개 연속으로 볼지 골라요. 연속으로 끝까지 보면 보너스가 있어요.</p></div>
+    <div class="card"><div class="n">2</div><h3>15초를 봐요</h3><p>광고가 끝나면 아주 짧은 확인 문제가 하나 나와요. 맞히면 바로 적립돼요.</p></div>
+    <div class="card"><div class="n">3</div><h3>기프티콘으로 바꿔요</h3><p>1P는 1원. 1,000P부터 편의점·커피·배달 쿠폰으로 교환할 수 있어요.</p></div>
+  </div>
+</div></section>
+
+<section id="calc"><div class="wrap">
+  <div class="card calc">
+    <div>
+      <h2>한 달에 얼마나 모일까?</h2>
+      <p class="sub" style="margin-bottom:20px">하루에 몇 편 볼지 움직여 보세요. (예상치이며, 실제 적립액은 광고 상황에 따라 달라요)</p>
+      <label>하루 <b id="nv">15</b>편</label>
+      <input type="range" id="n" min="1" max="30" value="15">
+    </div>
+    <div style="text-align:center">
+      <div class="result" id="out">3,000P</div>
+      <div style="color:var(--mute)">한 달(20영업일) 예상 · <span id="eq">아메리카노 약 0.7잔</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="biz"><div class="wrap">
+  <div class="dark">
+    <h2>광고주라면</h2>
+    <p class="sub">평일 업무 시간, PC 앞의 직장인에게 닿는 광고 지면이에요. 사용자가 직접 골라서 끝까지 보고, 확인 문제까지 맞힌 시청에만 비용을 받아요.</p>
+    <div class="grid">
+      <div class="card"><h3>업무 시간대 타겟</h3><p>오전·점심·오후 시간대를 골라 집행. 점심 배달, 업무용 툴, 사무용품에 잘 맞아요.</p></div>
+      <div class="card"><h3>끝까지 본 시청만 과금</h3><p>15초 완료 + 확인 문제 정답 기준. 틀어만 둔 노출은 청구하지 않아요.</p></div>
+      <div class="card"><h3>수익의 절반은 사용자에게</h3><p>보상이 커야 사용자가 자발적으로 봐요. 광고비의 약 50%가 사용자 포인트로 돌아가요.</p></div>
+    </div>
+    <div class="cta"><a class="btn" href="#join" onclick="document.getElementById('type').value='광고주'">광고 입점 문의</a></div>
+  </div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <h2>자주 묻는 질문</h2>
+  <details><summary>정말 설치가 필요 없나요?</summary><p>네. 웹 브라우저에서 바로 써요. 회사 PC에 프로그램을 깔 수 없어도 괜찮아요.</p></details>
+  <details><summary>광고를 틀어두고 다른 일을 하면요?</summary><p>다른 탭으로 넘어가면 광고가 일시정지되고, 끝난 뒤 확인 문제를 맞혀야 적립돼요. 그래야 광고주가 계속 광고비를 낼 수 있어요.</p></details>
+  <details><summary>하루에 얼마까지 모을 수 있나요?</summary><p>공정한 운영을 위해 하루 적립 상한이 있어요. 정확한 금액은 정식 오픈 때 안내할게요.</p></details>
+  <details><summary>언제 오픈하나요?</summary><p>지금은 사전 신청을 받으며 컨셉을 확인하는 단계예요. 신청해주시면 오픈 소식을 가장 먼저 알려드릴게요.</p></details>
+</div></section>
+
+<section id="join"><div class="wrap">
+  <div class="card">
+    <h2>사전 신청</h2>
+    <p class="sub" style="margin-bottom:12px">오픈하면 가장 먼저 알려드리고, 사전 신청자에게는 시작 포인트를 드릴 예정이에요.</p>
+    <form id="f">
+      <input type="email" id="email" placeholder="이메일" required>
+      <select id="type"><option>직장인</option><option>프리랜서</option><option>학생</option><option>광고주</option><option>기타</option></select>
+      <button class="btn">신청하기</button>
+    </form>
+    <div id="msg"></div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">© 2026 데스크포인트 · 컨셉 검증용 페이지입니다.</div></footer>
+
+<script>
+const n=document.getElementById('n');
+function calc(){const v=+n.value,p=v*10*20;document.getElementById('nv').textContent=v;document.getElementById('out').textContent=p.toLocaleString()+'P';document.getElementById('eq').textContent='아메리카노 약 '+(p/4500).toFixed(1)+'잔'}
+n.oninput=calc;calc();
+// 사전 신청: 지금은 수집 백엔드가 없어 화면 안내만 합니다. (폼 서비스 연결 시 여기에 전송 코드 추가)
+document.getElementById('f').onsubmit=e=>{e.preventDefault();document.getElementById('msg').textContent='신청해주셔서 감사해요! (컨셉 검증 단계라 아직 실제로 저장되지는 않아요)'};
+</script>
+</body>
+</html>
