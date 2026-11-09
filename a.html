@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>틈날때버는월급</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--acc:#1f6f5c;--acc2:#e6f2ec;--bg:#f6f5f1;--hero:#fff;--ink:#1d1d1b;--card:#fff;--mute:#6b6a65;--line:#e2e0d8}
+*{box-sizing:border-box}body{margin:0;font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+a{color:var(--acc)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line)}header .wrap{display:flex;justify-content:space-between;align-items:center;height:60px;gap:10px}
+.logo{font-family:'Gowun Dodum',sans-serif;font-size:22px;text-decoration:none;color:var(--ink)}
+.hr{display:flex;align-items:center;gap:10px;font-size:14px}
+.pill{background:var(--acc);color:#fff;border-radius:99px;padding:5px 12px;font-weight:700}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--acc);border:1px solid var(--acc)}
+.btn.sm{padding:7px 12px;font-size:13px;border-radius:9px}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:40px 0 24px;align-items:center}
+@media(max-width:860px){.hero{grid-template-columns:1fr}}
+.tag{display:inline-block;background:var(--acc2);color:var(--acc);font-weight:700;font-size:13px;padding:4px 10px;border-radius:99px}
+h1{font-family:'Gowun Dodum',sans-serif;font-size:44px;line-height:1.2;margin:14px 0 12px;font-weight:400}
+@media(max-width:600px){h1{font-size:34px}}
+.lead{color:var(--mute);font-size:16px}
+.timer{background:var(--hero);border:1px solid var(--line);border-radius:22px;padding:26px;text-align:center}
+.timer h3{margin:0;color:var(--mute);font-weight:600;font-size:14px}
+#tTime{font-size:64px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin:4px 0}
+.money{font-size:14px;color:var(--mute)}#tMoney{display:block;font-size:30px;font-weight:800;color:var(--acc)}
+#go{margin-top:16px;width:100%;font-size:18px;padding:16px;border-radius:14px}#go.on{background:var(--ink);color:var(--bg)}
+.gr{margin-top:14px;background:var(--acc2);border-radius:12px;padding:10px;color:var(--acc)}.gr b{font-size:18px;display:block}.gr small{display:block;opacity:.8}
+.wi{font-size:13px;color:var(--mute);margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+.card h2{font-size:17px;margin:0 0 4px}.card .sub{color:var(--mute);font-size:13px;margin:0 0 12px}
+ul{list-style:none;margin:0;padding:0}li{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}li:last-child{border:0}
+li.done{color:var(--mute);text-decoration:line-through}li.me{color:var(--acc);font-weight:700}
+.mute{color:var(--mute)}
+.weekbox{display:flex;gap:8px;align-items:flex-end;height:110px;margin-top:6px}
+.wk{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--mute)}.wb{width:100%;height:86px;background:var(--acc2);border-radius:8px;display:flex;align-items:flex-end;overflow:hidden}.wb i{display:block;width:100%;background:var(--acc);border-radius:8px}
+.adb{display:flex;gap:8px;flex-wrap:wrap}
+.item{display:grid;grid-template-columns:1fr 90px auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}.item:last-child{border:0}.item span{display:block;color:var(--mute);font-size:12px}
+.mb{height:6px;background:var(--acc2);border-radius:99px;overflow:hidden}.mb i{display:block;height:100%;background:var(--acc)}
+#slip{background:#fffdf7;color:#222;border:1px solid #e3dcc8;border-radius:12px;padding:16px;font-size:14px;font-family:'Noto Sans KR',sans-serif}
+.sl-h{font-weight:800;font-size:16px;display:flex;justify-content:space-between;border-bottom:2px solid #222;padding-bottom:8px;margin-bottom:6px}.sl-h span{font-weight:400;font-size:12px;color:#777}
+.sl-r{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dotted #ccc}.sl-r span{color:#666}.acc{color:var(--acc)}
+.sl-f{margin-top:10px;font-size:12px;color:#777;text-align:center}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}.ov.on{display:flex}
+.box{background:var(--card);color:var(--ink);border-radius:18px;width:min(440px,100%);padding:22px}
+.box h2{margin:0 0 8px}.box input,.box select{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;font:inherit;margin:4px 0 10px;background:var(--bg);color:var(--ink)}
+.err{color:#d9534f;font-size:13px;min-height:18px}
+.row{display:flex;gap:8px;justify-content:flex-end;align-items:center}
+.scr{min-height:200px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px;background:var(--acc2);color:#222}
+.scr.c0{background:#fdf1e6}.scr.c1{background:#eef3ea}.scr.c2{background:#eaf0f7}.scr.c3{background:#f5edf3}
+#pTitle{font-size:22px;font-weight:800}
+#pQuiz{display:flex;flex-direction:column;gap:6px;width:100%;margin-top:10px}#pQuiz button{padding:9px;border:1px solid #ccc;background:#fff;border-radius:9px;font:inherit;cursor:pointer}
+.pb{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin:12px 0}.pb i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s linear}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:30}.toast.on{opacity:1}
+footer{color:var(--mute);font-size:13px;padding:30px 0}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="index.html">틈날때버는월급</a>
+  <div class="hr"><span id="who" class="mute"></span><button class="btn ghost sm" id="authBtn">로그인</button><span class="pill" id="ptTop">0P</span></div>
+</div></header>
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <span class="tag">쉬는 시간도 월급이 된다</span>
+      <h1>틈날 때마다,<br>월급이 조금씩 더 쌓여요</h1>
+      <p class="lead">커피 한 잔, 스트레칭 한 번, 창밖 보기 5분. 그 틈을 기록하면 내 시급으로 환산해 보여주고, 원하면 짧은 광고로 진짜 포인트도 받을 수 있어요.</p>
+    </div>
+    <div class="timer">
+      <h3>오늘의 틈</h3>
+      <div id="tTime">0:00</div>
+      <div class="money">틈으로 번 월급(내 시급 기준)<span id="tMoney">0원</span></div>
+      <button class="btn" id="go"></button>
+      <div class="gr"><b id="tGrade"></b><small id="tGradeSub"></small><small id="tNext"></small></div>
+      <div class="wi" id="wageInfo"></div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h2>이번 주 기록</h2><p class="sub" id="weekSum"></p><div class="weekbox" id="week"></div></div>
+    <div class="card"><h2>오늘의 미션</h2><p class="sub">달성하면 진짜 포인트를 드려요</p><ul id="miss"></ul></div>
+    <div class="card"><h2>업종별 오늘의 쉼</h2><p class="sub">오늘 가장 잘 쉰 업종은? (시연용 가상 수치)</p><ul id="league"></ul></div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h2>보너스 타임</h2><p class="sub">15초 광고 보고 진짜 포인트 받기</p>
+      <div class="adb"><button class="btn" data-ad="1">1편 보기 +10P</button><button class="btn ghost" data-ad="3">3편 연속</button></div>
+      <p class="sub" id="adLeft" style="margin-top:10px"></p></div>
+    <div class="card"><h2>포인트 교환</h2><p class="sub">1P = 1원 · 교환할 때만 로그인</p><div id="shop"></div></div>
+    <div class="card"><h2>오늘의 명세서</h2><p class="sub">캡처하거나 복사해서 자랑하세요</p><div id="slip"></div><button class="btn sm" id="copySlip" style="margin-top:10px;width:100%">명세서 복사하기</button></div>
+  </div>
+
+  <div class="card"><h2>최근 기록</h2><ul id="log"></ul></div>
+  <footer>시연용 페이지예요. 기록·계정은 이 브라우저에만 저장되고, 교환은 실제로 발송되지 않아요. 환산 금액은 '연봉 ÷ 12 ÷ 209시간' 기준 재미용 수치예요. · <a href="index.html">다른 안 보기</a></footer>
+</main>
+
+<div class="ov" id="setup"><div class="box">
+  <h2>내 연봉을 알려주세요</h2><p class="mute" style="font-size:14px">쉬는 시간을 내 시급으로 환산하는 데만 쓰여요. 이 브라우저에만 저장돼요.</p>
+  <label class="mute" style="font-size:13px">연봉 (만원)</label><input id="sWage" type="number" placeholder="예: 4200">
+  <label class="mute" style="font-size:13px">업종</label><select id="sJob"></select>
+  <div class="err" id="sErr"></div>
+  <div class="row"><button class="btn ghost sm" id="sX">닫기</button><button class="btn sm" id="sGo">시작하기</button></div>
+</div></div>
+
+<div class="ov" id="auth"><div class="box">
+  <h2 id="aT">로그인</h2><p id="aS" class="mute" style="font-size:14px"></p>
+  <input id="aId" placeholder="아이디 (영문·숫자 4~16자)" maxlength="16" autocomplete="username">
+  <input id="aPw" type="password" placeholder="비밀번호 (6자 이상)" autocomplete="current-password">
+  <div class="err" id="aErr"></div>
+  <p class="mute" style="font-size:12px">시연용이라 이 브라우저에만 저장돼요. 평소 쓰는 비밀번호는 넣지 마세요.</p>
+  <div class="row"><button class="btn ghost sm" id="aSkip" style="margin-right:auto">로그인 건너뛰기</button><button class="btn ghost sm" id="aX">닫기</button><button class="btn ghost sm" id="aSw">회원가입</button><button class="btn sm" id="aGo">로그인</button></div>
+</div></div>
+
+<div class="ov" id="player"><div class="box">
+  <div class="scr" id="pScr"><small id="pBrand" style="color:#777"></small><div id="pTitle"></div><small id="pMsg" style="color:#777;margin-top:6px"></small><div id="pQuiz"></div></div>
+  <div class="pb"><i id="pBar"></i></div>
+  <div class="row" style="justify-content:space-between"><span class="mute" style="font-size:13px"><span id="pCnt"></span> <span id="pStat"></span></span><button class="btn ghost sm" id="pClose">그만 보기</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script>window.CFG={"key": "tm_", "name": "틈날때버는월급", "goLabel": "▶ 틈 시작", "stopLabel": "■ 틈 끝", "sessionWord": "틈", "slipTitle": "틈새 월급명세서", "slipFooter": "틈날 때 버는 게 진짜 월급 ☕", "grades": [[0, "새싹 쉼표", "오늘 첫 틈을 열어보세요"], [5, "커피 한 잔", "잘 쉬고 있어요"], [15, "산책 고수", "몸이 고마워해요"], [30, "틈새 장인", "쉼의 기술자"], [60, "여유 대표", "오늘 하루, 충분히 숨 쉬었어요"]], "missions": [["m5", "오늘 5분 틈 만들기", "m5", 5], ["m15", "오늘 15분 쉬기", "m15", 10], ["lunch", "점심 후 한 번 쉬기", "lunch", 5], ["ad1", "보너스 광고 1편 보기", "ad1", 5], ["ad3", "보너스 광고 3편 보기", "ad3", 10]]};</script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -3,270 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>4분기_실적정리_최종_진짜최종.xlsx</title>
+<title>어떤 월급이 끌리세요?</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--g:#217346;--g2:#e7f1ea;--ln:#d4d4d4;--hd:#f3f3f3;--ink:#222;--mute:#777}
-*{box-sizing:border-box}
-body{margin:0;font-family:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif;font-size:13px;color:var(--ink);background:#fff;height:100vh;display:flex;flex-direction:column;overflow:hidden}
-button{font:inherit;cursor:pointer}
-.top{background:var(--g);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:6px 12px}
-.top b{font-weight:600}
-.acct{display:flex;gap:8px;align-items:center}
-.acct button{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:3px;padding:3px 10px}
-.menu{display:flex;gap:2px;background:var(--g);padding:0 8px}
-.menu span{color:#fff;padding:5px 12px;opacity:.85}.menu span.on{background:#fff;color:var(--g);opacity:1;border-radius:3px 3px 0 0}
-.ribbon{display:flex;gap:6px;align-items:center;padding:8px 10px;border-bottom:1px solid var(--ln);background:#fafafa;flex-wrap:wrap}
-.rb{border:1px solid transparent;background:none;padding:6px 10px;border-radius:3px;display:flex;flex-direction:column;align-items:center;font-size:12px;color:#333;min-width:64px}
-.rb:hover{background:#e8e8e8;border-color:var(--ln)}.rb i{font-style:normal;font-size:18px;line-height:1.1}
-.rb:disabled{opacity:.35;cursor:not-allowed}
-.rsep{width:1px;height:38px;background:var(--ln);margin:0 4px}
-.rlabel{font-size:11px;color:var(--mute);margin-left:auto;text-align:right}
-.fbar{display:flex;border-bottom:1px solid var(--ln);height:28px}
-.fbar .nm{width:80px;border-right:1px solid var(--ln);display:flex;align-items:center;padding:0 8px}
-.fbar .fx{width:34px;border-right:1px solid var(--ln);display:flex;align-items:center;justify-content:center;color:var(--mute);font-style:italic}
-.fbar .fv{flex:1;display:flex;align-items:center;padding:0 8px;font-family:Consolas,monospace;white-space:nowrap;overflow:hidden}
-.sheetwrap{flex:1;overflow:auto;position:relative}
-table.sh{border-collapse:collapse;table-layout:fixed}
-.sh th{background:var(--hd);border:1px solid var(--ln);font-weight:normal;color:#555;height:22px;position:sticky;top:0;z-index:2}
-.sh th.rn,.sh td.rn{background:var(--hd);color:#555;text-align:center;position:sticky;left:0;z-index:1}
-.sh td{border:1px solid #e3e3e3;height:24px;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sh td.num{text-align:right;font-family:Consolas,monospace}
-.sh td.h{font-weight:bold;background:var(--g2)}
-.sh td.t{font-weight:bold;font-size:15px}
-.sh td.m{color:var(--mute)}
-.sh td.ok{color:var(--g);font-weight:bold}
-.sh tr.click td:not(.rn){cursor:pointer}.sh tr.click:hover td:not(.rn){background:#f0f7f2}
-.sh tr.done td:not(.rn){color:#aaa}
-.sh .bar{display:inline-block;height:10px;background:#5b9b74;vertical-align:middle}
-.tabs{display:flex;border-top:1px solid var(--ln);background:#f6f6f6;height:30px;padding-left:40px}
-.tabs button{border:0;border-right:1px solid var(--ln);background:none;padding:0 16px;color:#444}
-.tabs button.on{background:#fff;color:var(--g);font-weight:bold;border-bottom:2px solid var(--g)}
-.status{display:flex;justify-content:space-between;background:var(--g);color:#fff;font-size:12px;padding:3px 12px}
-#chart{position:absolute;right:24px;top:40px;width:380px;background:#fff;border:1px solid #bdbdbd;box-shadow:0 4px 14px rgba(0,0,0,.15);display:none;z-index:5}
-#chart.on{display:block}
-#chart .ch{display:flex;justify-content:space-between;padding:6px 10px;border-bottom:1px solid var(--ln);font-size:12px;color:#555;background:#fafafa}
-#scr{height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px;transition:background .3s}
-#scr b{font-size:20px}
-#quiz{display:flex;flex-direction:column;gap:6px;width:100%;margin-top:10px}
-#quiz button{border:1px solid var(--ln);background:#fff;padding:7px;border-radius:3px}#quiz button:hover{background:var(--g2)}
-.pg{height:5px;background:#eee}.pg i{display:block;height:100%;width:0;background:var(--g);transition:width .25s linear}
-#chart .cf{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;font-size:12px}
-#chart .cf button{border:1px solid var(--ln);background:#fff;padding:3px 10px;border-radius:3px}
-#dlg{position:fixed;inset:0;background:rgba(0,0,0,.25);display:none;align-items:center;justify-content:center;z-index:20}
-#dlg.on{display:flex}
-.dl{width:360px;max-width:92vw;background:#fff;border:1px solid #999;box-shadow:0 8px 30px rgba(0,0,0,.25)}
-.dl .dh{background:var(--g);color:#fff;padding:6px 10px;display:flex;justify-content:space-between}
-.dl .db{padding:16px}
-.dl label{display:block;font-size:12px;color:#555;margin-top:8px}
-.dl input{width:100%;padding:6px;border:1px solid #aaa;margin-top:3px;font:inherit}
-.dl .df{display:flex;justify-content:flex-end;gap:6px;padding:10px 16px;border-top:1px solid var(--ln);background:#f7f7f7}
-.dl .df button{min-width:76px;padding:5px 10px;border:1px solid #999;background:#fff}
-.dl .df button.p{background:var(--g);color:#fff;border-color:var(--g)}
-.err{color:#c0392b;font-size:12px;min-height:16px;margin-top:8px}
-.toast{position:fixed;bottom:44px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:7px 14px;border-radius:3px;font-size:12px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:30}.toast.on{opacity:1}
-body.boss #chart,body.boss .rlabel{display:none!important}
+*{box-sizing:border-box}body{margin:0;font-family:'Noto Sans KR',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#efeee9;color:#1d1d1b;padding:24px}
+h1{font-size:26px;margin:0 0 6px;text-align:center}p.s{color:#6b6a65;margin:0 0 28px;text-align:center}
+.wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:min(900px,100%)}
+@media(max-width:700px){.wrap{grid-template-columns:1fr}}
+a.opt{display:block;text-decoration:none;border-radius:22px;padding:34px 28px;transition:transform .15s,box-shadow .15s}
+a.opt:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(0,0,0,.12)}
+.a{background:#fff;color:#1d1d1b;border:1px solid #e2e0d8}.b{background:#16131f;color:#f2eefc}
+.k{font-size:13px;font-weight:700;opacity:.65}
+.n{font-size:36px;margin:10px 0}.a .n{font-family:'Gowun Dodum';color:#1f6f5c}.b .n{font-family:'Black Han Sans';color:#a98bff}
+.d{font-size:15px;opacity:.8;line-height:1.6}
+.go{display:inline-block;margin-top:20px;font-weight:700;padding:10px 16px;border-radius:12px}.a .go{background:#1f6f5c;color:#fff}.b .go{background:#6b3fd4;color:#fff}
+small{margin-top:24px;color:#8a8984}
 </style>
 </head>
 <body>
-<div class="top">
-  <div><b>4분기_실적정리_최종_진짜최종.xlsx</b><span style="opacity:.8"> · 저장됨</span></div>
-  <div class="acct"><span id="who">게스트</span><button id="authBtn">로그인</button></div>
+<h1>쉬는 시간, 어떤 이름으로 부를까요?</h1>
+<p class="s">두 가지 컨셉 중 더 끌리는 쪽을 골라 써보세요.</p>
+<div class="wrap">
+  <a class="opt a" href="a.html"><div class="k">A안</div><div class="n">틈날때버는월급</div><div class="d">커피 한 잔, 스트레칭 한 번.<br>잘 쉬는 것도 일의 일부라고 말해주는 따뜻한 버전.</div><span class="go">A안 써보기 →</span></a>
+  <a class="opt b" href="b.html"><div class="k">B안</div><div class="n">월급루팡</div><div class="d">월급은 회사가, 루팡은 내가.<br>등급 올리고 업종 대항전 하는 장난스러운 버전.</div><span class="go">B안 써보기 →</span></a>
 </div>
-<div class="menu"><span>파일</span><span class="on">홈</span><span>삽입</span><span>수식</span><span>데이터</span><span>검토</span><span>보기</span></div>
-<div class="ribbon">
-  <button class="rb" data-n="1"><i>▶</i>광고 1개</button>
-  <button class="rb" data-n="3"><i>⏩</i>3개 연속</button>
-  <button class="rb" data-n="5"><i>⏭</i>5개 연속</button>
-  <div class="rsep"></div>
-  <button class="rb" id="attBtn"><i>✔</i>출근 도장</button>
-  <div class="rsep"></div>
-  <button class="rb" id="bossBtn"><i>🙈</i>업무 모드</button>
-  <div class="rlabel">몰래버는월급<br><span id="rl"></span></div>
-</div>
-<div class="fbar"><div class="nm" id="nm">A1</div><div class="fx">fx</div><div class="fv" id="fv"></div></div>
-<div class="sheetwrap">
-  <table class="sh" id="sh"></table>
-  <div id="chart">
-    <div class="ch"><span id="chTitle">차트 1</span><span id="chStat"></span></div>
-    <div id="scr"><span style="font-size:12px;color:#777" id="brand"></span><b id="ttl"></b><span style="font-size:12px;color:#777;margin-top:6px" id="msg"></span><div id="quiz"></div></div>
-    <div class="pg"><i id="pg"></i></div>
-    <div class="cf"><span id="cnt"></span><button id="stop">그만 보기</button></div>
-  </div>
-</div>
-<div class="tabs" id="tabs">
-  <button data-s="watch" class="on">광고목록</button>
-  <button data-s="pay">월급명세서</button>
-  <button data-s="att">근태</button>
-  <button data-s="shop">복지몰</button>
-  <button data-s="how">사용법</button>
-</div>
-<div class="status"><span id="stL">준비</span><span id="stR"></span></div>
-
-<div id="dlg"><div class="dl">
-  <div class="dh"><span id="dT">로그인</span><span style="cursor:pointer" id="dX">✕</span></div>
-  <div class="db">
-    <div id="dS" style="color:#444;line-height:1.5"></div>
-    <label>아이디 (영문·숫자 4~16자)</label><input id="aId" maxlength="16" autocomplete="username">
-    <label>비밀번호 (6자 이상)</label><input id="aPw" type="password" autocomplete="current-password">
-    <div class="err" id="aErr"></div>
-    <div style="font-size:11px;color:#888">시연용: 계정은 이 브라우저에만 저장돼요. 평소 쓰는 비밀번호는 넣지 마세요.</div>
-  </div>
-  <div class="df"><button id="aSkip" style="margin-right:auto">로그인 건너뛰기</button><button id="aSw">회원가입</button><button class="p" id="aGo">로그인</button></div>
-</div></div>
-<div class="toast" id="toast"></div>
-
-<script>
-const $=id=>document.getElementById(id);
-const dkey=d=>(d||new Date()).toDateString();
-const now=()=>new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
-const SEC=15,PER=10,CAP=300,BONUS=10,ATT=5;
-const SLOTS=['오전','점심','오후','저녁'];
-const curSlot=()=>{const h=new Date().getHours();return h>=9&&h<12?0:h>=12&&h<14?1:h>=14&&h<18?2:3};
-const COL=['#fdf1e6','#eef3ea','#eaf0f7','#f5edf3','#f3f1e4','#e9eef0','#f0ece4','#f7efe9'];
-const ADS=[['점심 배달비 0원','배달앱 A',1],['사무실 원두 정기배송','커피브랜드 B','all'],['연말정산 미리보기','세무앱 C',0],['목·어깨 편한 의자','가구 D',2],['퇴근길 운동 1회 무료','피트니스 E',3],['업무용 메모 앱 3개월 무료','SaaS F',0],['주말 근교 숙소 특가','여행 G',3],['오후 간식 묶음 배송','간식몰 H',2],['회의록 자동 정리 툴','SaaS I','all'],['점심 샐러드 구독','샐러드 J',1],['직장인 영어 첫 달 무료','교육 K','all'],['사원증 케이스 굿즈','문구 L',2]].map((a,i)=>({id:i,title:a[0],brand:a[1],slot:a[2],color:COL[i%8]}));
-const ITEMS=[['편의점','편의점 1천원권',1000],['편의점','편의점 3천원권',3000],['커피','아메리카노',4500],['커피','카페라떼',5000],['배달','배달 쿠폰 5천원',5000],['배달','치킨 세트',20000]];
-const won=n=>n.toLocaleString()+'원';
-
-// 계정(시연용, 브라우저 저장 · 비밀번호는 해시만)
-const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
-const st=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-let DB=ld('mw_users')||{},cur=ld('mw_cur');if(cur&&!DB[cur])cur=null;
-const fresh=()=>({pt:0,day:dkey(),today:0,seen:[],cnt:0,att:[],log:[]});
-let skip=!!ld('mw_skip');
-let S;function loadU(){S=cur?DB[cur].s:(ld('mw_guest')||fresh());if(S.day!==dkey()){S.day=dkey();S.today=0;S.seen=[]}}loadU();
-const save=()=>{if(cur){DB[cur].s=S;st('mw_users',DB)}else st('mw_guest',S)};
-async function hash(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('mw:'+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return'f'+h}}
-let after=null,signup=false,need=false;
-// must=true: 교환처럼 로그인이 꼭 필요한 동작
-function needAuth(fn,must){if(cur||(skip&&!must))return true;need=!!must;after=fn;signup=false;mode();$('aErr').textContent='';$('aPw').value='';$('dlg').classList.add('on');setTimeout(()=>$('aId').focus(),50);return false}
-function mode(){$('dT').textContent=signup?'회원가입':'로그인';$('aGo').textContent=signup?'가입':'로그인';$('aSw').textContent=signup?'로그인으로':'회원가입';$('dS').innerHTML=need?'<b>복지몰 교환은 로그인이 필요해요.</b><br>지금까지 쌓은 월급은 로그인하면 그대로 계정으로 옮겨져요.':(signup?'아이디·비밀번호만 있으면 바로 시작해요. 가입하면 입사 축하금 100원!':'지금은 <b>건너뛰고 바로 보셔도 돼요.</b><br>쌓인 월급은 이 브라우저에 임시로 보관되고, <b>복지몰에서 기프티콘으로 바꿀 때</b> 로그인하면 계정으로 옮겨져요.');$('aSkip').style.display=need?'none':''}
-$('aSw').onclick=()=>{signup=!signup;mode();$('aErr').textContent=''};
-$('dX').onclick=()=>{after=null;$('dlg').classList.remove('on')};
-$('aSkip').onclick=()=>{skip=true;st('mw_skip',1);$('dlg').classList.remove('on');toast('게스트로 시작해요 · 교환할 때 로그인하면 돼요');render();const f=after;after=null;if(f)f()};
-$('aPw').onkeydown=e=>{if(e.key==='Enter')$('aGo').click()};
-$('aGo').onclick=async()=>{const id=$('aId').value.trim().toLowerCase(),pw=$('aPw').value;
- if(!/^[a-z0-9]{4,16}$/.test(id))return $('aErr').textContent='아이디는 영문·숫자 4~16자예요.';
- if(pw.length<6)return $('aErr').textContent='비밀번호는 6자 이상이에요.';
- const h=await hash(pw);
- if(signup){if(DB[id])return $('aErr').textContent='이미 있는 아이디예요.';const s=fresh();s.pt=100;s.log=[[now(),'입사 축하금',100]];DB[id]={h,s};toast('입사를 축하해요! +100원')}
- else{if(!DB[id])return $('aErr').textContent='없는 아이디예요. 회원가입을 눌러주세요.';if(DB[id].h!==h)return $('aErr').textContent='비밀번호가 맞지 않아요.';toast(id+' 님, 출근하셨네요')}
- const g=ld('mw_guest');if(g&&(g.pt||g.log.length)){const A=DB[id].s;A.pt+=g.pt;A.cnt+=g.cnt;A.log=[...g.log,...A.log].slice(0,80);if(A.day===g.day){A.today+=g.today;A.seen=[...new Set([...A.seen,...g.seen])]}A.att=[...new Set([...A.att,...g.att])];st('mw_guest',null);if(g.pt)setTimeout(()=>toast(`게스트로 모은 ${won(g.pt)}을 옮겼어요`),1900)}
- cur=id;st('mw_cur',cur);st('mw_users',DB);loadU();$('dlg').classList.remove('on');render();const f=after;after=null;if(f)f()};
-$('authBtn').onclick=()=>{if(cur){cur=null;st('mw_cur',null);loadU();render();toast('퇴근 처리됐어요')}else needAuth(null)};
-
-function toast(m){$('toast').textContent=m;$('toast').classList.add('on');setTimeout(()=>$('toast').classList.remove('on'),1800)}
-function earn(n,what){const a=Math.max(0,Math.min(n,CAP-S.today));if(!a)return 0;S.today+=a;S.pt+=a;S.log.unshift([now(),what,a]);S.log=S.log.slice(0,80);return a}
-const live=()=>ADS.filter(a=>a.slot==='all'||a.slot===curSlot());
-const avail=()=>live().filter(a=>!S.seen.includes(a.id));
-
-// 시트 렌더링
-const COLS='ABCDEFGH'.split('');
-let sheet='watch',rowAct=[],boss=false;
-const cell=(v,cls,f)=>({v,cls,f});
-function draw(rows,widths){
- rowAct=[];let h='<colgroup><col style="width:40px">'+widths.map(w=>`<col style="width:${w}px">`).join('')+'</colgroup><tr><th class="rn"></th>'+widths.map((_,i)=>`<th>${COLS[i]}</th>`).join('')+'</tr>';
- const total=Math.max(rows.length+6,34);
- for(let r=0;r<total;r++){const row=rows[r]||{cells:[]};rowAct[r]=row.act||null;
-  h+=`<tr class="${row.act?'click':''} ${row.done?'done':''}" data-r="${r}"><td class="rn">${r+1}</td>`+widths.map((_,i)=>{const c=row.cells[i];return c?`<td class="${c.cls||''}" data-f="${String(c.f||'').replace(/"/g,'&quot;')}">${c.v}</td>`:'<td></td>'}).join('')+'</tr>'}
- $('sh').innerHTML=h;
-}
-$('sh').onclick=e=>{const td=e.target.closest('td');if(!td)return;const r=+td.parentElement.dataset.r,ci=td.cellIndex;
- if(ci>0){$('nm').textContent=COLS[ci-1]+(r+1);$('fv').textContent=td.dataset.f||td.textContent}
- if(!boss&&rowAct[r])rowAct[r]()};
-
-function sWatch(){
- const L=live(),rows=[];
- rows.push({cells:[cell('광고 목록 · '+SLOTS[curSlot()]+' 시간대','t')]});
- rows.push({cells:[cell(`오늘 ${won(S.today)} / 한도 ${won(CAP)} · 남은 광고 ${avail().length}편 · 행을 클릭하면 재생`,'m')]});
- rows.push({cells:[]});
- rows.push({cells:['No','광고','브랜드','시간대','길이','지급액','상태'].map(v=>cell(v,'h'))});
- L.forEach((a,i)=>{const d=S.seen.includes(a.id);rows.push({act:d?null:()=>play([a.id]),done:d,cells:[cell(i+1,'num'),cell(a.title),cell(a.brand),cell(a.slot==='all'?'전체':SLOTS[a.slot]),cell(SEC+'초','num'),cell(won(PER),'num'),cell(d?'지급 완료':'▶ 보기',d?'':'ok')]})});
- rows.push({cells:[]});
- rows.push({cells:[cell(''),cell('합계','h'),cell(''),cell(''),cell(''),cell(won(L.length*PER),'num h',`=SUM(F5:F${4+L.length})`),cell('')]});
- draw(rows,[50,240,130,80,60,90,90]);
-}
-function sPay(){
- const rows=[];
- rows.push({cells:[cell('월급명세서','t')]});
- rows.push({cells:[cell(cur?`성명: ${cur}`:'게스트 명세서 · 복지몰에서 교환할 때 로그인하면 계정으로 옮겨져요','m')]});
- rows.push({cells:[]});
- rows.push({cells:[cell('항목','h'),cell('금액','h'),cell('','h')]});
- rows.push({cells:[cell('보유 월급'),cell(won(S.pt),'num ok','=SUM(지급)-SUM(사용)'),cell('')]});
- rows.push({cells:[cell('오늘 지급액'),cell(won(S.today),'num'),cell(`<span class="bar" style="width:${Math.round(S.today/CAP*120)}px"></span> 한도 ${won(CAP)}`)]});
- rows.push({cells:[cell('누적 시청'),cell(S.cnt+'편','num'),cell('')]});
- rows.push({cells:[]});
- rows.push({cells:[cell('시각','h'),cell('금액','h'),cell('내역','h')]});
- if(!S.log.length)rows.push({cells:[cell('-'),cell(''),cell('아직 내역이 없어요','m')]});
- S.log.slice(0,40).forEach(l=>rows.push({cells:[cell(l[0]),cell((l[2]>0?'+':'')+won(l[2]),'num '+(l[2]>0?'ok':'')),cell(l[1])]}));
- draw(rows,[160,120,280]);
-}
-function sAtt(){
- const rows=[];rows.push({cells:[cell('근태 기록','t')]});
- rows.push({cells:[cell(`출근 도장 하루 ${won(ATT)} · 7일 개근이면 보너스 ${won(ATT*4)}`,'m')]});
- rows.push({cells:[]});rows.push({cells:['날짜','요일','출근'].map(v=>cell(v,'h'))});
- for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const ok=S.att.includes(dkey(d)),today=i===0;
-  rows.push({act:today&&!ok?attend:null,cells:[cell(d.toLocaleDateString('ko-KR')),cell('일월화수목금토'[d.getDay()]+'요일'),cell(ok?'✔ 출근':today?'▶ 도장 찍기':'-',ok||today?'ok':'m')]})}
- draw(rows,[140,80,120]);
-}
-function sShop(){
- const rows=[];rows.push({cells:[cell('사내 복지몰','t')]});
- rows.push({cells:[cell(`보유 ${won(S.pt)} · 행을 클릭하면 교환 (시연용, 실제 발송 없음)`+(cur?'':' · 교환할 때 로그인이 필요해요'),'m')]});
- rows.push({cells:[]});rows.push({cells:['분류','상품','가격','진행률','교환'].map(v=>cell(v,'h'))});
- ITEMS.forEach((it,i)=>{const r=Math.min(1,S.pt/it[2]),can=r>=1;rows.push({act:()=>buy(i),cells:[cell(it[0]),cell(it[1]),cell(won(it[2]),'num'),cell(`<span class="bar" style="width:${Math.round(r*100)}px"></span> ${Math.round(r*100)}%`),cell(can?'▶ 교환':won(it[2]-S.pt)+' 부족',can?'ok':'m')]})});
- draw(rows,[80,180,90,160,110]);
-}
-function sHow(){
- const t=['몰래버는월급 사용법','','1. [광고목록] 시트의 행을 클릭하거나, 위 리본의 [광고 1개 / 3개 연속 / 5개 연속]을 누르세요.','2. 오른쪽에 차트처럼 생긴 창에서 15초 광고가 나와요. 끝나면 브랜드 맞히기 문제가 하나 나와요.','3. 맞히면 10원이 [월급명세서]에 쌓여요. 5개 연속 완주하면 보너스 10원.','4. [근태] 시트에서 매일 출근 도장을 찍으면 5원, 7일 개근이면 보너스.','5. [복지몰] 시트에서 모은 월급을 기프티콘으로 바꾸세요.','','단축키','Esc — 업무 모드: 광고 창이 사라지고 평범한 실적표만 남아요. 재생은 일시정지돼요.','','※ 시연용 페이지입니다. 계정·월급은 이 브라우저에만 저장되고, 기프티콘은 실제로 발송되지 않아요.'];
- draw(t.map((v,i)=>({cells:[cell(v,i===0?'t':i===8?'h':'')]})),[780]);
-}
-function sBoss(){
- const rows=[{cells:[cell('2026년 4분기 실적 정리','t')]},{cells:[cell('단위: 백만원','m')]},{cells:[]},{cells:['구분','10월','11월','12월','합계','전년比'].map(v=>cell(v,'h'))}];
- [['국내 매출',412,438,455],['해외 매출',128,131,142],['판관비',-210,-205,-219],['물류비',-64,-61,-70],['기타',12,9,15]].forEach((r,i)=>{const s=r[1]+r[2]+r[3];rows.push({cells:[cell(r[0]),cell(r[1],'num'),cell(r[2],'num'),cell(r[3],'num'),cell(s,'num',`=SUM(B${5+i}:D${5+i})`),cell((3+i*1.7).toFixed(1)+'%','num')]})});
- rows.push({cells:[cell('영업이익','h'),cell(278,'num h'),cell(312,'num h'),cell(323,'num h'),cell(913,'num h','=SUM(E5:E9)'),cell('6.2%','num h')]});
- draw(rows,[120,80,80,80,90,80]);
-}
-function render(){
- $('who').textContent=cur?cur+' 님':(skip?'게스트 · 교환할 때 로그인':'게스트');$('authBtn').textContent=cur?'로그아웃':'로그인';
- $('rl').textContent='보유 '+won(S.pt);
- $('stR').textContent=boss?'평균: 304.3   개수: 18   합계: 913':`합계: ${won(S.pt)}   오늘: ${won(S.today)}   개수: ${S.cnt}`;
- const a=avail().length;document.querySelectorAll('.rb[data-n]').forEach(b=>b.disabled=boss||!a||S.today>=CAP);
- $('attBtn').disabled=boss||S.att.includes(dkey());
- $('fv').textContent=boss?'=SUM(E5:E9)':`=몰래버는월급(오늘, "${SLOTS[curSlot()]}")  →  ${won(S.today)}`;
- if(boss)return sBoss();
- ({watch:sWatch,pay:sPay,att:sAtt,shop:sShop,how:sHow})[sheet]();
-}
-$('tabs').onclick=e=>{const b=e.target.closest('button');if(!b||boss)return;sheet=b.dataset.s;document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));render()};
-
-function attend(){if(!needAuth(attend))return;const k=dkey();if(S.att.includes(k))return;S.att.push(k);S.att=S.att.slice(-30);
- S.pt+=ATT;S.log.unshift([now(),'출근 도장',ATT]);let streak=0;for(let i=0;i<7;i++){const d=new Date();d.setDate(d.getDate()-i);if(S.att.includes(dkey(d)))streak++;else break}
- let m=`출근 완료 +${won(ATT)}`;if(streak===7){S.pt+=ATT*4;S.log.unshift([now(),'7일 개근 보너스',ATT*4]);m+=' · 7일 개근 보너스!'}save();render();toast(m)}
-$('attBtn').onclick=attend;
-function buy(i){if(!needAuth(()=>buy(i),true))return;const it=ITEMS[i];if(S.pt<it[2])return toast(won(it[2]-S.pt)+' 더 모아야 해요');S.pt-=it[2];S.log.unshift([now(),'복지몰: '+it[1],-it[2]]);save();render();toast(`'${it[1]}' 교환 완료 (시연용)`)}
-
-// 광고 재생 — '차트' 개체처럼 생긴 창
-let Q=[],qi=0,t=0,tm=null,N=0,got=0,quizOn=false;
-function play(ids){if(!needAuth(()=>play(ids)))return;if(S.today>=CAP)return toast('오늘 한도를 다 채웠어요');Q=ids;qi=0;N=ids.length;got=0;$('stop').textContent='그만 보기';$('chart').classList.add('on');start()}
-function start(){t=0;quizOn=false;const a=ADS[Q[qi]];$('chTitle').textContent='차트 '+(qi+1);$('brand').textContent=a.brand+' · 광고';$('ttl').textContent=a.title;$('scr').style.background=a.color;$('msg').textContent='';$('quiz').innerHTML='';$('pg').style.width=0;$('cnt').textContent=N>1?`${qi+1}/${N}편`:'';clearInterval(tm);tm=setInterval(tick,1000);tick(true)}
-function tick(first){if(document.hidden||boss){$('chStat').textContent='일시정지';return}
- if(!first)t++;$('pg').style.width=t/SEC*100+'%';$('chStat').textContent=(SEC-t)+'초';$('stL').textContent='계산 중... '+Math.round(t/SEC*100)+'%';
- if(t>=SEC){clearInterval(tm);ask(ADS[Q[qi]])}}
-function ask(a){quizOn=true;const o=[a.brand,...ADS.filter(x=>x.brand!==a.brand).map(x=>x.brand).sort(()=>Math.random()-.5).slice(0,2)].sort(()=>Math.random()-.5);
- $('brand').textContent='확인 문제';$('ttl').textContent='방금 본 광고의 브랜드는?';$('scr').style.background='#fff';$('chStat').textContent='';$('stL').textContent='입력 대기';
- $('quiz').innerHTML=o.map(x=>`<button data-b="${x}">${x}</button>`).join('')}
-$('quiz').onclick=e=>{const b=e.target.closest('button');if(b&&quizOn){quizOn=false;settle(ADS[Q[qi]],b.dataset.b===ADS[Q[qi]].brand)}};
-function settle(a,ok){$('quiz').innerHTML='';S.seen.push(a.id);
- if(ok){S.cnt++;const g=earn(PER,a.brand+' 광고 시청');got+=g;$('ttl').textContent=`+${won(g)} 입금`}else{$('ttl').textContent='아쉽게도 오답';$('msg').textContent='이 광고는 지급되지 않았어요'}
- save();render();qi++;
- if(qi<Q.length&&S.today<CAP)setTimeout(start,1200);
- else{let m=`이번에 ${won(got)} 벌었어요`;if(N>=5&&got>=PER*5){const b=earn(BONUS,'5편 연속 보너스');m+=` + 보너스 ${won(b)}`;save();render()}$('msg').textContent=m;$('stop').textContent='닫기';$('stL').textContent='준비'}}
-$('stop').onclick=()=>{clearInterval(tm);quizOn=false;$('chart').classList.remove('on');$('stL').textContent='준비'};
-document.querySelectorAll('.rb[data-n]').forEach(b=>b.onclick=()=>{const ids=avail().slice(0,+b.dataset.n).map(a=>a.id);if(ids.length)play(ids)});
-
-// 업무 모드(Esc)
-function toggleBoss(){boss=!boss;document.body.classList.toggle('boss',boss);$('bossBtn').innerHTML=boss?'<i>👀</i>다시 벌기':'<i>🙈</i>업무 모드';$('stL').textContent='준비';render()}
-$('bossBtn').onclick=toggleBoss;
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('dlg').classList.contains('on'))toggleBoss()});
-render();
-</script>
+<small>두 안은 기록이 따로 저장돼요 · 시연용 페이지</small>
 </body>
 </html>
