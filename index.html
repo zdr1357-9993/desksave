@@ -111,7 +111,7 @@ body.boss #chart,body.boss .rlabel{display:none!important}
     <div class="err" id="aErr"></div>
     <div style="font-size:11px;color:#888">시연용: 계정은 이 브라우저에만 저장돼요. 평소 쓰는 비밀번호는 넣지 마세요.</div>
   </div>
-  <div class="df"><button id="aSw">회원가입</button><button class="p" id="aGo">로그인</button></div>
+  <div class="df"><button id="aSkip" style="margin-right:auto">로그인 건너뛰기</button><button id="aSw">회원가입</button><button class="p" id="aGo">로그인</button></div>
 </div></div>
 <div class="toast" id="toast"></div>
 
@@ -132,14 +132,17 @@ const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null
 const st=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 let DB=ld('mw_users')||{},cur=ld('mw_cur');if(cur&&!DB[cur])cur=null;
 const fresh=()=>({pt:0,day:dkey(),today:0,seen:[],cnt:0,att:[],log:[]});
-let S;function loadU(){S=cur?DB[cur].s:fresh();if(S.day!==dkey()){S.day=dkey();S.today=0;S.seen=[]}}loadU();
-const save=()=>{if(cur){DB[cur].s=S;st('mw_users',DB)}};
+let skip=!!ld('mw_skip');
+let S;function loadU(){S=cur?DB[cur].s:(ld('mw_guest')||fresh());if(S.day!==dkey()){S.day=dkey();S.today=0;S.seen=[]}}loadU();
+const save=()=>{if(cur){DB[cur].s=S;st('mw_users',DB)}else st('mw_guest',S)};
 async function hash(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('mw:'+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return'f'+h}}
-let after=null,signup=false;
-function needAuth(fn){if(cur)return true;after=fn;signup=false;mode();$('aErr').textContent='';$('aPw').value='';$('dlg').classList.add('on');setTimeout(()=>$('aId').focus(),50);return false}
-function mode(){$('dT').textContent=signup?'회원가입':'로그인';$('aGo').textContent=signup?'가입':'로그인';$('aSw').textContent=signup?'로그인으로':'회원가입';$('dS').textContent=signup?'아이디·비밀번호만 있으면 바로 시작해요. 가입하면 입사 축하금 100원!':'광고를 보고 월급을 쌓으려면 로그인이 필요해요. 처음이면 회원가입을 눌러주세요.'}
+let after=null,signup=false,need=false;
+// must=true: 교환처럼 로그인이 꼭 필요한 동작
+function needAuth(fn,must){if(cur||(skip&&!must))return true;need=!!must;after=fn;signup=false;mode();$('aErr').textContent='';$('aPw').value='';$('dlg').classList.add('on');setTimeout(()=>$('aId').focus(),50);return false}
+function mode(){$('dT').textContent=signup?'회원가입':'로그인';$('aGo').textContent=signup?'가입':'로그인';$('aSw').textContent=signup?'로그인으로':'회원가입';$('dS').innerHTML=need?'<b>복지몰 교환은 로그인이 필요해요.</b><br>지금까지 쌓은 월급은 로그인하면 그대로 계정으로 옮겨져요.':(signup?'아이디·비밀번호만 있으면 바로 시작해요. 가입하면 입사 축하금 100원!':'지금은 <b>건너뛰고 바로 보셔도 돼요.</b><br>쌓인 월급은 이 브라우저에 임시로 보관되고, <b>복지몰에서 기프티콘으로 바꿀 때</b> 로그인하면 계정으로 옮겨져요.');$('aSkip').style.display=need?'none':''}
 $('aSw').onclick=()=>{signup=!signup;mode();$('aErr').textContent=''};
 $('dX').onclick=()=>{after=null;$('dlg').classList.remove('on')};
+$('aSkip').onclick=()=>{skip=true;st('mw_skip',1);$('dlg').classList.remove('on');toast('게스트로 시작해요 · 교환할 때 로그인하면 돼요');render();const f=after;after=null;if(f)f()};
 $('aPw').onkeydown=e=>{if(e.key==='Enter')$('aGo').click()};
 $('aGo').onclick=async()=>{const id=$('aId').value.trim().toLowerCase(),pw=$('aPw').value;
  if(!/^[a-z0-9]{4,16}$/.test(id))return $('aErr').textContent='아이디는 영문·숫자 4~16자예요.';
@@ -147,6 +150,7 @@ $('aGo').onclick=async()=>{const id=$('aId').value.trim().toLowerCase(),pw=$('aP
  const h=await hash(pw);
  if(signup){if(DB[id])return $('aErr').textContent='이미 있는 아이디예요.';const s=fresh();s.pt=100;s.log=[[now(),'입사 축하금',100]];DB[id]={h,s};toast('입사를 축하해요! +100원')}
  else{if(!DB[id])return $('aErr').textContent='없는 아이디예요. 회원가입을 눌러주세요.';if(DB[id].h!==h)return $('aErr').textContent='비밀번호가 맞지 않아요.';toast(id+' 님, 출근하셨네요')}
+ const g=ld('mw_guest');if(g&&(g.pt||g.log.length)){const A=DB[id].s;A.pt+=g.pt;A.cnt+=g.cnt;A.log=[...g.log,...A.log].slice(0,80);if(A.day===g.day){A.today+=g.today;A.seen=[...new Set([...A.seen,...g.seen])]}A.att=[...new Set([...A.att,...g.att])];st('mw_guest',null);if(g.pt)setTimeout(()=>toast(`게스트로 모은 ${won(g.pt)}을 옮겼어요`),1900)}
  cur=id;st('mw_cur',cur);st('mw_users',DB);loadU();$('dlg').classList.remove('on');render();const f=after;after=null;if(f)f()};
 $('authBtn').onclick=()=>{if(cur){cur=null;st('mw_cur',null);loadU();render();toast('퇴근 처리됐어요')}else needAuth(null)};
 
@@ -184,7 +188,7 @@ function sWatch(){
 function sPay(){
  const rows=[];
  rows.push({cells:[cell('월급명세서','t')]});
- rows.push({cells:[cell(cur?`성명: ${cur}`:'로그인하면 내 명세서가 보여요','m')]});
+ rows.push({cells:[cell(cur?`성명: ${cur}`:'게스트 명세서 · 복지몰에서 교환할 때 로그인하면 계정으로 옮겨져요','m')]});
  rows.push({cells:[]});
  rows.push({cells:[cell('항목','h'),cell('금액','h'),cell('','h')]});
  rows.push({cells:[cell('보유 월급'),cell(won(S.pt),'num ok','=SUM(지급)-SUM(사용)'),cell('')]});
@@ -206,7 +210,7 @@ function sAtt(){
 }
 function sShop(){
  const rows=[];rows.push({cells:[cell('사내 복지몰','t')]});
- rows.push({cells:[cell(`보유 ${won(S.pt)} · 행을 클릭하면 교환 (시연용, 실제 발송 없음)`,'m')]});
+ rows.push({cells:[cell(`보유 ${won(S.pt)} · 행을 클릭하면 교환 (시연용, 실제 발송 없음)`+(cur?'':' · 교환할 때 로그인이 필요해요'),'m')]});
  rows.push({cells:[]});rows.push({cells:['분류','상품','가격','진행률','교환'].map(v=>cell(v,'h'))});
  ITEMS.forEach((it,i)=>{const r=Math.min(1,S.pt/it[2]),can=r>=1;rows.push({act:()=>buy(i),cells:[cell(it[0]),cell(it[1]),cell(won(it[2]),'num'),cell(`<span class="bar" style="width:${Math.round(r*100)}px"></span> ${Math.round(r*100)}%`),cell(can?'▶ 교환':won(it[2]-S.pt)+' 부족',can?'ok':'m')]})});
  draw(rows,[80,180,90,160,110]);
@@ -222,7 +226,7 @@ function sBoss(){
  draw(rows,[120,80,80,80,90,80]);
 }
 function render(){
- $('who').textContent=cur?cur+' 님':'게스트';$('authBtn').textContent=cur?'로그아웃':'로그인';
+ $('who').textContent=cur?cur+' 님':(skip?'게스트 · 교환할 때 로그인':'게스트');$('authBtn').textContent=cur?'로그아웃':'로그인';
  $('rl').textContent='보유 '+won(S.pt);
  $('stR').textContent=boss?'평균: 304.3   개수: 18   합계: 913':`합계: ${won(S.pt)}   오늘: ${won(S.today)}   개수: ${S.cnt}`;
  const a=avail().length;document.querySelectorAll('.rb[data-n]').forEach(b=>b.disabled=boss||!a||S.today>=CAP);
@@ -237,7 +241,7 @@ function attend(){if(!needAuth(attend))return;const k=dkey();if(S.att.includes(k
  S.pt+=ATT;S.log.unshift([now(),'출근 도장',ATT]);let streak=0;for(let i=0;i<7;i++){const d=new Date();d.setDate(d.getDate()-i);if(S.att.includes(dkey(d)))streak++;else break}
  let m=`출근 완료 +${won(ATT)}`;if(streak===7){S.pt+=ATT*4;S.log.unshift([now(),'7일 개근 보너스',ATT*4]);m+=' · 7일 개근 보너스!'}save();render();toast(m)}
 $('attBtn').onclick=attend;
-function buy(i){if(!needAuth(()=>buy(i)))return;const it=ITEMS[i];if(S.pt<it[2])return toast(won(it[2]-S.pt)+' 더 모아야 해요');S.pt-=it[2];S.log.unshift([now(),'복지몰: '+it[1],-it[2]]);save();render();toast(`'${it[1]}' 교환 완료 (시연용)`)}
+function buy(i){if(!needAuth(()=>buy(i),true))return;const it=ITEMS[i];if(S.pt<it[2])return toast(won(it[2]-S.pt)+' 더 모아야 해요');S.pt-=it[2];S.log.unshift([now(),'복지몰: '+it[1],-it[2]]);save();render();toast(`'${it[1]}' 교환 완료 (시연용)`)}
 
 // 광고 재생 — '차트' 개체처럼 생긴 창
 let Q=[],qi=0,t=0,tm=null,N=0,got=0,quizOn=false;
