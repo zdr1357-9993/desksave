@@ -2,422 +2,430 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>틈날때버는월급</title>
-<meta name="description" content="커피 한 잔, 스트레칭 한 번. 쉬는 틈에 짧은 광고 한 편 보고 포인트를 쌓는 직장인 쉼 기록.">
+<meta name="description" content="틈새 속 광고 하나 보고 가세요. 커피 기다리는 15초가 돈이 돼요.">
 <meta name="theme-color" content="#1f6f5c">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="틈날때">
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--acc:#1f6f5c;--acc-d:#16523f;--acc2:#e6f2ec;--bg:#f6f5f1;--card:#fff;--ink:#1d1d1b;--mute:#6b6a65;--line:#e6e3da;--warm:#f4a259;--r:18px}
-*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
-body{margin:0;font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
-button{font:inherit;cursor:pointer;color:inherit}a{color:var(--acc)}
+:root{--acc:#1f6f5c;--acc-d:#16523f;--acc2:#e6f2ec;--bg:#f6f5f1;--card:#fff;--ink:#1d1d1b;--mute:#6b6a65;--line:#e8e5dc;--warm:#f4a259;--warm2:#fff4e6;--gold:#e8b931}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',sans-serif;line-height:1.55}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 :focus-visible{outline:3px solid var(--warm);outline-offset:2px}
-.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
-header{position:sticky;top:0;z-index:10;background:rgba(246,245,241,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;justify-content:space-between;align-items:center;height:58px;gap:10px}
-.logo{font-family:'Gowun Dodum';font-size:21px;font-weight:700;text-decoration:none;color:var(--ink)}.logo b{color:var(--acc)}
-.hr{display:flex;align-items:center;gap:8px;font-size:14px}
-.pill{background:var(--acc);color:#fff;border-radius:99px;padding:5px 12px;font-weight:700;font-variant-numeric:tabular-nums}
-.btn{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:12px 18px;font-weight:700;transition:transform .08s,background .15s}
-.btn:hover{background:var(--acc-d)}.btn:active{transform:scale(.98)}
-.btn.ghost{background:transparent;color:var(--acc);border:1px solid var(--acc)}.btn.ghost:hover{background:var(--acc2)}
-.btn.sm{padding:7px 12px;font-size:13px;border-radius:9px}
-.btn:disabled{opacity:.35;cursor:not-allowed}
-.link{background:none;border:0;color:var(--mute);text-decoration:underline;font-size:13px;padding:4px}
+.hand{font-family:'Gowun Dodum',sans-serif}
 .mute{color:var(--mute)}
-.hero{display:grid;grid-template-columns:1fr 420px;gap:32px;padding:36px 0 18px;align-items:center}
-@media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:20px;gap:18px}.intro{order:2}}
-.tag{display:inline-block;background:var(--acc2);color:var(--acc);font-weight:700;font-size:13px;padding:4px 10px;border-radius:99px}
-h1{font-family:'Gowun Dodum';font-size:42px;line-height:1.25;margin:12px 0;font-weight:700;letter-spacing:-.01em}
-@media(max-width:600px){h1{font-size:30px}}
-.lead{color:var(--mute);font-size:16px;max-width:480px}
-.steps{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.steps span{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px}.steps b{color:var(--acc)}
-.timer{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 10px 30px rgba(31,111,92,.08);position:relative;overflow:hidden}
-.timer.run{border-color:var(--acc);box-shadow:0 10px 40px rgba(31,111,92,.22)}
-.timer.run::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0,rgba(31,111,92,.10),transparent 60%);animation:breathe 4s ease-in-out infinite;pointer-events:none}
-@keyframes breathe{50%{opacity:.3}}
-.tt{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--mute)}
-.state{font-size:12px;font-weight:700;padding:3px 8px;border-radius:99px;background:var(--bg)}.timer.run .state{background:var(--acc);color:#fff}
-#tTime{font-size:60px;font-weight:800;font-variant-numeric:tabular-nums;text-align:center;letter-spacing:-.02em;margin:6px 0 0}
-.money{text-align:center;color:var(--mute);font-size:13px}#tMoney{display:block;font-size:30px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums}
-.kinds{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0 10px}
-.kind{border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:9px 4px;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:2px}
-.kind i{font-style:normal;font-size:22px}.kind.on{border-color:var(--acc);background:var(--acc2);color:var(--acc);font-weight:700}
-#go{width:100%;font-size:18px;padding:16px;border-radius:14px}
-.timer.run #go{background:var(--ink)}
-.gr{margin-top:14px;display:flex;align-items:center;gap:12px;background:var(--acc2);border-radius:14px;padding:10px 12px}
-.gr .em{font-size:26px}.gr b{display:block;color:var(--acc)}.gr small{display:block;color:var(--mute);font-size:12px}
-.gbar{height:6px;background:#fff;border-radius:99px;overflow:hidden;margin-top:5px}.gbar i{display:block;height:100%;background:var(--acc);transition:width .4s}
-.tad{display:none;margin-top:10px;background:#fff7ec;border:1px solid #f3dfc3;border-radius:14px;padding:12px;text-align:center}.timer.run .tad{display:block}.tad .btn{background:var(--warm);width:100%}.tad .btn:hover{background:#e08d43}.tad small{display:block;color:var(--mute);font-size:12px;margin-top:6px}
-.wi{font-size:12px;color:var(--mute);text-align:center;margin-top:10px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
-.card h2{font-size:17px;margin:0}.card .sub{color:var(--mute);font-size:13px;margin:2px 0 12px}
-.ch{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-ul{list-style:none;margin:0;padding:0}
-li{display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}li:last-child{border:0}
-li.done span{color:var(--mute)}li.done b{color:var(--acc)}li.me{color:var(--acc);font-weight:700}
-.chk{display:inline-flex;width:18px;height:18px;border-radius:50%;border:2px solid var(--line);margin-right:6px;vertical-align:-3px;align-items:center;justify-content:center;font-size:11px}
-li.done .chk{background:var(--acc);border-color:var(--acc);color:#fff}
-.weekbox{display:flex;gap:8px;align-items:flex-end;height:120px}
-.wk{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--mute)}
-.wb{width:100%;height:92px;background:var(--acc2);border-radius:8px;display:flex;align-items:flex-end;overflow:hidden}.wb i{display:block;width:100%;background:var(--acc);border-radius:8px;transition:height .4s}
-.wk.today span{color:var(--acc);font-weight:700}
-.kindsum{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.kindsum span{font-size:12px;background:var(--bg);border-radius:99px;padding:3px 9px}
-.item{display:grid;grid-template-columns:1fr 80px auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}.item:last-child{border:0}.item span{display:block;color:var(--mute);font-size:12px}
-.mb{height:6px;background:var(--acc2);border-radius:99px;overflow:hidden}.mb i{display:block;height:100%;background:var(--acc)}
-.bonus{background:linear-gradient(135deg,#fff7ec,#fff);border-color:#f3dfc3}
-.bonus .btn{background:var(--warm)}.bonus .btn:hover{background:#e08d43}.bonus .btn.ghost{background:transparent;color:#b86a23;border-color:var(--warm)}
-#slip{background:#fffdf7;border:1px solid #e9e1c9;border-radius:12px;padding:16px;font-size:14px}
-.sl-h{font-weight:800;font-size:16px;display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:4px}.sl-h span{font-weight:400;font-size:12px;color:var(--mute)}
-.sl-r{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dotted #d8d2bf}.sl-r span{color:var(--mute)}.sl-r .acc{color:var(--acc)}
-.sl-f{margin-top:10px;font-size:12px;color:var(--mute);text-align:center}
-.two{display:flex;gap:8px;margin-top:10px}.two .btn{flex:1}
-.ov{position:fixed;inset:0;background:rgba(20,20,18,.5);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}.ov.on{display:flex}
-.box{background:var(--card);border-radius:20px;width:min(440px,100%);padding:24px;max-height:92vh;overflow:auto;animation:pop .18s ease-out}
-@keyframes pop{from{transform:scale(.96);opacity:0}}
-.box h2{margin:0 0 6px;font-family:'Gowun Dodum';font-size:22px}
-.box input,.box select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:inherit;margin:4px 0 8px;background:var(--bg)}
-.presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}.presets button{border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:5px 11px;font-size:13px}.presets button.on{border-color:var(--acc);color:var(--acc);background:var(--acc2)}
+
+/* 레이아웃: 모바일 한 칸, PC는 가운데 앱 + 옆 정보 */
+.app{max-width:480px;margin:0 auto;min-height:100vh;padding:calc(14px + env(safe-area-inset-top)) 16px calc(92px + env(safe-area-inset-bottom))}
+@media(min-width:960px){.app{max-width:980px;display:grid;grid-template-columns:440px 1fr;gap:28px;padding-bottom:40px}.side{display:block!important}.tabs{display:none!important}.pane{display:block!important}.pane.side-only{display:none!important}}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.logo{font-family:'Gowun Dodum';font-weight:700;font-size:19px}.logo b{color:var(--acc)}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px 11px;font-size:13px;font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:12px}
+.card h2{font-size:16px;margin:0 0 2px}.card .sub{font-size:13px;color:var(--mute);margin:0 0 12px}
+.btn{background:var(--acc);color:#fff;border-radius:14px;padding:13px 18px;font-weight:700;transition:transform .08s,background .15s}
+.btn:active{transform:scale(.97)}.btn:hover{background:var(--acc-d)}
+.btn.warm{background:var(--warm)}.btn.warm:hover{background:#e08d43}
+.btn.ghost{background:transparent;color:var(--acc);border:1px solid var(--acc)}
+.btn.sm{padding:8px 12px;font-size:13px;border-radius:10px}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.link{color:var(--mute);text-decoration:underline;font-size:13px;padding:4px}
+
+/* 지금 화면 */
+.greet{display:flex;gap:12px;align-items:center}
+.mini{width:58px;height:58px;border-radius:20px;background:var(--acc2);display:flex;align-items:center;justify-content:center;font-size:32px;flex:none;position:relative}
+.mini.bump{animation:bump .5s}@keyframes bump{40%{transform:scale(1.15) rotate(-6deg)}}
+.bubble{background:var(--card);border:1px solid var(--line);border-radius:18px 18px 18px 4px;padding:10px 14px;font-size:15px}
+.hero{background:linear-gradient(160deg,#24806a,#1f6f5c);color:#fff;border:0;text-align:center;padding:22px 18px}
+.hero .mo-now{font-size:13px;opacity:.85}
+.hero h1{font-family:'Gowun Dodum';font-size:24px;margin:4px 0 14px;font-weight:700}
+.play{width:100%;background:#fff;color:var(--acc);font-size:18px;padding:16px;border-radius:16px;font-weight:800;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.play small{display:block;font-size:12px;font-weight:600;color:var(--mute);margin-top:2px}
+.hero .alt{margin-top:10px;font-size:13px;opacity:.9}.hero .alt button{color:#fff;text-decoration:underline;font-size:13px}
+
+.goal .row1{display:flex;justify-content:space-between;align-items:baseline}
+.goal b.big{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums}
+.bar{height:16px;background:var(--acc2);border-radius:99px;overflow:hidden;margin:10px 0 6px;position:relative}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),#3fa585);border-radius:99px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.bar.glow i{box-shadow:0 0 12px rgba(63,165,133,.8)}
+.goalpick{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.goalpick button{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:4px 10px;background:var(--bg)}.goalpick button.on{border-color:var(--acc);background:var(--acc2);color:var(--acc);font-weight:700}
+
+.moments{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mo{border:1px solid var(--line);background:var(--bg);border-radius:16px;padding:12px;text-align:left;position:relative}
+.mo i{font-style:normal;font-size:22px}.mo b{display:block;font-size:14px;margin-top:2px}.mo small{color:var(--mute);font-size:12px}
+.mo.rec{border-color:var(--acc);background:var(--acc2)}.mo em{position:absolute;top:8px;right:8px;font-style:normal;font-size:10px;font-weight:700;background:var(--acc);color:#fff;border-radius:99px;padding:1px 7px}
+.mo.done{opacity:.5}
+.boxes{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}.boxes span{font-size:12px;border:1px dashed var(--line);border-radius:10px;padding:4px 8px;color:var(--mute)}.boxes span.on{border-style:solid;border-color:var(--warm);background:var(--warm2);color:#b86a23;font-weight:700}
+
+/* 틈 일기 */
+.story{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scroll-snap-type:x mandatory}
+.sc{flex:none;width:132px;height:170px;border-radius:18px;padding:12px;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:space-between;color:#1d1d1b;position:relative}
+.sc .e{font-size:30px}.sc .t{font-size:11px;opacity:.7}.sc b{font-size:13px;line-height:1.3}.sc .p{font-weight:800;color:var(--acc)}
+.sc.lucky::after{content:'행운 2배';position:absolute;top:10px;right:10px;font-size:10px;font-weight:800;background:var(--gold);color:#fff;border-radius:99px;padding:1px 6px}
+.empty{color:var(--mute);font-size:14px;text-align:center;padding:16px}
+.week{display:flex;gap:6px;align-items:flex-end;height:90px;margin-top:6px}
+.wk{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--mute)}.wk div{width:100%;height:66px;background:var(--acc2);border-radius:8px;display:flex;align-items:flex-end;overflow:hidden}.wk div i{display:block;width:100%;background:var(--acc);border-radius:8px}.wk.today{color:var(--acc);font-weight:700}
+
+/* 틈이 방 */
+.room{height:220px;border-radius:20px;background:linear-gradient(#fdf8ee 0 62%,#efe3cc 62%);position:relative;overflow:hidden;border:1px solid var(--line)}
+.room .pet{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);font-size:78px;transition:transform .3s}
+.room .pet.bump{animation:hop .6s}@keyframes hop{30%{transform:translateX(-50%) translateY(-18px)}}
+.room .it{position:absolute;font-size:34px}
+.room .lv{position:absolute;left:12px;top:10px;font-size:12px;font-weight:700;background:#fff;border-radius:99px;padding:2px 9px}
+.xp{height:8px;background:var(--acc2);border-radius:99px;overflow:hidden;margin-top:10px}.xp i{display:block;height:100%;background:var(--acc);transition:width .6s}
+.shop{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.si{border:1px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center;background:var(--bg)}.si i{font-style:normal;font-size:28px;display:block}.si small{display:block;font-size:11px;color:var(--mute)}.si.own{border-color:var(--acc);background:var(--acc2)}
+.bdg{display:flex;gap:6px;flex-wrap:wrap}.bdg span{width:40px;height:40px;border-radius:12px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:20px;filter:grayscale(1);opacity:.35}.bdg span.on{filter:none;opacity:1;background:var(--warm2)}
+
+/* 지갑·알림 */
+.list li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14px;list-style:none}.list{margin:0;padding:0}.list li:last-child{border:0}
+.tg{position:relative;width:44px;height:26px;border-radius:99px;background:#d6d3ca;flex:none;transition:background .2s}.tg::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .2s}.tg.on{background:var(--acc)}.tg.on::after{left:21px}
+.rowx{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14px}.rowx:last-child{border:0}
+select,input{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+
+/* 하단 탭 (모바일) */
+.tabs{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;justify-content:center;padding:6px 8px calc(6px + env(safe-area-inset-bottom));z-index:10}
+.tabs .in{display:flex;max-width:480px;width:100%}
+.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:11px;color:var(--mute);padding:6px 0;border-radius:12px}
+.tabs button i{font-style:normal;font-size:20px;filter:grayscale(1);opacity:.6}.tabs button.on{color:var(--acc);font-weight:700}.tabs button.on i{filter:none;opacity:1}
+.pane{display:none}.pane.on{display:block}
+.side{display:none}
+
+/* 광고 플레이어: 모바일 전체화면 */
+.ov{position:fixed;inset:0;z-index:30;display:none;background:rgba(20,20,18,.55);align-items:center;justify-content:center}.ov.on{display:flex}
+.player{background:var(--card);width:min(440px,100%);height:min(720px,100%);border-radius:24px;display:flex;flex-direction:column;overflow:hidden;animation:up .25s ease-out}
+@media(max-width:520px){.player{border-radius:0;height:100%}}
+@keyframes up{from{transform:translateY(30px);opacity:0}}
+.ph{display:flex;justify-content:space-between;align-items:center;padding:calc(12px + env(safe-area-inset-top)) 16px 10px;font-size:13px}
+.pbar{display:flex;gap:4px;padding:0 16px}.pbar span{flex:1;height:4px;border-radius:99px;background:var(--line);overflow:hidden}.pbar span i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s linear}
+.stage{flex:1;margin:12px 16px;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;transition:background .3s;position:relative}
+.stage .brand{font-size:13px;color:var(--mute)}.stage .tt{font-size:26px;font-weight:800;line-height:1.3;margin:8px 0}
+.stage .load{font-family:'Gowun Dodum';font-size:18px;color:var(--mute)}
+.stage .quiz{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:14px}.stage .quiz button{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;font-weight:600}.stage .quiz button:hover{border-color:var(--acc)}
+.stage .got{font-size:56px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;animation:pop .4s}
+.stage .got.lucky{color:var(--gold)}
+@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.1)}}
+.stage .luckytag{background:var(--gold);color:#fff;font-weight:800;border-radius:99px;padding:3px 12px;font-size:13px;animation:pop .4s}
+.pf{display:flex;gap:8px;padding:0 16px calc(16px + env(safe-area-inset-bottom))}.pf .btn{flex:1}
+.conf{position:absolute;inset:0;pointer-events:none;overflow:hidden}.conf i{position:absolute;top:-10px;font-style:normal;animation:fall 1.4s ease-in forwards}@keyframes fall{to{transform:translateY(520px) rotate(360deg);opacity:0}}
+
+/* 모달·배너·토스트 */
+.sheet{background:var(--card);border-radius:24px;width:min(420px,calc(100% - 24px));padding:22px;max-height:90vh;overflow:auto;animation:up .2s}
+.sheet h2{font-family:'Gowun Dodum';margin:0 0 6px}
+.sheet input{width:100%;margin:4px 0 8px}
 .err{color:#c0392b;font-size:13px;min-height:18px}
-.row{display:flex;gap:8px;justify-content:flex-end;align-items:center;flex-wrap:wrap}
-.dots{display:flex;gap:6px;justify-content:center;margin-top:14px}.dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}.dots i.on{background:var(--acc);width:18px;border-radius:99px}
-.scr{min-height:200px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px;background:var(--acc2)}
-.scr.c0{background:#fdf1e6}.scr.c1{background:#eef3ea}.scr.c2{background:#eaf0f7}.scr.c3{background:#f5edf3}
-#pTitle{font-size:22px;font-weight:800}
-#pQuiz{display:flex;flex-direction:column;gap:6px;width:100%;margin-top:10px}#pQuiz button{padding:10px;border:1px solid var(--line);background:#fff;border-radius:10px}#pQuiz button:hover{border-color:var(--acc)}
-.pb{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin:12px 0}.pb i{display:block;height:100%;width:0;background:var(--warm);transition:width .3s linear}
-.nudge{position:fixed;right:18px;bottom:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.12);display:none;z-index:15;max-width:300px}.nudge.on{display:block;animation:pop .2s}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:99px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:30;max-width:90vw;text-align:center}.toast.on{opacity:1}
-footer{color:var(--mute);font-size:12px;padding:24px 0 40px;line-height:1.7}
-body{padding-bottom:96px}
-.dock{position:fixed;left:0;right:0;bottom:0;z-index:12;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(0,0,0,.05);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
-.dock .in{max-width:1040px;margin:0 auto;display:flex;gap:8px;align-items:stretch}
-.dock .lbl{font-size:11px;color:var(--mute);align-self:center;white-space:nowrap;margin-right:2px}
-.mo{flex:1;border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:13px;font-weight:600;min-width:0}
-.mo i{font-style:normal;font-size:20px}.mo small{font-size:11px;color:var(--mute);font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.mo:hover{border-color:var(--acc);background:var(--acc2)}
-.mo.all{background:var(--warm);border-color:var(--warm);color:#fff}.mo.all small{color:#fff;opacity:.9}.mo.all:hover{background:#e08d43}
-.mo:disabled{opacity:.4;cursor:not-allowed}
-.mo{position:relative}.mo.rec{border-color:var(--acc);background:var(--acc2)}.mo em{position:absolute;top:-8px;right:6px;font-style:normal;font-size:10px;font-weight:700;background:var(--acc);color:#fff;border-radius:99px;padding:1px 6px}
-.dock .lbl b{color:var(--acc)}
-/* 캐릭터 */
-.pet{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;margin-top:4px}
-@media(max-width:700px){.pet{grid-template-columns:auto 1fr}.pet .bdg{grid-column:1/-1}}
-.face{width:96px;height:96px;border-radius:28px;background:var(--acc2);display:flex;align-items:center;justify-content:center;font-size:52px;position:relative}
-.face.bump{animation:bump .5s}@keyframes bump{40%{transform:scale(1.15) rotate(-6deg)}}
-.face b{position:absolute;bottom:-8px;right:-8px;background:var(--ink);color:#fff;font-size:12px;border-radius:99px;padding:2px 8px}
-.say{background:var(--bg);border-radius:14px;padding:8px 12px;font-size:14px;margin-top:6px;display:inline-block}
-.xp{height:10px;background:var(--acc2);border-radius:99px;overflow:hidden;margin-top:8px}.xp i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),#3fa585);transition:width .5s}
-.combo{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}.combo span{font-size:12px;border:1px dashed var(--line);border-radius:10px;padding:4px 8px;color:var(--mute)}.combo span.on{border-style:solid;border-color:var(--warm);background:#fff7ec;color:#b86a23;font-weight:700}
-.bdg{display:flex;gap:6px;flex-wrap:wrap;max-width:260px}.bdg span{width:40px;height:40px;border-radius:12px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:20px;filter:grayscale(1);opacity:.35}.bdg span.on{filter:none;opacity:1;background:#fff7ec}
-.lvup{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:40;pointer-events:none}.lvup.on{display:flex}.lvup div{background:var(--card);border-radius:24px;padding:28px 34px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25);animation:pop .3s}.lvup i{font-style:normal;font-size:60px;display:block}
-@media(max-width:640px){.dock .lbl{display:none}.mo{font-size:12px}.mo small{display:none}}
-.nudge{bottom:110px!important}
-#pHead{font-size:13px;font-weight:700;color:var(--acc);text-align:center;margin-bottom:8px;min-height:18px}
+.banner{position:fixed;left:50%;top:calc(10px + env(safe-area-inset-top));transform:translate(-50%,-140%);width:min(440px,calc(100% - 20px));background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.15);padding:12px 14px;display:flex;gap:10px;align-items:center;z-index:40;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.banner.on{transform:translate(-50%,0)}.banner .bi{font-size:26px}.banner b{display:block;font-size:14px}.banner small{color:var(--mute);font-size:12px}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:99px;padding:9px 16px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:50;max-width:90vw;text-align:center}.toast.on{opacity:1}
+.foot{font-size:11px;color:var(--mute);text-align:center;margin:8px 0 0;line-height:1.6}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-  <a class="logo" href="#">틈날때<b>버는</b>월급</a>
-  <div class="hr"><span id="who" class="mute"></span><button class="btn ghost sm" id="authBtn">로그인</button><span class="pill" id="ptTop" title="보유 포인트">0P</span></div>
-</div></header>
-<main class="wrap">
-  <section class="hero">
-    <div class="intro">
-      <span class="tag">쉬는 틈에, 광고 한 편</span>
-      <h1>틈날 때마다,<br>월급이 조금씩 더 쌓여요</h1>
-      <p class="lead">커피 한 잔, 스트레칭 한 번, 창밖 보기 5분. 틈을 켜두고 쉬다가 15초 광고 한 편 보면 포인트가 쌓여요. 모은 포인트는 커피 쿠폰으로 돌아와요.</p>
-      <div class="steps"><span><b>1</b> 쉬러 가기 전, 아래 버튼 한 번</span><span><b>2</b> 기다리는 동안 광고 한 편</span><span><b>3</b> 포인트로 커피 한 잔</span></div>
-    </div>
-    <div class="timer" id="timer" aria-live="polite">
-      <div class="tt"><span>오늘의 틈</span><span class="state" id="state">대기 중</span></div>
-      <div id="tTime">0:00</div>
-      <div class="money">오늘 틈에 받은 포인트<span id="tMoney">0P</span></div>
-      <div class="kinds" id="kinds" role="radiogroup" aria-label="틈 종류"></div>
-      <button class="btn" id="go">▶ 틈 시작</button>
-      <div class="tad" id="tAd"></div>
-      <div class="gr"><span class="em" id="gEm">🌱</span><div style="flex:1"><b id="gName"></b><small id="gNext"></small><div class="gbar"><i id="gBar"></i></div></div></div>
-      <div class="wi" id="wageInfo"></div>
-    </div>
-  </section>
-  <section class="card"><div class="pet">
-    <div class="face" id="pFace">🌱<b id="pLv">Lv.1</b></div>
-    <div><div class="ch" style="justify-content:flex-start;gap:8px"><h2 id="pName">틈이</h2><span class="mute" style="font-size:13px" id="pStage"></span></div>
-      <div class="say" id="pSay"></div>
-      <div class="xp"><i id="pXp"></i></div><div class="mute" style="font-size:12px;margin-top:4px" id="pXpT"></div>
-      <div class="combo" id="combo"></div></div>
-    <div class="bdg" id="bdg" aria-label="성과"></div>
-  </div></section>
-  <section class="grid">
-    <div class="card"><div class="ch"><h2>이번 주 틈</h2><span class="mute" style="font-size:13px" id="weekSum"></span></div><p class="sub" id="weekSub"></p><div class="weekbox" id="week"></div><div class="kindsum" id="kindsum"></div></div>
-    <div class="card"><h2>오늘의 미션</h2><p class="sub">달성하면 포인트가 자동으로 들어와요</p><ul id="miss"></ul></div>
-    <div class="card"><h2>오늘의 틈 광고</h2><p class="sub">쉬는 동안 하나씩 골라 봐도 돼요</p><ul id="adlist"></ul></div>
-  </section>
-  <section class="grid">
-    <div class="card"><h2>오늘의 명세서</h2><p class="sub">이미지로 저장하거나 복사해서 공유해 보세요</p><div id="slip"></div>
-      <div class="two"><button class="btn sm" id="saveSlip">이미지 저장</button><button class="btn ghost sm" id="copySlip">텍스트 복사</button></div></div>
-    <div class="card bonus"><h2>☕ 틈 광고</h2><p class="sub">15초 광고 한 편에 10P부터 · 틈이 레벨이 오르면 더 커져요</p>
-      <div class="row" style="justify-content:flex-start"><button class="btn" data-ad="1">1편 보기</button><button class="btn ghost" data-ad="3">3편 연속</button></div>
-      <p class="sub" id="adLeft" style="margin-top:12px"></p>
-      <p class="sub" style="font-size:12px">광고가 끝나면 브랜드 맞히기 문제가 하나 나와요. 맞히면 적립돼요.</p></div>
-    <div class="card"><h2>포인트 교환</h2><p class="sub">1P = 1원 · 교환할 때만 로그인이 필요해요</p><div id="shop"></div></div>
-  </section>
-  <section class="card"><div class="ch"><h2>최근 기록</h2></div><ul id="log" style="margin-top:8px"></ul></section>
-  <footer>틈날때버는월급 · 시연용 페이지예요. 기록·계정은 이 브라우저에만 저장되고, 광고는 예시이며 교환은 실제로 발송되지 않아요.</footer>
-</main>
+<div class="app">
+ <div>
+  <div class="top"><div class="logo">틈날때<b>버는</b>월급</div><button class="chip" id="ptChip">0P</button></div>
 
-<div class="ov" id="onb"><div class="box"><div id="onbBody"></div><div class="dots" id="onbDots"></div></div></div>
-<div class="ov" id="setup" hidden><div class="box">
-  <h2>설정</h2>
-  <p class="mute" style="font-size:14px;margin-top:0">쉬는 시간을 시급으로 환산하는 데만 쓰여요. 이 브라우저에만 저장돼요.</p>
-  <label class="mute" style="font-size:13px" for="sWage">연봉 (만원)</label>
-  <div class="presets" id="presets"></div>
-  <input id="sWage" type="number" inputmode="numeric" placeholder="직접 입력 (예: 4200)">
-  <label class="mute" style="font-size:13px" for="sJob">업종</label><select id="sJob"></select>
-  <div class="err" id="sErr"></div>
-  <div class="row"><button class="link" id="sAvg">잘 모르겠어요 (3,600만원으로)</button><button class="btn sm" id="sGo">저장하고 시작</button></div>
+  <!-- 지금 -->
+  <section class="pane on" id="p-now">
+    <div class="greet" style="margin-bottom:12px"><div class="mini" id="miniPet">🌱</div><div class="bubble" id="say"></div></div>
+    <div class="card hero">
+      <div class="mo-now" id="moNow"></div>
+      <h1 id="heroT">틈새 속 광고 하나 보고 가세요</h1>
+      <button class="play" id="playBtn">▶ 광고 보고 돈 벌어가요<small id="playSub"></small></button>
+      <div class="alt" id="altLine"></div>
+    </div>
+    <div class="card goal">
+      <div class="row1"><h2 id="goalT">아메리카노까지</h2><span class="mute" style="font-size:13px" id="goalPct"></span></div>
+      <div class="bar" id="goalBar"><i></i></div>
+      <div class="row1"><b class="big" id="ptBig">0P</b><span class="mute" style="font-size:13px" id="goalLeft"></span></div>
+      <div class="boxes" id="boxes"></div>
+    </div>
+    <div class="card"><h2>이럴 때 하나씩</h2><p class="sub">지금 시간에 맞는 순간이 위에 와요</p><div class="moments" id="moments"></div></div>
+  </section>
+
+  <!-- 틈 일기 -->
+  <section class="pane side-only" id="p-diary">
+    <div class="card"><h2>오늘의 틈</h2><p class="sub" id="diarySub"></p><div class="story" id="story"></div></div>
+    <div class="card"><h2>이번 주</h2><p class="sub" id="weekSub"></p><div class="week" id="week"></div></div>
+  </section>
+
+  <!-- 틈이 방 -->
+  <section class="pane side-only" id="p-room">
+    <div class="card"><div class="room" id="room"><span class="lv" id="roomLv"></span><span class="pet" id="pet">🌱</span></div>
+      <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:13px"><b id="petName"></b><span class="mute" id="petPer"></span></div>
+      <div class="xp"><i id="xpBar"></i></div><p class="mute" style="font-size:12px;margin:4px 0 0" id="xpT"></p></div>
+    <div class="card"><h2>틈이 방 꾸미기</h2><p class="sub">모은 포인트로만 살 수 있어요 · 현금 결제는 없어요</p><div class="shop" id="shop"></div></div>
+    <div class="card"><h2>성과</h2><p class="sub" id="bdgSub"></p><div class="bdg" id="bdg"></div></div>
+  </section>
+
+  <!-- 지갑 -->
+  <section class="pane side-only" id="p-wallet">
+    <div class="card"><h2>내 지갑</h2><p class="sub">1P = 1원 · 교환할 때만 로그인이 필요해요</p><ul class="list" id="gifts"></ul></div>
+    <div class="card"><h2>최근 내역</h2><ul class="list" id="log"></ul><div style="text-align:right;margin-top:8px"><button class="link" id="authBtn">로그인</button></div></div>
+  </section>
+
+  <!-- 알림 -->
+  <section class="pane side-only" id="p-alarm">
+    <div class="card"><h2>언제 알려드릴까요?</h2><p class="sub">이유가 있을 때만, 정해둔 순간에만 한 번씩 말을 걸어요</p>
+      <div id="alarmList"></div></div>
+    <div class="card"><h2>알림 규칙</h2>
+      <div class="rowx"><span>하루 최대</span><select id="aMax"><option>1</option><option>2</option><option selected>3</option><option>5</option></select></div>
+      <div class="rowx"><span>조용한 시간</span><span><select id="aQ1"></select> ~ <select id="aQ2"></select></span></div>
+      <div class="rowx"><span>앱을 열면 바로 광고</span><button class="tg" id="autoTg" aria-label="앱을 열면 바로 광고"></button></div>
+      <div class="rowx"><span>폰 알림 허용</span><button class="btn sm ghost" id="permBtn">허용하기</button></div>
+      <p class="mute" style="font-size:12px;margin:8px 0 0" id="patternT"></p>
+      <button class="link" id="testAlarm">알림 미리 받아보기</button>
+    </div>
+    <div class="card" id="installCard"><h2>홈 화면에 두기</h2><p class="sub">카톡 옆에 두면 커피 갈 때 손이 먼저 가요</p><button class="btn" id="installBtn">홈 화면에 추가</button><p class="mute" style="font-size:12px;margin:8px 0 0" id="installHelp"></p></div>
+  </section>
+  <p class="foot">시연용 페이지 · 기록은 이 기기에만 저장되고, 광고는 예시이며 교환은 실제로 발송되지 않아요.</p>
+ </div>
+
+ <!-- PC: 옆에 다른 화면들을 함께 보여준다 -->
+ <div class="side" id="side"></div>
+</div>
+
+<nav class="tabs"><div class="in">
+  <button class="on" data-p="now"><i>🌿</i>지금</button>
+  <button data-p="diary"><i>📔</i>틈 일기</button>
+  <button data-p="room"><i>🏠</i>틈이 방</button>
+  <button data-p="wallet"><i>👛</i>지갑</button>
+  <button data-p="alarm"><i>🔔</i>알림</button>
+</div></nav>
+
+<!-- 광고 플레이어 -->
+<div class="ov" id="pov"><div class="player">
+  <div class="ph"><span id="pHead" class="mute"></span><button class="link" id="pClose">닫기</button></div>
+  <div class="pbar" id="pBars"></div>
+  <div class="stage" id="stage"></div>
+  <div class="pf" id="pFoot"></div>
 </div></div>
-<div class="ov" id="auth"><div class="box">
-  <h2 id="aT">로그인</h2><p id="aS" class="mute" style="font-size:14px;margin-top:0"></p>
+
+<!-- 로그인 -->
+<div class="ov" id="auth"><div class="sheet">
+  <h2 id="aT">로그인</h2><p class="mute" style="font-size:14px;margin-top:0" id="aS"></p>
   <input id="aId" placeholder="아이디 (영문·숫자 4~16자)" maxlength="16" autocomplete="username">
   <input id="aPw" type="password" placeholder="비밀번호 (6자 이상)" autocomplete="current-password">
   <div class="err" id="aErr"></div>
-  <p class="mute" style="font-size:12px">시연용이라 이 브라우저에만 저장돼요. 평소 쓰는 비밀번호는 넣지 마세요.</p>
-  <div class="row"><button class="link" id="aSkip" style="margin-right:auto">로그인 건너뛰기</button><button class="btn ghost sm" id="aSw">회원가입</button><button class="btn sm" id="aGo">로그인</button></div>
-  <div style="text-align:right;margin-top:6px"><button class="link" id="aX">닫기</button></div>
+  <p class="mute" style="font-size:12px">시연용이라 이 기기에만 저장돼요. 평소 쓰는 비밀번호는 넣지 마세요.</p>
+  <div style="display:flex;gap:8px;justify-content:flex-end"><button class="link" id="aX" style="margin-right:auto">닫기</button><button class="btn ghost sm" id="aSw">회원가입</button><button class="btn sm" id="aGo">로그인</button></div>
 </div></div>
-<div class="ov" id="player"><div class="box">
-  <div id="pHead"></div>
-  <div class="scr" id="pScr"><small id="pBrand" class="mute"></small><div id="pTitle"></div><small id="pMsg" class="mute" style="margin-top:6px"></small><div id="pQuiz"></div></div>
-  <div class="pb"><i id="pBar"></i></div>
-  <div class="row" style="justify-content:space-between"><span class="mute" style="font-size:13px"><span id="pCnt"></span> <span id="pStat"></span></span><button class="btn ghost sm" id="pClose">그만 보기</button></div>
-</div></div>
-<div class="nudge" id="nudge"><b>50분째 일하고 있어요 🌿</b><p class="mute" style="font-size:13px;margin:4px 0 10px">잠깐 틈을 내볼까요? 물 한 잔도 좋아요.</p><div class="row"><button class="link" id="nLater">나중에</button><button class="btn sm" id="nGo">틈 시작</button></div></div>
-<nav class="dock" aria-label="빠른 실행"><div class="in"><span class="lbl"><b>틈새 속 광고 하나</b><br>보고 가세요 💸</span><span id="moments" style="display:contents"></span><button class="mo all" id="allBtn"><i>⏭</i><span>돈 벌어가요</span><small id="allCnt"></small></button></div></nav>
-<div class="lvup" id="lvup"><div><i id="lvE"></i><b id="lvT" style="font-size:20px"></b><p class="mute" id="lvS" style="margin:6px 0 0"></p></div></div>
-<div class="toast" id="toast" role="status" style="bottom:110px"></div>
+
+<!-- 첫 방문 -->
+<div class="ov" id="onb"><div class="sheet" style="text-align:center" id="onbBox"></div></div>
+
+<div class="banner" id="banner"><span class="bi" id="bI"></span><div style="flex:1"><b id="bT"></b><small id="bS"></small></div><button class="btn sm" id="bGo">보기</button></div>
+<div class="toast" id="toast" role="status"></div>
 
 <script>
 (function(){
 const $=id=>document.getElementById(id);
-const won=n=>Math.round(n).toLocaleString()+'원';
 const dkey=d=>(d||new Date()).toDateString();
-const now=()=>new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
-const mmss=s=>{s=Math.floor(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+':':'')+String(m).padStart(h?2:1,'0')+':'+String(x).padStart(2,'0')};
-const P='tm_';
+const hm=d=>(d||new Date()).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
+const P='tm2_';
 const ld=k=>{try{return JSON.parse(localStorage.getItem(P+k))}catch(e){return null}};
 const st=(k,v)=>{try{localStorage.setItem(P+k,JSON.stringify(v))}catch(e){}};
-const SEC=15,PER=10,CAP=300,NUDGE_MIN=50;
-const KINDS=[['coffee','☕','커피'],['stretch','🧘','스트레칭'],['walk','🚶','산책'],['window','🌤','멍때리기']];
-const GRADES=[[0,'🌱','새싹 쉼표'],[5,'☕','커피 한 잔'],[15,'🚶','산책 고수'],[30,'🪴','틈새 장인'],[60,'🌳','여유 대표']];
-const MISS=[['m5','오늘 5분 틈 만들기',5],['k2','두 가지 종류로 쉬기',5],['m15','오늘 15분 쉬기',10],['lunch','점심 후(13~15시) 1분 이상 쉬기',5],['ad1','틈 광고 1편 보기',5],['ad3','틈 광고 3편 보기',10]];
-const JOBS=['IT·개발','마케팅·광고','영업','디자인','경영지원','제조·생산','금융','공공·교육','서비스·유통','기타'];
-const ADS=[['오늘 점심 배달비 0원','배달앱 A','lunch'],['점심 샐러드 첫 달 50%','샐러드 J','lunch'],['사무실 원두 정기배송','커피브랜드 B','coffee'],['디카페인도 진하게','커피브랜드 K','coffee'],['오후 간식 묶음 배송','간식몰 C','sleepy'],['졸릴 땐 탄산 한 캔','음료 L','sleepy'],['목·어깨 편한 의자','가구 D','stretch'],['회의록 자동 정리 툴','SaaS F','meeting'],['오늘 저녁은 집밥 키트','밀키트 M','leave'],['퇴근길 운동 1회 무료','피트니스 E','commute'],['출퇴근길 오디오북 한 달 무료','오디오북 N','commute'],['주말 근교 숙소 특가','여행 G','leave']].map((a,i)=>({id:i,title:a[0],brand:a[1],m:a[2]}));
-const ITEMS=[['편의점 1천원권',1000],['아메리카노',4500],['배달 쿠폰 5천원',5000],['치킨 세트',20000]];
+const SEC=15,BASE=10,CAP=300,LUCK=0.12;
 
-const fresh=()=>({xp:0,adsAll:0,badges:[],combos:[],momToday:[],allDone:false,wage:0,job:'',pt:0,day:dkey(),secToday:0,secAll:0,days:{},kindsToday:{},seen:[],ptToday:0,log:[],missions:[],run:null,kind:'coffee'});
+// ---------- 콘텐츠 ----------
+const MOMENTS=[
+ {k:'coffee',e:'☕',n:'커피 기다리며',h:[9,12],at:'10:30',ads:1,head:'☕ 커피 나올 동안 15초만',load:['원두 가는 중…','우유 데우는 중…','샷 내리는 중…'],bg:'#fdf1e6'},
+ {k:'lunch',e:'🍱',n:'점심 가기 전',h:[11,13],at:'11:50',ads:3,head:'🍱 엘리베이터 기다리며 3편',load:['엘리베이터 부르는 중…','메뉴 고민하는 중…'],bg:'#fff0e0'},
+ {k:'sleepy',e:'🥱',n:'오후 3시, 졸릴 때',h:[14,16],at:'15:00',ads:1,head:'🥱 잠 깨는 15초',load:['눈 비비는 중…','기지개 켜는 중…'],bg:'#eaf0f7'},
+ {k:'meeting',e:'📋',n:'회의 들어가기 전',h:[10,17],at:'',ads:1,head:'📋 회의실 가는 길에 15초',load:['노트북 챙기는 중…','회의실 찾는 중…'],bg:'#eef3ea'},
+ {k:'leave',e:'🏃',n:'퇴근 직전',h:[17,19],at:'17:50',ads:2,head:'🏃 퇴근 전 마지막 2편',load:['가방 싸는 중…','모니터 끄는 중…'],bg:'#f5edf3'},
+ {k:'commute',e:'🚇',n:'퇴근길',h:[18,24],at:'18:20',ads:3,head:'🚇 지하철 기다리며 3편',load:['지하철 오는 중…','이어폰 찾는 중…'],bg:'#e9eef0'}];
+const ADS=[['오늘 점심 배달비 0원','배달앱 A','lunch'],['점심 샐러드 첫 달 50%','샐러드 J','lunch'],['한 그릇 국밥 쿠폰','국밥집 P','lunch'],['사무실 원두 정기배송','커피브랜드 B','coffee'],['디카페인도 진하게','커피브랜드 K','coffee'],['오후 간식 묶음 배송','간식몰 C','sleepy'],['졸릴 땐 탄산 한 캔','음료 L','sleepy'],['회의록 자동 정리 툴','SaaS F','meeting'],['오늘 저녁은 집밥 키트','밀키트 M','leave'],['주말 근교 숙소 특가','여행 G','leave'],['퇴근길 운동 1회 무료','피트니스 E','commute'],['출퇴근길 오디오북 한 달 무료','오디오북 N','commute'],['목·어깨 편한 의자','가구 D','meeting']].map((a,i)=>({id:i,t:a[0],b:a[1],m:a[2]}));
+const GOALS=[['편의점 1천원권',1000],['아메리카노',4500],['배달 쿠폰',5000],['금요일 치킨',20000]];
+const LV=[[0,'🌱','새싹 틈이'],[50,'🌿','잎새 틈이'],[150,'🪴','화분 틈이'],[300,'🌳','나무 틈이'],[500,'🌸','꽃핀 틈이'],[800,'🍎','열매 틈이']];
+const BOXES=[[3,5,'🎁'],[6,10,'🎁'],[10,20,'💎']];
+const DECOR=[['mug','☕','머그컵',30,[18,58]],['lamp','🪔','스탠드',60,[78,30]],['plant','🌵','선인장',50,[8,52]],['radio','📻','라디오',80,[80,58]],['frame','🖼','액자',100,[22,12]],['cat','🐈','고양이 친구',150,[64,64]],['star','⭐','별 조명',120,[50,8]],['sofa','🛋','소파',200,[30,68]]];
+const BADGES=[['first','🎬','첫 틈 광고'],['coffee','☕','커피 틈'],['lunch','🍱','점심 전 3편'],['sleepy','🥱','오후 3시 잠깨기'],['commute','🚇','퇴근길 틈'],['lucky','🍀','행운 2배'],['m3','🧩','하루 세 순간'],['ten','🔟','누적 10편'],['room','🏠','첫 방 꾸미기']];
+
+// ---------- 상태 ----------
+const fresh=()=>({pt:0,day:dkey(),ptToday:0,seen:[],cards:[],days:{},xp:0,ads:0,goal:1,owned:[],badges:[],boxes:[],moms:[],hours:{},log:[],
+ al:{on:true,moms:['coffee','sleepy','leave'],max:3,q1:22,q2:8,sent:[],ign:0},auto:false});
 let DB=ld('users')||{},cur=ld('cur');if(cur&&!DB[cur])cur=null;
 let S;
-function rollDay(){if(S.day!==dkey()){if(S.run)finishRun(true);S.day=dkey();S.secToday=0;S.kindsToday={};S.seen=[];S.ptToday=0;S.missions=[];S.combos=[];S.momToday=[];S.allDone=false}}
-function loadU(){S=Object.assign(fresh(),cur?DB[cur].s:(ld('guest')||{}));rollDay()}
-const perSec=()=>S.wage?S.wage*10000/12/209/3600:0;
-const liveSec=()=>S.secToday+(S.run?(Date.now()-S.run.t)/1000:0);
-const liveKinds=()=>{const k=Object.assign({},S.kindsToday);if(S.run)k[S.run.k]=(k[S.run.k]||0)+(Date.now()-S.run.t)/1000;return k};
-function save(){S.days[dkey()]=liveSec();if(cur){DB[cur].s=S;st('users',DB)}else st('guest',S)}
+function loadU(){S=Object.assign(fresh(),cur?DB[cur]:(ld('guest')||{}));S.al=Object.assign(fresh().al,S.al||{});if(S.day!==dkey()){S.day=dkey();S.ptToday=0;S.seen=[];S.cards=[];S.boxes=[];S.moms=[];S.al.sent=[]}}
+function save(){S.days[dkey()]={ads:S.seen.length,pt:S.ptToday};if(cur){DB[cur]=S;st('users',DB)}else st('guest',S)}
 loadU();
 
-function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),2200)}
-function open(id){$(id).classList.add('on')}function close(id){$(id).classList.remove('on')}
-document.querySelectorAll('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o&&(o.id==='setup'||o.id==='auth'))close(o.id)}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')['setup','auth'].forEach(close)});
-
-// 첫 방문 안내
-const ONB=[['🌿','틈날 때 버는 월급','일하다 잠깐 쉬는 시간, 그냥 흘려보내지 말고 기록해 보세요.'],['⏱','틈을 켜두고 쉬어요','커피, 스트레칭, 산책, 멍때리기. 고르고 시작을 누르면 돼요.'],['🎁','쉬면서 광고 한 편','15초 광고를 보면 10P. 모은 포인트는 커피·편의점 쿠폰으로 바꿀 수 있어요.']];
-let ob=0;
-function drawOnb(){const s=ONB[ob];$('onbBody').innerHTML=`<div style="font-size:44px;text-align:center">${s[0]}</div><h2 style="text-align:center">${s[1]}</h2><p class="mute" style="text-align:center">${s[2]}</p><div class="row" style="justify-content:space-between;margin-top:16px"><button class="link" id="obSkip">건너뛰기</button><button class="btn" id="obNext">${ob<ONB.length-1?'다음':'시작하기'}</button></div>`;
- $('onbDots').innerHTML=ONB.map((_,i)=>`<i class="${i===ob?'on':''}"></i>`).join('');
- $('obNext').onclick=()=>{if(ob<ONB.length-1){ob++;drawOnb()}else{st('onb',1);close('onb')}};
- $('obSkip').onclick=()=>{st('onb',1);close('onb')}}
-
-// 연봉 설정
-let afterSetup=null;
-function openSetup(fn){afterSetup=fn||null;$('sErr').textContent='';$('sWage').value=S.wage||'';
- $('presets').innerHTML=[3000,4000,5000,6000,8000].map(v=>`<button data-v="${v}" class="${S.wage===v?'on':''}">${v.toLocaleString()}</button>`).join('');
- $('sJob').innerHTML=JOBS.map(j=>`<option ${j===S.job?'selected':''}>${j}</option>`).join('');open('setup');setTimeout(()=>$('sWage').focus(),60)}
-$('presets').onclick=e=>{const b=e.target.closest('button');if(!b)return;$('sWage').value=b.dataset.v;[...$('presets').children].forEach(x=>x.classList.toggle('on',x===b))};
-function applySetup(w){S.wage=w;S.job=$('sJob').value;save();close('setup');render();toast(`1분 쉬면 ${won(perSec()*60)}이에요`);const f=afterSetup;afterSetup=null;if(f)f()}
-$('sGo').onclick=()=>{const w=+$('sWage').value;if(!(w>=1000&&w<=100000))return $('sErr').textContent='연봉을 만원 단위로 넣어주세요 (예: 4200)';applySetup(w)};
-$('sWage').onkeydown=e=>{if(e.key==='Enter')$('sGo').click()};
-$('sAvg').onclick=()=>applySetup(3600);
-
-
-// 틈 타이머 (시작 시각을 저장해 새로고침해도 이어짐)
-const kn=k=>KINDS.find(x=>x[0]===k)||KINDS[0];
-$('kinds').innerHTML=KINDS.map(k=>`<button class="kind" role="radio" data-k="${k[0]}"><i>${k[1]}</i>${k[2]}</button>`).join('');
-$('kinds').onclick=e=>{const b=e.target.closest('.kind');if(!b)return;
- if(S.run&&S.run.k!==b.dataset.k){const add=(Date.now()-S.run.t)/1000;S.secToday+=add;S.secAll+=add;S.kindsToday[S.run.k]=(S.kindsToday[S.run.k]||0)+add;S.run={k:b.dataset.k,t:Date.now(),s0:S.run.s0};toast(kn(b.dataset.k)[2]+'(으)로 바꿨어요')}
- S.kind=b.dataset.k;save();render()};
-let lastWork=Date.now(),nudged=false;
-function startRun(){S.run={k:S.kind,t:Date.now(),s0:Date.now()};S.run0pt=S.ptToday;close('nudge');save();render()}
-function finishRun(silent){if(!S.run)return;const add=(Date.now()-S.run.t)/1000,total=(Date.now()-S.run.s0)/1000,k=S.run.k;
- S.secToday+=add;S.secAll+=add;S.kindsToday[k]=(S.kindsToday[k]||0)+add;S.run=null;lastWork=Date.now();nudged=false;
- const gotRun=S.ptToday-(S.run0pt||0);if(total>=5){S.log.unshift([now(),`${kn(k)[1]} ${kn(k)[2]} ${mmss(total)}`+(gotRun>0?` · 틈에 ${gotRun}P`:''),0]);S.log=S.log.slice(0,60);if(!silent)toast(gotRun>0?`${mmss(total)} 쉬면서 ${gotRun}P 받았어요 🌿`:`${mmss(total)} 잘 쉬었어요 🌿`)}
- save();checkMissions();render()}
-$('go').onclick=()=>S.run?finishRun():startRun();
-
-// 등급·미션
-const grade=sec=>{let g=GRADES[0];for(const x of GRADES)if(sec/60>=x[0])g=x;return g};
-function mOk(id,sec){const h=new Date().getHours(),k=liveKinds();
- if(id==='m5')return sec>=300;if(id==='m15')return sec>=900;if(id==='k2')return Object.values(k).filter(v=>v>=30).length>=2;
- if(id==='lunch')return !!(S.run&&h>=13&&h<15&&Date.now()-S.run.s0>=60000);if(id==='ad1')return S.seen.length>=1;if(id==='ad3')return S.seen.length>=3;return false}
-function checkMissions(){const sec=liveSec();let hit=false;
- MISS.forEach(m=>{if(!S.missions.includes(m[0])&&mOk(m[0],sec)){S.missions.push(m[0]);const a=Math.max(0,Math.min(m[2],CAP-S.ptToday));S.pt+=a;S.ptToday+=a;S.log.unshift([now(),'미션 달성: '+m[1],a]);toast(`🎉 미션 달성! ${m[1]} +${a}P`);hit=true}});
- if(hit){save();render()}}
-
-// ---------- 게이미피케이션: 틈이(캐릭터)·레벨·콤보·성과 ----------
-const LV=[[0,'🌱','새싹 틈이','처음 만났네요! 광고 한 편 같이 볼래요?'],[50,'🌿','잎새 틈이','틈날 때마다 쑥쑥 자라요'],[150,'🪴','화분 틈이','광고 한 편에 포인트가 더 붙어요'],[300,'🌳','나무 틈이','이제 그늘도 만들 수 있어요'],[500,'🌸','꽃핀 틈이','틈새 장인 인정!'],[800,'🍎','열매 틈이','전설의 틈새러']];
-function level(){let n=0;LV.forEach((l,i)=>{if(S.xp>=l[0])n=i});return{n,l:LV[n],nx:LV[n+1]}}
-const perAd=()=>10+level().n; // 레벨이 오를수록 광고 1편 포인트가 1P씩 커짐
-const COMBOS=[[3,5,'🎁'],[6,10,'🎁'],[10,20,'💎']];
-const BADGES=[['first','🎬','첫 틈 광고'],['coffee','☕','커피 타임 광고'],['lunch','🍱','점심 전 3편'],['sleepy','🥱','오후 3시 잠깨기'],['commute','🚇','퇴근길 광고'],['m3','🧩','하루 3가지 순간'],['all','🏁','하루 완주'],['ten','🔟','누적 10편'],['lv3','🌳','틈이 나무 되기']];
-function badge(id){if(S.badges.includes(id))return;S.badges.push(id);const b=BADGES.find(x=>x[0]===id);setTimeout(()=>toast(`🏅 성과 달성: ${b[1]} ${b[2]}`),900)}
-function comboMsg(){const n=S.seen.length;const nx=COMBOS.find(c=>n<c[0]);return nx?`${nx[0]-n}편 더 보면 보너스 상자 ${nx[2]} +${nx[1]}P`:'오늘 보너스 상자를 다 열었어요!'}
-function onAdReward(lv0){const n=S.seen.length;
- COMBOS.forEach(c=>{if(n>=c[0]&&!S.combos.includes(c[0])){S.combos.push(c[0]);const b=Math.min(c[1],CAP-S.ptToday);S.pt+=b;S.ptToday+=b;S.log.unshift([now(),`${c[2]} ${c[0]}편 보너스 상자`,b]);setTimeout(()=>toast(`${c[2]} 보너스 상자 열림! +${b}P`),400)}});
- badge('first');const last=ADS.find(x=>x.id===S.seen[S.seen.length-1]);if(last&&['coffee','sleepy','commute'].includes(last.m))badge(last.m);
- if(ADS.filter(x=>x.m==='lunch'&&S.seen.includes(x.id)).length>=2||S.seen.filter(id=>ADS[id].m==='lunch').length>=2)badge('lunch');
- if(S.momToday.length>=3)badge('m3');if(S.adsAll>=10)badge('ten');
- const lv=level();if(lv.n>=3)badge('lv3');
- if(lv.n>lv0){$('lvE').textContent=lv.l[1];$('lvT').textContent=`레벨 업! ${lv.l[2]}`;$('lvS').textContent=`이제 광고 1편에 ${perAd()}P`;$('lvup').classList.add('on');setTimeout(()=>$('lvup').classList.remove('on'),2200)}
- const f=$('pFace');f.classList.remove('bump');void f.offsetWidth;f.classList.add('bump')}
-function drawPet(){const {n,l,nx}=level();$('pFace').firstChild.nodeValue=l[1];$('pLv').textContent='Lv.'+(n+1);$('pName').textContent=l[2];
- $('pStage').textContent=`광고 1편에 ${perAd()}P`;
- const hr=new Date().getHours();const say=S.run?`${kn(S.run.k)[1]} 같이 쉬는 중… 광고 한 편 볼래요?`:(hr>=14&&hr<16?'오후 3시… 저도 졸려요 🥱 잠 깨는 광고 하나?':hr>=17&&hr<19?'퇴근이 코앞! 마지막으로 하나 보고 가요 🏃':hr>=11&&hr<13?'점심 메뉴 고민되면 광고에서 힌트를!':l[3]);
- $('pSay').textContent=say;
- $('pXp').style.width=(nx?(S.xp-l[0])/(nx[0]-l[0])*100:100)+'%';$('pXpT').textContent=nx?`경험치 ${S.xp-l[0]}/${nx[0]-l[0]} · 다음: ${nx[1]} ${nx[2]} (광고 1편 = 10 경험치)`:'최고 레벨!';
- const c=S.seen.length;$('combo').innerHTML=COMBOS.map(x=>`<span class="${c>=x[0]?'on':''}">${x[2]} 오늘 ${x[0]}편 +${x[1]}P</span>`).join('')+`<span class="${S.allDone?'on':''}">🏁 완주 +20P</span>`;
- $('bdg').innerHTML=BADGES.map(b=>`<span class="${S.badges.includes(b[0])?'on':''}" title="${b[2]}">${b[1]}</span>`).join('')}
-
-// 순간 버튼: 뭐 하기 전에 한 번 누르면 → 틈 켜고 바로 광고
-// [키, 틈 종류, 아이콘, 이름, 광고 수, 플레이어 머리말, 추천 시간(시)]
-const MOMENTS=[['coffee','coffee','☕','커피 타러 가기 전',1,'☕ 커피 나올 동안 15초만',[9,11]],['lunch','walk','🍱','점심 가기 전',3,'🍱 엘리베이터 기다리며 3편',[11,13]],['sleepy','window','🥱','오후 3시, 졸릴 때',1,'🥱 잠 깨는 15초',[14,16]],['stretch','stretch','🧘','스트레칭 전',1,'🧘 몸 풀기 전에 15초만',[16,17]],['meeting','window','📋','회의 들어가기 전',1,'📋 회의실 가는 길에 15초',[10,17]],['leave','walk','🏃','퇴근 직전 10분',2,'🏃 퇴근 전 마지막 2편',[17,19]],['commute','walk','🚇','퇴근하면서',3,'🚇 지하철 기다리며 3편',[18,21]]];
-const recMoments=()=>{const hr=new Date().getHours();const on=MOMENTS.filter(m=>hr>=m[6][0]&&hr<m[6][1]);const rest=MOMENTS.filter(m=>!on.includes(m));return [...on.map(m=>[m,1]),...rest.map(m=>[m,0])].slice(0,4)};
-function drawDock(){$('moments').innerHTML=recMoments().map(([m,r])=>`<button class="mo ${r?'rec':''}" data-m="${m[0]}">${r?'<em>지금</em>':''}<i>${m[2]}</i><span>${m[3]}</span><small>${m[4]}편 · +${m[4]*perAd()}P</small></button>`).join('')}
-
-$('moments').onclick=e=>{const b=e.target.closest('[data-m]');if(!b)return;const m=MOMENTS.find(x=>x[0]===b.dataset.m);S.kind=m[1];if(!S.run)startRun();else if(S.run.k!==m[1]){const add=(Date.now()-S.run.t)/1000;S.secToday+=add;S.secAll+=add;S.kindsToday[S.run.k]=(S.kindsToday[S.run.k]||0)+add;S.run={k:m[1],t:Date.now(),s0:S.run.s0}}
- if(!S.momToday.includes(m[0]))S.momToday.push(m[0]);save();render();if(avail().length&&S.ptToday<CAP)play(m[4],m[5],m[0]);else toast('틈을 켰어요. 오늘 광고는 다 봤으니 푹 쉬세요 🌿')};
-$('allBtn').onclick=()=>{if(!S.run)startRun();allRun=true;play(avail().length,'⏭ 남은 광고 한 번에 · 끝까지 보면 완주 보너스!')};
-// 넛지
-$('nLater').onclick=()=>{close('nudge');lastWork=Date.now();nudged=false};
-$('nGo').onclick=()=>{close('nudge');startRun()};
-
-// 매 0.5초 갱신
-function tick(){rollDay();const sec=liveSec(),run=!!S.run;
- $('timer').classList.toggle('run',run);$('state').textContent=run?kn(S.run.k)[1]+' 쉬는 중':'대기 중';
- $('tTime').textContent=mmss(sec);$('tMoney').textContent=S.ptToday.toLocaleString()+'P';
- $('go').textContent=run?'■ 틈 끝내기':'▶ 틈 시작';
- const g=grade(sec),i=GRADES.indexOf(g),nx=GRADES[i+1];
- $('gEm').textContent=g[1];$('gName').textContent=g[2];
- $('gNext').textContent=nx?`'${nx[2]}'까지 ${Math.ceil(nx[0]-sec/60)}분`:'오늘 충분히 쉬었어요';
- $('gBar').style.width=(nx?((sec/60-g[0])/(nx[0]-g[0]))*100:100)+'%';
- document.title=run?`${kn(S.run.k)[1]} ${mmss(sec)} 쉬는 중 — 틈날때버는월급`:'틈날때버는월급';
- if(run&&Math.floor(sec)%15===0)checkMissions();
- if(!run&&!nudged&&Date.now()-lastWork>NUDGE_MIN*60000&&!document.hidden){nudged=true;open('nudge')}}
-
-// 보너스 광고
-let Q=[],qi=0,t=0,tm=null,quizOn=false,got=0;
+const lvl=()=>{let n=0;LV.forEach((l,i)=>{if(S.xp>=l[0])n=i});return{n,l:LV[n],nx:LV[n+1]}};
+const perAd=()=>BASE+lvl().n;
 const avail=()=>ADS.filter(a=>!S.seen.includes(a.id));
-let allRun=false;
-function play(n,head,mk){const a=avail();const pick=[...a.filter(x=>x.m===mk),...a.filter(x=>x.m!==mk)].slice(0,n);if(head&&!head.startsWith('⏭'))allRun=false;playIds(pick.map(x=>x.id),head)}
-function playIds(ids,head){if(!guard(()=>playIds(ids,head)))return;$('pHead').textContent=head||'';if(S.ptToday>=CAP)return toast('오늘 적립 한도를 채웠어요');Q=ids.map(id=>ADS[id]).filter(a=>a&&!S.seen.includes(a.id));if(!Q.length)return toast('오늘 틈 광고를 다 봤어요');qi=0;got=0;$('pClose').textContent='그만 보기';open('player');startAd()}
-function startAd(){t=0;quizOn=false;const a=Q[qi];$('pBrand').textContent=a.brand+' · 광고';$('pTitle').textContent=a.title;$('pQuiz').innerHTML='';$('pMsg').textContent='';$('pBar').style.width=0;$('pScr').className='scr c'+(a.id%4);$('pCnt').textContent=Q.length>1?`${qi+1}/${Q.length}편 ·`:'';clearInterval(tm);tm=setInterval(adTick,1000);adTick(true)}
-function adTick(first){if(document.hidden){$('pStat').textContent='탭을 벗어나 일시정지';return}if(!first)t++;$('pBar').style.width=t/SEC*100+'%';$('pStat').textContent=(SEC-t)+'초 남음';
- if(t>=SEC){clearInterval(tm);const a=Q[qi];quizOn=true;const o=[a.brand,...ADS.filter(x=>x.id!==a.id).map(x=>x.brand).sort(()=>Math.random()-.5).slice(0,2)].sort(()=>Math.random()-.5);
-  $('pBrand').textContent='확인 문제';$('pTitle').textContent='방금 본 광고의 브랜드는?';$('pScr').className='scr';$('pStat').textContent='';$('pQuiz').innerHTML=o.map(x=>`<button data-b="${x}">${x}</button>`).join('')}}
-$('pQuiz').onclick=e=>{const b=e.target.closest('button');if(!b||!quizOn)return;quizOn=false;const a=Q[qi],ok=b.dataset.b===a.brand;S.seen.push(a.id);$('pQuiz').innerHTML='';
- if(ok){const lv0=level().n;const g=Math.min(perAd(),CAP-S.ptToday);S.pt+=g;S.ptToday+=g;got+=g;S.xp+=10;S.adsAll=(S.adsAll||0)+1;S.log.unshift([now(),a.brand+' 틈 광고',g]);$('pTitle').textContent=`+${g}P`;$('pMsg').textContent=comboMsg();onAdReward(lv0);render()}else{$('pTitle').textContent='아쉽게 오답이에요';$('pMsg').textContent='이번 광고는 적립되지 않았어요'}
- save();checkMissions();render();qi++;if(qi<Q.length&&S.ptToday<CAP)setTimeout(startAd,1200);else{if(allRun&&!avail().length&&!S.allDone){S.allDone=true;const b=Math.min(20,CAP-S.ptToday);S.pt+=b;S.ptToday+=b;S.log.unshift([now(),'🏁 오늘 광고 완주 보너스',b]);badge('all');save();render();$('pMsg').textContent=`이번에 ${got}P + 완주 보너스 ${b}P!`}else $('pMsg').textContent=`이번에 ${got}P 받았어요`;allRun=false;$('pClose').textContent='닫기'}};
-$('pClose').onclick=()=>{clearInterval(tm);quizOn=false;close('player')};
-document.querySelectorAll('[data-ad]').forEach(b=>b.onclick=()=>play(+b.dataset.ad));
-$('adlist').onclick=e=>{const b=e.target.closest('[data-one]');if(b)playIds([+b.dataset.one])};
+const curMoment=()=>{const h=new Date().getHours();return MOMENTS.find(m=>m.k!=='meeting'&&h>=m.h[0]&&h<m.h[1])||MOMENTS[0]};
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),2200)}
+const open=id=>$(id).classList.add('on'),close=id=>$(id).classList.remove('on');
 
-// 로그인 (건너뛰기 가능, 교환할 때만 필수)
-let skip=!!ld('skip'),after=null,signup=false,must=false;
-function guard(fn,need){if(cur||(skip&&!need))return true;after=fn;must=!!need;signup=false;mode();$('aErr').textContent='';$('aPw').value='';open('auth');setTimeout(()=>$('aId').focus(),60);return false}
-function mode(){$('aT').textContent=signup?'회원가입':'로그인';$('aGo').textContent=signup?'가입하기':'로그인';$('aSw').textContent=signup?'로그인으로':'회원가입';$('aSkip').style.display=must?'none':'';
- $('aS').innerHTML=must?'<b>교환은 로그인이 필요해요.</b> 지금까지 모은 기록과 포인트는 로그인하면 그대로 옮겨져요.':(signup?'아이디·비밀번호만 있으면 돼요. 가입하면 100P를 드려요.':'지금은 <b>건너뛰어도 괜찮아요.</b> 기록은 이 브라우저에 보관되고, 교환할 때 로그인하면 계정으로 옮겨져요.')}
-$('aSw').onclick=()=>{signup=!signup;mode();$('aErr').textContent=''};
-$('aX').onclick=()=>{after=null;close('auth')};
-$('aSkip').onclick=()=>{skip=true;st('skip',1);close('auth');render();const f=after;after=null;if(f)f()};
+// ---------- 틈이 말투 (상황을 알고 말 걸기) ----------
+function petSay(){const h=new Date().getHours(),d=new Date().getDay(),n=S.seen.length,ld0=lvl();
+ if(S.ptToday>=CAP)return '오늘 몫은 다 챙겼어요. 이제 푹 쉬어요 🌙';
+ if(n===0&&S.cards.length===0){if(d===1)return '월요일이네요… 커피 한 잔 같이 해요 ☕';if(d===5)return '금요일! 오늘은 치킨 목표 가볼까요? 🍗'}
+ const gl=GOALS[S.goal],left=gl[1]-S.pt;if(left>0&&left<=perAd()*3)return `${gl[0]}까지 ${left}P! 거의 다 왔어요`;
+ if(h>=14&&h<16)return '오후 3시… 저도 졸려요 🥱';if(h>=11&&h<13)return '점심 뭐 먹어요? 광고에 힌트가 있을지도!';if(h>=17&&h<19)return '오늘도 수고했어요. 퇴근 전에 하나만? 🏃';if(h>=19)return '퇴근길이에요? 지하철 기다리며 하나 🚇';
+ return n?`오늘 벌써 ${n}편! ${ld0.l[2]}가 기뻐해요`:'커피 기다리는 15초, 같이 보내요';}
+
+// ---------- 광고 플레이어 ----------
+let Q=[],qi=0,t=0,tm=null,phase='',got=0,curMo=null,quizAns='';
+function startSession(mo,n){mo=mo||curMoment();n=n||mo.ads;
+ if(S.ptToday>=CAP)return toast('오늘 적립 한도를 채웠어요. 내일 또 만나요');
+ const a=avail();if(!a.length)return toast('오늘 광고를 다 봤어요. 푹 쉬세요 🌿');
+ Q=[...a.filter(x=>x.m===mo.k),...a.filter(x=>x.m!==mo.k)].slice(0,n);qi=0;got=0;curMo=mo;
+ if(!S.moms.includes(mo.k))S.moms.push(mo.k);const hr=new Date().getHours();S.hours[hr]=(S.hours[hr]||0)+1;
+ $('pHead').textContent=mo.head;$('pBars').innerHTML=Q.map(()=>'<span><i></i></span>').join('');open('pov');loadAd()}
+function loadAd(){phase='load';clearInterval(tm);const a=Q[qi];$('stage').style.background=curMo.bg;
+ $('stage').innerHTML=`<div style="font-size:44px">${curMo.e}</div><div class="load">${curMo.load[Math.floor(Math.random()*curMo.load.length)]}</div>`;$('pFoot').innerHTML='';
+ setTimeout(()=>{if(phase==='load')playAd()},900)}
+function playAd(){phase='play';t=0;const a=Q[qi];
+ $('stage').innerHTML=`<div class="brand">${a.b} · 광고</div><div class="tt">${a.t}</div><div class="mute" style="font-size:13px" id="sLeft"></div>`;
+ $('pFoot').innerHTML='';tm=setInterval(tickAd,1000);tickAd(true)}
+function tickAd(first){if(document.hidden){if($('sLeft'))$('sLeft').textContent='잠깐 멈췄어요';return}if(!first)t++;
+ const bar=$('pBars').children[qi];if(bar)bar.firstChild.style.width=t/SEC*100+'%';if($('sLeft'))$('sLeft').textContent=`${SEC-t}초`;
+ if(t>=SEC){clearInterval(tm);quiz()}}
+function quiz(){phase='quiz';const a=Q[qi];quizAns=a.b;const o=[a.b,...ADS.filter(x=>x.b!==a.b).map(x=>x.b).sort(()=>Math.random()-.5).slice(0,2)].sort(()=>Math.random()-.5);
+ $('stage').style.background='var(--bg)';$('stage').innerHTML=`<div class="brand">마지막 한 번만</div><div class="tt" style="font-size:20px">방금 본 광고, 어디였죠?</div><div class="quiz">${o.map(x=>`<button data-b="${x}">${x}</button>`).join('')}</div>`}
+$('stage').onclick=e=>{const b=e.target.closest('[data-b]');if(!b||phase!=='quiz')return;phase='result';const a=Q[qi];S.seen.push(a.id);
+ if(b.dataset.b===quizAns)reward(a);else{$('stage').innerHTML=`<div style="font-size:44px">😅</div><div class="tt" style="font-size:20px">아쉽게 틀렸어요</div><div class="mute">괜찮아요, 다음 광고에서 만나요</div>`;S.cards.unshift({t:hm(),e:curMo.e,mo:curMo.n,b:a.b,p:0,bg:curMo.bg});save();next()}};
+function reward(a){const lv0=lvl().n,lucky=Math.random()<LUCK;let g=perAd()*(lucky?2:1);g=Math.min(g,CAP-S.ptToday);
+ S.pt+=g;S.ptToday+=g;got+=g;S.xp+=10;S.ads++;S.log.unshift([hm(),`${curMo.e} ${a.b}${lucky?' · 행운 2배':''}`,g]);S.log=S.log.slice(0,80);
+ S.cards.unshift({t:hm(),e:curMo.e,mo:curMo.n,b:a.b,p:g,lucky,bg:curMo.bg});
+ const gl=GOALS[S.goal],pct=Math.min(100,Math.round(S.pt/gl[1]*100));
+ $('stage').style.background=lucky?'#fff8e1':'var(--acc2)';
+ $('stage').innerHTML=`${lucky?'<span class="luckytag">🍀 행운 광고 2배!</span>':''}<div class="got ${lucky?'lucky':''}">+${g}P</div><div class="mute">${gl[0]}까지 ${pct}%</div><div class="bar glow" style="width:100%"><i style="width:${Math.min(100,(S.pt-g)/gl[1]*100)}%"></i></div><div class="mute" style="font-size:13px" id="boxMsg"></div><div class="conf" id="conf"></div>`;
+ setTimeout(()=>{const i=$('stage').querySelector('.bar i');if(i)i.style.width=pct+'%'},60);
+ confetti(lucky?24:10);
+ // 보너스 상자·성과
+ const n=S.seen.length;BOXES.forEach(bx=>{if(n>=bx[0]&&!S.boxes.includes(bx[0])){S.boxes.push(bx[0]);const b=Math.min(bx[1],CAP-S.ptToday);S.pt+=b;S.ptToday+=b;S.log.unshift([hm(),`${bx[2]} 오늘 ${bx[0]}편 보너스 상자`,b]);setTimeout(()=>toast(`${bx[2]} 보너스 상자가 열렸어요! +${b}P`),500)}});
+ const nx=BOXES.find(bx=>n<bx[0]);$('boxMsg').textContent=nx?`${nx[0]-n}편 더 보면 ${nx[2]} 보너스 상자`:'';
+ badge('first');if(['coffee','sleepy','commute'].includes(curMo.k))badge(curMo.k);if(curMo.k==='lunch'&&Q.length>=3&&qi===2)badge('lunch');if(lucky)badge('lucky');if(S.moms.length>=3)badge('m3');if(S.ads>=10)badge('ten');
+ const lv=lvl();if(lv.n>lv0)setTimeout(()=>{toast(`레벨 업! ${lv.l[1]} ${lv.l[2]} · 이제 광고 1편 ${perAd()}P`)},900);
+ save();render();bumpPet();next()}
+function next(){const more=qi<Q.length-1&&S.ptToday<CAP;
+ $('pFoot').innerHTML=more?`<button class="btn ghost" id="fDone">여기까지</button><button class="btn" id="fNext">다음 광고 (${qi+2}/${Q.length})</button>`:(avail().length&&S.ptToday<CAP?`<button class="btn ghost" id="fDone">다 봤어요</button><button class="btn warm" id="fMore">한 편 더 +${perAd()}P</button>`:`<button class="btn" id="fDone">오늘 끝! 닫기</button>`);
+ const d=$('fDone'),nx=$('fNext'),mo=$('fMore');if(d)d.onclick=endSession;if(nx)nx.onclick=()=>{qi++;loadAd()};if(mo)mo.onclick=()=>{Q.push(avail()[0]);$('pBars').insertAdjacentHTML('beforeend','<span><i></i></span>');qi++;loadAd()}}
+function endSession(){clearInterval(tm);phase='';close('pov');if(got)toast(`${curMo.e} 이번 틈에 ${got}P 챙겼어요`);render()}
+$('pClose').onclick=endSession;
+function confetti(n){const c=$('conf');if(!c)return;const em=['✨','💚','🪙','⭐'];for(let i=0;i<n;i++){const s=document.createElement('i');s.textContent=em[i%em.length];s.style.left=Math.random()*100+'%';s.style.animationDelay=Math.random()*.4+'s';s.style.fontSize=(14+Math.random()*12)+'px';c.appendChild(s)}}
+function badge(id){if(S.badges.includes(id))return;S.badges.push(id);const b=BADGES.find(x=>x[0]===id);setTimeout(()=>toast(`🏅 성과: ${b[1]} ${b[2]}`),1200)}
+function bumpPet(){['miniPet','pet'].forEach(id=>{const e=$(id);e.classList.remove('bump');void e.offsetWidth;e.classList.add('bump')})}
+
+// ---------- 지금 화면 ----------
+$('playBtn').onclick=()=>startSession(curMoment());
+function drawMoments(){const h=new Date().getHours();const list=[...MOMENTS].sort((a,b)=>((h>=b.h[0]&&h<b.h[1])-(h>=a.h[0]&&h<a.h[1])));
+ $('moments').innerHTML=list.map(m=>{const rec=h>=m.h[0]&&h<m.h[1],done=S.moms.includes(m.k);return `<button class="mo ${rec?'rec':''} ${done?'done':''}" data-m="${m.k}">${rec?'<em>지금</em>':''}<i>${m.e}</i><b>${m.n}</b><small>${done?'오늘 했어요 ✓':`${m.ads}편 · +${m.ads*perAd()}P`}</small></button>`}).join('')}
+$('moments').onclick=e=>{const b=e.target.closest('[data-m]');if(b)startSession(MOMENTS.find(m=>m.k===b.dataset.m))};
+
+// ---------- 렌더 ----------
+function render(){const L=lvl(),gl=GOALS[S.goal],mo=curMoment(),pct=Math.min(100,S.pt/gl[1]*100);
+ $('ptChip').textContent=S.pt.toLocaleString()+'P';
+ $('miniPet').textContent=L.l[1];$('say').textContent=petSay();
+ $('moNow').textContent=`${mo.e} 지금은 '${mo.n}' 시간`;
+ const av=avail().length;$('playBtn').disabled=!av||S.ptToday>=CAP;
+ $('playSub').textContent=!av||S.ptToday>=CAP?'오늘 몫은 다 챙겼어요':`${mo.head.replace(/^\S+\s/,'')} · +${perAd()}P부터`;
+ $('altLine').innerHTML=av>1&&S.ptToday<CAP?`시간 있으면 <button id="allBtn">남은 ${av}편 한 번에 보기</button>`:'';const ab=$('allBtn');if(ab)ab.onclick=()=>startSession({...mo,head:'⏭ 남은 광고 한 번에'},av);
+ $('goalT').textContent=`${gl[0]}까지`;$('goalPct').textContent=Math.floor(pct)+'%';$('goalBar').firstElementChild.style.width=pct+'%';
+ $('ptBig').textContent=S.pt.toLocaleString()+'P';$('goalLeft').textContent=S.pt>=gl[1]?'교환할 수 있어요! 🎉':(()=>{const r=gl[1]-S.pt,n=Math.ceil(r/perAd());return `${r.toLocaleString()}P 남음 · `+(n<=12?`약 ${n}편`:`하루 10편이면 약 ${Math.ceil(n/10)}일`)})();
+ $('boxes').innerHTML=BOXES.map(b=>`<span class="${S.boxes.includes(b[0])?'on':''}">${b[2]} 오늘 ${b[0]}편 +${b[1]}P</span>`).join('')+`<span>🍀 가끔 행운 2배</span>`;
+ drawMoments();
+ // 일기
+ $('diarySub').textContent=S.cards.length?`오늘 ${S.cards.length}번의 틈 · ${S.ptToday}P`:'아직 오늘의 틈이 없어요';
+ $('story').innerHTML=S.cards.length?S.cards.map(c=>`<div class="sc ${c.lucky?'lucky':''}" style="background:${c.bg}"><div><div class="e">${c.e}</div><div class="t">${c.t}</div></div><b>${c.mo}<br><span class="mute" style="font-weight:400">${c.b}</span></b><div class="p">${c.p?'+'+c.p+'P':'다음엔 꼭!'}</div></div>`).join(''):'<div class="empty">커피 기다리며 광고 하나 보면<br>여기에 첫 카드가 생겨요 ☕</div>';
+ const days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push([d,(S.days[dkey(d)]||{}).pt||0,i===0])}const mx=Math.max(30,...days.map(x=>x[1]));
+ $('week').innerHTML=days.map(([d,p,td])=>`<div class="wk ${td?'today':''}"><div><i style="height:${p/mx*100}%"></i></div>${td?'오늘':'일월화수목금토'[d.getDay()]}</div>`).join('');
+ const wsum=days.reduce((s,x)=>s+x[1],0);$('weekSub').textContent=wsum?`이번 주 ${wsum.toLocaleString()}P 모았어요`:'이번 주 첫 틈을 기다리는 중';
+ // 방
+ $('pet').textContent=L.l[1];$('roomLv').textContent=`Lv.${L.n+1}`;$('petName').textContent=L.l[2];$('petPer').textContent=`광고 1편 ${perAd()}P`;
+ $('xpBar').style.width=(L.nx?(S.xp-L.l[0])/(L.nx[0]-L.l[0])*100:100)+'%';$('xpT').textContent=L.nx?`광고 ${Math.ceil((L.nx[0]-S.xp)/10)}편 더 보면 ${L.nx[1]} ${L.nx[2]} · 광고 1편 포인트가 1P 올라요`:'최고 레벨이에요!';
+ [...$('room').querySelectorAll('.it')].forEach(e=>e.remove());S.owned.forEach(k=>{const d=DECOR.find(x=>x[0]===k);if(!d)return;const s=document.createElement('span');s.className='it';s.textContent=d[1];s.style.left=d[4][0]+'%';s.style.top=d[4][1]+'%';$('room').appendChild(s)});
+ $('shop').innerHTML=DECOR.map(d=>{const own=S.owned.includes(d[0]);return `<button class="si ${own?'own':''}" data-d="${d[0]}" ${own?'disabled':''}><i>${d[1]}</i>${d[2]}<small>${own?'방에 있어요':d[3]+'P'}</small></button>`}).join('');
+ $('bdgSub').textContent=`${S.badges.length}/${BADGES.length} 모았어요`;$('bdg').innerHTML=BADGES.map(b=>`<span class="${S.badges.includes(b[0])?'on':''}" title="${b[2]}">${b[1]}</span>`).join('');
+ // 지갑
+ $('gifts').innerHTML=GOALS.map((g,i)=>{const r=Math.min(1,S.pt/g[1]);return `<li><span><b>${g[0]}</b><br><small class="mute">${g[1].toLocaleString()}P${i===S.goal?' · 지금 목표':''}</small></span><span style="display:flex;gap:6px">${i!==S.goal?`<button class="btn sm ghost" data-goal="${i}">목표로</button>`:''}<button class="btn sm" data-buy="${i}" ${r<1?'disabled':''}>${r<1?Math.floor(r*100)+'%':'교환'}</button></span></li>`}).join('');
+ $('log').innerHTML=S.log.length?S.log.slice(0,10).map(l=>`<li><span>${l[0]} · ${l[1]}</span><b style="color:${l[2]>0?'var(--acc)':'var(--mute)'}">${l[2]>0?'+':''}${l[2]}P</b></li>`).join(''):'<li class="mute">아직 내역이 없어요</li>';
+ $('authBtn').textContent=cur?`${cur} 님 · 로그아웃`:'로그인';
+ // 알림
+ $('alarmList').innerHTML=MOMENTS.filter(m=>m.at).map(m=>{const on=S.al.moms.includes(m.k);return `<div class="rowx"><span>${m.e} ${m.n}<br><small class="mute">${m.at}쯤 · ${m.head.replace(/^\S+\s/,'')}</small></span><button class="tg ${on?'on':''}" data-al="${m.k}" aria-label="${m.n} 알림"></button></div>`}).join('');
+ $('aMax').value=S.al.max;$('autoTg').classList.toggle('on',S.auto);
+ const top=Object.entries(S.hours).sort((a,b)=>b[1]-a[1])[0];$('patternT').textContent=top?`요즘 ${top[0]}시쯤 자주 틈을 내시네요. 그 시간엔 알림이 더 맞춰질 거예요.`:'며칠 쓰시면 자주 쉬는 시간을 알아서 맞춰 드릴게요.';
+ $('permBtn').textContent=('Notification' in window)&&Notification.permission==='granted'?'허용됨 ✓':'허용하기';
+ if(window.innerWidth>=960)drawSide();
+ document.title=S.ptToday?`🌿 ${S.ptToday}P · 틈날때버는월급`:'틈날때버는월급';
+}
+// PC: 옆 칸에 일기·방·지갑을 함께
+function drawSide(){const s=$('side');if(s.dataset.ok)return;s.dataset.ok=1;['p-diary','p-room','p-wallet','p-alarm'].forEach(id=>s.appendChild($(id)))}
+
+// ---------- 탭 ----------
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on',p.id==='p-'+b.dataset.p));window.scrollTo(0,0)});
+$('ptChip').onclick=()=>document.querySelector('.tabs [data-p="wallet"]').click();
+
+// ---------- 꾸미기·지갑 ----------
+$('shop').onclick=e=>{const b=e.target.closest('[data-d]');if(!b)return;const d=DECOR.find(x=>x[0]===b.dataset.d);if(S.pt<d[3])return toast(`${d[3]-S.pt}P 더 모으면 ${d[2]}를 들일 수 있어요`);S.pt-=d[3];S.owned.push(d[0]);S.log.unshift([hm(),`틈이 방: ${d[1]} ${d[2]}`,-d[3]]);badge('room');save();render();bumpPet();toast(`${d[1]} ${d[2]}가 방에 들어왔어요!`)};
+$('gifts').onclick=e=>{const g=e.target.closest('[data-goal]'),b=e.target.closest('[data-buy]');if(g){S.goal=+g.dataset.goal;save();render();toast(`목표를 '${GOALS[S.goal][0]}'로 바꿨어요`)}if(b)buy(+b.dataset.buy)};
+function buy(i){if(!cur)return askLogin(()=>buy(i));const g=GOALS[i];if(S.pt<g[1])return;S.pt-=g[1];S.log.unshift([hm(),`교환: ${g[0]}`,-g[1]]);save();render();toast(`'${g[0]}' 교환 완료! (시연용)`)}
+
+// ---------- 로그인: 교환할 때만 ----------
+let after=null,signup=false;
+function askLogin(fn){after=fn;signup=false;mode();$('aErr').textContent='';$('aPw').value='';open('auth')}
+function mode(){$('aT').textContent=signup?'회원가입':'교환하려면 로그인';$('aGo').textContent=signup?'가입하기':'로그인';$('aSw').textContent=signup?'로그인으로':'회원가입';$('aS').textContent=signup?'아이디와 비밀번호만 있으면 돼요. 지금까지 모은 포인트는 그대로 옮겨져요.':'지금까지 모은 포인트와 틈이는 로그인하면 그대로 이어져요.'}
+$('aSw').onclick=()=>{signup=!signup;mode()};$('aX').onclick=()=>{after=null;close('auth')};
 $('aPw').onkeydown=e=>{if(e.key==='Enter')$('aGo').click()};
-async function hash(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('tm:'+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return'f'+h}}
+$('authBtn').onclick=()=>{if(cur){cur=null;st('cur',null);loadU();render();toast('로그아웃했어요')}else askLogin(null)};
+async function hash(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('tm2:'+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return'f'+h}}
 $('aGo').onclick=async()=>{const id=$('aId').value.trim().toLowerCase(),pw=$('aPw').value;
  if(!/^[a-z0-9]{4,16}$/.test(id))return $('aErr').textContent='아이디는 영문·숫자 4~16자예요.';if(pw.length<6)return $('aErr').textContent='비밀번호는 6자 이상이에요.';
- const h=await hash(pw);
- if(signup){if(DB[id])return $('aErr').textContent='이미 있는 아이디예요. 로그인해 주세요.';DB[id]={h,s:fresh()};DB[id].s.pt=100;DB[id].s.log=[[now(),'가입 축하',100]]}
- else{if(!DB[id])return $('aErr').textContent='없는 아이디예요. 처음이면 회원가입을 눌러주세요.';if(DB[id].h!==h)return $('aErr').textContent='비밀번호가 맞지 않아요.'}
- if(S.run)finishRun(true);
- const g=ld('guest'),A=Object.assign(fresh(),DB[id].s);
- if(g){A.pt+=g.pt||0;A.secAll+=g.secAll||0;A.log=[...(g.log||[]),...A.log].slice(0,60);if(!A.wage){A.wage=g.wage;A.job=g.job}
-  for(const d in (g.days||{}))A.days[d]=Math.max(A.days[d]||0,g.days[d]);
-  if(A.day===g.day){A.secToday+=g.secToday||0;for(const k in (g.kindsToday||{}))A.kindsToday[k]=(A.kindsToday[k]||0)+g.kindsToday[k];A.seen=[...new Set([...A.seen,...(g.seen||[])])];A.ptToday+=g.ptToday||0;A.missions=[...new Set([...A.missions,...(g.missions||[])])]}
-  st('guest',null)}
- DB[id].s=A;cur=id;st('cur',id);st('users',DB);loadU();close('auth');toast(signup?'가입 완료! +100P 드렸어요':id+' 님, 다시 오셨네요');render();const f=after;after=null;if(f)f()};
-$('authBtn').onclick=()=>{if(cur){if(S.run)finishRun(true);cur=null;st('cur',null);loadU();render();toast('로그아웃했어요')}else guard(null)};
-function buy(i){if(!guard(()=>buy(i),true))return;const it=ITEMS[i];if(S.pt<it[1])return toast(`${(it[1]-S.pt).toLocaleString()}P 더 모으면 돼요`);S.pt-=it[1];S.log.unshift([now(),'교환: '+it[0],-it[1]]);save();render();toast(`'${it[0]}' 교환 완료 (시연용)`)}
-$('shop').onclick=e=>{const b=e.target.closest('[data-buy]');if(b)buy(+b.dataset.buy)};
+ const h=await hash(pw),H=ld('hash')||{};
+ if(signup){if(DB[id])return $('aErr').textContent='이미 있는 아이디예요.';DB[id]=Object.assign(fresh(),S);H[id]=h}
+ else{if(!DB[id])return $('aErr').textContent='없는 아이디예요. 처음이면 회원가입을 눌러주세요.';if(H[id]!==h)return $('aErr').textContent='비밀번호가 맞지 않아요.';const A=DB[id],g=S;A.pt+=g.pt;A.xp+=g.xp;A.ads+=g.ads;A.owned=[...new Set([...A.owned,...g.owned])];A.badges=[...new Set([...A.badges,...g.badges])];A.log=[...g.log,...A.log].slice(0,80);if(A.day===g.day){A.ptToday+=g.ptToday;A.seen=[...new Set([...A.seen,...g.seen])];A.cards=[...g.cards,...A.cards]}}
+ st('hash',H);st('guest',null);cur=id;st('cur',id);st('users',DB);loadU();close('auth');toast(signup?'가입 완료! 이제 교환할 수 있어요':`${id} 님, 다시 만나서 반가워요`);render();const f=after;after=null;if(f)f()};
 
-// 업종 리그 (예시 수치 + 내 기록 반영)
-function league(){const seed=new Date().getDate(),me=liveSec()/60,base=JOBS.slice(0,8);if(S.job&&!base.includes(S.job))base.push(S.job);
- return base.map((j,i)=>{let m=Math.round(14+((i*37+seed*13)%22));if(j===S.job)m=Math.max(m,Math.round((m*20+me)/21));return{j,m}}).sort((a,b)=>b.m-a.m)}
+// ---------- 알림: 정해둔 순간에, 이유와 함께, 한 번씩 ----------
+const hrs=[...Array(24).keys()];$('aQ1').innerHTML=$('aQ2').innerHTML=hrs.map(h=>`<option value="${h}">${h}시</option>`).join('');$('aQ1').value=S.al.q1;$('aQ2').value=S.al.q2;
+$('aQ1').onchange=()=>{S.al.q1=+$('aQ1').value;save()};$('aQ2').onchange=()=>{S.al.q2=+$('aQ2').value;save()};
+$('aMax').onchange=()=>{S.al.max=+$('aMax').value;save()};
+$('alarmList').onclick=e=>{const b=e.target.closest('[data-al]');if(!b)return;const k=b.dataset.al,i=S.al.moms.indexOf(k);if(i>=0)S.al.moms.splice(i,1);else S.al.moms.push(k);save();render()};
+$('autoTg').onclick=()=>{S.auto=!S.auto;save();render();toast(S.auto?'다음부터 열자마자 광고가 나와요':'열면 먼저 지금 화면을 보여드려요')};
+$('permBtn').onclick=async()=>{if(!('Notification' in window))return toast('이 브라우저는 알림을 지원하지 않아요');const r=await Notification.requestPermission();render();toast(r==='granted'?'좋아요! 정해둔 순간에만 살짝 알려드릴게요':'알림 없이도 잘 쓸 수 있어요')};
+const quiet=h=>S.al.q1>S.al.q2?(h>=S.al.q1||h<S.al.q2):(h>=S.al.q1&&h<S.al.q2);
+function reason(m){const gl=GOALS[S.goal],left=gl[1]-S.pt,n=S.seen.length,nx=BOXES.find(b=>n<b[0]);
+ if(left>0&&left<=perAd()*m.ads)return `이번 ${m.ads}편이면 ${gl[0]} 완성!`;if(nx&&nx[0]-n<=m.ads)return `${nx[0]-n}편이면 ${nx[2]} 보너스 상자가 열려요`;
+ const top=Object.entries(S.hours).sort((a,b)=>b[1]-a[1])[0];if(top&&+top[0]===new Date().getHours())return `요즘 이 시간쯤 쉬시던데, 오늘도?`;return `${m.head.replace(/^\S+\s/,'')} · +${m.ads*perAd()}P`}
+let bannerMo=null,bannerTm=null;
+function notify(m,test){bannerMo=m;$('bI').textContent=m.e;$('bT').textContent=`${m.n}, 광고 하나 보고 가세요`;$('bS').textContent=reason(m);open('banner');clearTimeout(bannerTm);
+ bannerTm=setTimeout(()=>{if($('banner').classList.contains('on')){close('banner');if(!test){S.al.ign++;if(S.al.ign>=3&&S.al.max>1){S.al.max--;S.al.ign=0;toast('요즘 바쁘신가 봐요. 알림을 하루 한 번 줄일게요');render()}save()}}},9000);
+ if(!test&&document.hidden&&('Notification' in window)&&Notification.permission==='granted'&&navigator.serviceWorker){navigator.serviceWorker.ready.then(r=>r.showNotification(`${m.e} ${m.n}, 광고 하나 보고 가세요`,{body:reason(m),icon:'icon-192.png',tag:'tm-'+m.k,data:{m:m.k}})).catch(()=>{})}}
+$('bGo').onclick=()=>{close('banner');S.al.ign=0;save();startSession(bannerMo)};
+$('banner').onclick=e=>{if(e.target===$('banner')||e.target.closest('#banner')&&!e.target.closest('#bGo')){close('banner')}};
+$('testAlarm').onclick=()=>notify(curMoment(),true);
+function scheduler(){if(!S.al.on)return;const d=new Date(),h=d.getHours(),cur_=`${String(h).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+ if(quiet(h)||S.al.sent.length>=S.al.max||S.ptToday>=CAP||!avail().length)return;
+ const m=MOMENTS.find(x=>x.at===cur_&&S.al.moms.includes(x.k)&&!S.al.sent.includes(x.k)&&!S.moms.includes(x.k));if(m){S.al.sent.push(m.k);save();notify(m)}}
+setInterval(scheduler,20000);
 
-// 명세서
-function weekSec(){let s=0;for(let i=0;i<7;i++){const d=new Date();d.setDate(d.getDate()-i);s+=i===0?liveSec():(S.days[dkey(d)]||0)}return s}
-function topKind(){const k=liveKinds();let b=null;for(const x in k)if(!b||k[x]>k[b])b=x;return b?kn(b):null}
-function slipRows(){const sec=liveSec(),g=grade(sec),tk=topKind();return[['이름',cur||'익명의 직장인'],['오늘의 틈',mmss(sec)],['가장 많이 한 쉼',tk?tk[1]+' '+tk[2]:'-'],['틈에 본 광고',S.seen.length+'편'],['오늘 받은 포인트',S.ptToday.toLocaleString()+'P',1],['이번 주 틈',mmss(weekSec())],['오늘의 등급',g[1]+' '+g[2]]]}
-$('copySlip').onclick=async()=>{const txt=`🌿 틈날때버는월급 · 오늘의 명세서 (${new Date().toLocaleDateString('ko-KR')})\n`+slipRows().map(r=>`${r[0]}: ${r[1]}`).join('\n')+`\n잘 쉬는 것도 일의 일부 ☕\n${location.href}`;
- try{await navigator.clipboard.writeText(txt);toast('복사했어요! 단톡방에 붙여넣어 보세요')}catch(e){toast('복사가 막혀 있어요. 이미지 저장을 써보세요')}};
-function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
-$('saveSlip').onclick=()=>{const W=720,H=860,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');if(!x)return toast('이미지를 만들 수 없는 브라우저예요');
- x.fillStyle='#f6f5f1';x.fillRect(0,0,W,H);x.fillStyle='#fffdf7';rr(x,40,40,W-80,H-80,28);x.fill();x.strokeStyle='#e9e1c9';x.lineWidth=2;x.stroke();
- x.fillStyle='#1f6f5c';x.font='700 26px "Gowun Dodum", sans-serif';x.fillText('🌿 틈날때버는월급',80,110);
- x.fillStyle='#1d1d1b';x.font='800 40px "Noto Sans KR", sans-serif';x.fillText('오늘의 명세서',80,170);
- x.fillStyle='#6b6a65';x.font='22px "Noto Sans KR", sans-serif';x.fillText(new Date().toLocaleDateString('ko-KR'),80,206);
- x.fillStyle='#1d1d1b';x.fillRect(80,228,W-160,3);
- let y=290;slipRows().forEach(r=>{x.fillStyle='#6b6a65';x.font='24px "Noto Sans KR", sans-serif';x.fillText(r[0],80,y);x.fillStyle=r[2]?'#1f6f5c':'#1d1d1b';x.font=(r[2]?'800 32px':'700 26px')+' "Noto Sans KR", sans-serif';const w=x.measureText(r[1]).width;x.fillText(r[1],W-80-w,y);x.strokeStyle='#d8d2bf';x.setLineDash([3,5]);x.beginPath();x.moveTo(80,y+22);x.lineTo(W-80,y+22);x.stroke();x.setLineDash([]);y+=72});
- x.fillStyle='#6b6a65';x.font='22px "Noto Sans KR", sans-serif';const f='잘 쉬는 것도 일의 일부 ☕';x.fillText(f,(W-x.measureText(f).width)/2,H-90);
- c.toBlob(b=>{if(!b)return toast('이미지를 만들지 못했어요');const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`틈날때버는월급_${new Date().toISOString().slice(0,10)}.png`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);toast('명세서 이미지를 저장했어요')})};
+// ---------- 홈 화면 설치 ----------
+let deferred=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e});
+const standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone;
+if(standalone)$('installCard').style.display='none';
+$('installBtn').onclick=async()=>{if(deferred){deferred.prompt();const r=await deferred.userChoice;deferred=null;toast(r.outcome==='accepted'?'홈 화면에 틈이가 생겼어요 🌱':'언제든 다시 추가할 수 있어요')}else{$('installHelp').textContent=/iphone|ipad/i.test(navigator.userAgent)?'사파리 하단 공유 버튼 → "홈 화면에 추가"를 눌러주세요.':'브라우저 메뉴(⋮) → "앱 설치" 또는 "홈 화면에 추가"를 눌러주세요.'}};
+if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(()=>{});navigator.serviceWorker.addEventListener('message',e=>{const m=MOMENTS.find(x=>x.k===(e.data||{}).go);if(m)startSession(m)})}
 
-// 렌더
-function render(){drawPet();drawDock();
- $('who').textContent=cur?cur+' 님':'';$('authBtn').textContent=cur?'로그아웃':'로그인';
- $('ptTop').textContent=S.pt.toLocaleString()+'P';
- [...$('kinds').children].forEach(b=>{const on=(S.run?S.run.k:S.kind)===b.dataset.k;b.classList.toggle('on',on);b.setAttribute('aria-checked',on)});
- $('wageInfo').textContent=S.run?'':'쉬러 갈 때 켜두세요. 틈 중에 광고를 보면 미션이 더 빨리 채워져요.';
- const av0=avail().length;$('tAd').innerHTML=av0&&S.ptToday<CAP?`<button class="btn" id="tAdBtn">🎁 쉬면서 광고 한 편 +${perAd()}P</button><small>15초 · 남은 광고 ${av0}편</small>`:'<small>오늘 틈 광고를 다 봤어요. 푹 쉬세요 🌿</small>';const tb=$('tAdBtn');if(tb)tb.onclick=()=>play(1,'🎁 쉬는 동안 15초만');
- tick();
- const days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push([d,i===0?liveSec():(S.days[dkey(d)]||0),i===0])}
- const mx=Math.max(600,...days.map(x=>x[1]));
- $('week').innerHTML=days.map(([d,s,td])=>`<div class="wk ${td?'today':''}" title="${mmss(s)}"><div class="wb"><i style="height:${s/mx*100}%"></i></div><span>${td?'오늘':'일월화수목금토'[d.getDay()]}</span></div>`).join('');
- const ws=weekSec();$('weekSum').textContent=mmss(ws);$('weekSub').textContent=ws?`이번 주 ${Math.round(ws/60)}분 쉬었어요`:'아직 이번 주 기록이 없어요';
- const k=liveKinds();$('kindsum').innerHTML=KINDS.filter(x=>k[x[0]]>=1).map(x=>`<span>${x[1]} ${x[2]} ${mmss(k[x[0]])}</span>`).join('');
- $('miss').innerHTML=MISS.map(m=>{const d=S.missions.includes(m[0]);return `<li class="${d?'done':''}"><span><span class="chk">${d?'✓':''}</span>${m[1]}</span><b>+${m[2]}P</b></li>`}).join('');
- $('adlist').innerHTML=ADS.map(a=>{const d=S.seen.includes(a.id);return `<li class="${d?'done':''}"><span><span class="chk">${d?'✓':''}</span>${a.title} <small class="mute">${a.brand}</small></span>${d?`<b>+${perAd()}P</b>`:`<button class="btn sm ghost" data-one="${a.id}" ${S.ptToday>=CAP?'disabled':''}>보기</button>`}</li>`}).join('');
- const avn=avail().length;$('allCnt').textContent=avn?`${avn}편 · +${Math.min(avn*10,CAP-S.ptToday)}P`:'오늘 다 봤어요';$('allBtn').disabled=!avn||S.ptToday>=CAP;
- const av=avail().length;document.querySelectorAll('[data-ad]').forEach(b=>b.disabled=!av||S.ptToday>=CAP);$('adLeft').textContent=`오늘 남은 광고 ${av}편 · 오늘 적립 ${S.ptToday}/${CAP}P`;
- $('shop').innerHTML=ITEMS.map((it,i)=>{const r=Math.min(1,S.pt/it[1]);return `<div class="item"><div><b>${it[0]}</b><span>${it[1].toLocaleString()}P</span></div><div class="mb" title="${Math.round(r*100)}%"><i style="width:${r*100}%"></i></div><button class="btn sm ${r<1?'ghost':''}" data-buy="${i}" ${r<1?'disabled':''}>${r<1?(it[1]-S.pt).toLocaleString()+'P 남음':'교환'}</button></div>`}).join('');
- $('slip').innerHTML=`<div class="sl-h">오늘의 명세서<span>${new Date().toLocaleDateString('ko-KR')}</span></div>`+slipRows().map(r=>`<div class="sl-r"><span>${r[0]}</span><b class="${r[2]?'acc':''}">${r[1]}</b></div>`).join('')+'<div class="sl-f">잘 쉬는 것도 일의 일부 ☕</div>';
- $('log').innerHTML=S.log.length?S.log.slice(0,8).map(l=>`<li><span>${l[0]} · ${l[1]}</span><b style="color:${l[2]>0?'var(--acc)':'var(--mute)'}">${l[2]?(l[2]>0?'+':'')+l[2]+'P':''}</b></li>`).join(''):'<li class="mute">첫 틈을 시작해 보세요</li>';
-}
-setInterval(tick,500);
-let lastR=0;setInterval(()=>{if(S.run&&Date.now()-lastR>5000){lastR=Date.now();render();save()}},1000);
-window.addEventListener('beforeunload',save);
+// ---------- 첫 방문 · 진입 ----------
+const ONB=[['🌱','안녕하세요, 틈이예요','커피 기다리는 15초, 엘리베이터 기다리는 15초. 그 틈을 돈으로 바꿔 드릴게요.'],['▶','열고, 보고, 끝','광고 한 편 보면 바로 포인트. 가끔은 행운 2배도 나와요. 🍀'],['🏠','모은 포인트로','커피 쿠폰으로 바꾸거나, 제 방을 꾸며 주세요. 현금 결제는 없어요.']];
+let ob=0;function drawOnb(){const s=ONB[ob];$('onbBox').innerHTML=`<div style="font-size:52px">${s[0]}</div><h2>${s[1]}</h2><p class="mute">${s[2]}</p><div style="display:flex;gap:6px;justify-content:center;margin:12px 0">${ONB.map((_,i)=>`<span style="width:${i===ob?18:7}px;height:7px;border-radius:99px;background:${i===ob?'var(--acc)':'var(--line)'}"></span>`).join('')}</div><button class="btn" style="width:100%" id="obN">${ob<2?'다음':'첫 광고 보러 가기 ☕'}</button><button class="link" id="obS" style="margin-top:6px">둘러볼게요</button>`;
+ $('obN').onclick=()=>{if(ob<2){ob++;drawOnb()}else{st('onb',1);close('onb');startSession(curMoment(),1)}};$('obS').onclick=()=>{st('onb',1);close('onb')}}
 render();
+const qs=new URLSearchParams(location.search),go=MOMENTS.find(m=>m.k===qs.get('go'));
 if(!ld('onb')){drawOnb();open('onb')}
+else if(go)startSession(go);
+else if(S.auto&&avail().length&&S.ptToday<CAP)setTimeout(()=>startSession(curMoment(),1),300);
+setInterval(()=>{if(!$('pov').classList.contains('on'))render()},60000);
 })();
 </script>
 </body>
