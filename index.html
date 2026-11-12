@@ -145,6 +145,16 @@ h1,h2{text-wrap:balance;letter-spacing:-.02em}
 .bubble{font-size:15px;line-height:1.5;color:var(--ink2);box-shadow:0 1px 2px rgba(29,29,27,.04)}
 .hero{border-radius:22px;padding:26px 20px 20px;background:radial-gradient(120% 90% at 50% 0%,#2a8a71 0%,#1f6f5c 60%,#1a6252 100%);box-shadow:0 14px 30px -12px rgba(31,111,92,.55)}
 .hero .mo-now{display:none}
+.hero .hint{margin:-8px 0 16px;font-size:13px;opacity:.85}
+.hero .moments{text-align:left}
+.hero .mo{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.18);color:#fff}
+.hero .mo small{color:rgba(255,255,255,.75)}
+.hero .mo .mi{background:rgba(255,255,255,.16);color:#fff}
+.hero .mo.rec{background:#fff;border-color:#fff;color:var(--ink)}.hero .mo.rec small{color:var(--mute)}.hero .mo.rec .mi{background:var(--acc);color:#fff}
+.hero .mo em{background:var(--warm)}
+.hero .mo.done{opacity:.55}
+.hero .alt{margin-top:14px}
+.play[hidden]{display:none}
 .nowic{width:52px;height:52px;margin:0 auto 10px;border-radius:16px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center}.nowic .ic{width:28px;height:28px}
 .hero h1{font-size:26px;line-height:1.3;margin:0 0 18px}
 .play{display:flex;flex-direction:column;align-items:center;gap:2px;transition:transform .16s var(--ease),box-shadow .2s var(--ease)}
@@ -195,12 +205,12 @@ h1,h2{text-wrap:balance;letter-spacing:-.02em}
     <div class="greet" style="margin-bottom:12px"><div class="mini" id="miniPet">🌱</div><div class="bubble" id="say"></div></div>
     <div class="card hero">
       <div class="mo-now" id="moNow"></div>
-      <div class="nowic" id="nowIc"></div>
-      <h1 id="heroT"></h1>
-      <button class="play" id="playBtn"><span id="playT"></span><small id="playSub"></small></button>
+      <h1 id="heroT">지금 뭐 하러 가세요?</h1>
+      <p class="hint" id="hint"></p>
+      <div class="moments" id="moments"></div>
+      <button class="play" id="playBtn" hidden><span id="playT"></span><small id="playSub"></small></button>
       <div class="alt" id="altLine"></div>
     </div>
-    <div class="card"><h2>다른 순간에</h2><p class="sub">지금 하려는 일을 골라 누르면 바로 시작돼요</p><div class="moments" id="moments"></div></div>
     <div class="card goal">
       <div class="row1"><h2 id="goalT">아메리카노까지</h2><span class="mute" style="font-size:13px" id="goalPct"></span></div>
       <div class="bar" id="goalBar"><i></i></div>
@@ -403,8 +413,12 @@ function badge(id){if(S.badges.includes(id))return;S.badges.push(id);const b=BAD
 function bumpPet(){petHappyUntil=Date.now()+1600;['miniPet','pet'].forEach(id=>{const e=$(id);if(e)e.innerHTML=petSVG(lvl().n,true)});setTimeout(()=>render(),1700);['miniPet','pet'].forEach(id=>{const e=$(id);e.classList.remove('bump');void e.offsetWidth;e.classList.add('bump')})}
 
 // ---------- 지금 화면 ----------
+function hintLine(){const h=new Date().getHours(),rec=MOMENTS.filter(m=>h>=m.h[0]&&h<m.h[1]&&m.k!=='meeting');
+ if(S.ptToday>=CAP)return '오늘 몫은 다 챙겼어요. 푹 쉬세요';
+ if(!rec.length)return '고르면 바로 광고가 시작돼요';
+ return `${h<12?'오전':h<18?'오후':'저녁'} ${h%12||12}시쯤이면 보통 '${rec.map(m=>m.n).join("', '")}' 할 때예요`}
 $('playBtn').onclick=()=>startSession(curMoment());
-function drawMoments(){const h=new Date().getHours();const now_=curMoment();const list=[...MOMENTS].filter(m=>m.k!==now_.k).sort((a,b)=>((h>=b.h[0]&&h<b.h[1])-(h>=a.h[0]&&h<a.h[1])));
+function drawMoments(){const h=new Date().getHours();const list=[...MOMENTS].sort((a,b)=>((h>=b.h[0]&&h<b.h[1])-(h>=a.h[0]&&h<a.h[1])));
  $('moments').innerHTML=list.map(m=>{const rec=h>=m.h[0]&&h<m.h[1],done=S.moms.includes(m.k);return `<button class="mo ${rec?'rec':''} ${done?'done':''}" data-m="${m.k}">${rec?'<em>지금</em>':''}<span class="mi">${svg(m.k)}</span><span><b>${m.n}</b><small>${done?'오늘 했어요 ✓':`${m.ads}편 · +${m.ads*perAd()}P`}</small></span></button>`}).join('')}
 $('moments').onclick=e=>{const b=e.target.closest('[data-m]');if(b)startSession(MOMENTS.find(m=>m.k===b.dataset.m))};
 
@@ -412,7 +426,7 @@ $('moments').onclick=e=>{const b=e.target.closest('[data-m]');if(b)startSession(
 function render(){const L=lvl(),gl=GOALS[S.goal],mo=curMoment(),pct=Math.min(100,S.pt/gl[1]*100);
  $('ptChip').textContent=S.pt.toLocaleString()+'P';
  {const hp=Date.now()<petHappyUntil;$('miniPet').innerHTML=petSVG(L.n,hp);$('pet').innerHTML=petSVG(L.n,hp)}$('say').textContent=petSay();
- $('moNow').textContent='';$('nowIc').innerHTML=svg(mo.k);$('heroT').innerHTML=`${mo.n},<br>광고 하나 보고 가세요`;$('playT').textContent=`▶ 광고 ${mo.ads}편 보기 +${mo.ads*perAd()}P`;
+ $('moNow').textContent='';$('hint').textContent=hintLine();
  const av=avail().length;$('playBtn').disabled=!av||S.ptToday>=CAP;
  $('playSub').textContent=!av||S.ptToday>=CAP?'오늘 몫은 다 챙겼어요':mo.head.replace(/^\S+\s/,'');
  $('altLine').innerHTML=av>1&&S.ptToday<CAP?`시간 있으면 <button id="allBtn">남은 ${av}편 한 번에 보기</button>`:'';const ab=$('allBtn');if(ab)ab.onclick=()=>startSession({...mo,head:'⏭ 남은 광고 한 번에'},av);
