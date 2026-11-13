@@ -227,6 +227,20 @@ h1,h2{text-wrap:balance;letter-spacing:-.02em}
 }
 @media(prefers-reduced-motion:reduce){.hero .mini svg,.room .pet svg{animation:none!important}}
 
+
+/* 크게 등장하는 틈이 */
+.hero .greet{flex-direction:column;gap:0;margin:0 auto 10px!important;position:relative;z-index:1}
+.hero #miniPet{display:none}
+.hero .teumi-stage{width:100%;height:154px;position:relative;margin:-8px auto 0;overflow:visible}
+.hero .teumi-art{position:absolute;width:224px;height:224px;object-fit:contain;left:50%;top:-36px;transform:translateX(-50%);filter:drop-shadow(0 11px 10px rgba(8,50,37,.2));animation:teumi-big-hop 3.8s cubic-bezier(.2,.8,.2,1) infinite}
+.hero .teumi-glint{position:absolute;left:calc(50% + 78px);top:20px;color:#ffe58b;font-size:22px;animation:teumi-glint 2.4s ease-in-out infinite}
+.hero .bubble{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:13px;padding:7px 13px;box-shadow:none}
+.hero h1{font-size:27px;line-height:1.25;margin:7px 0 12px}
+@keyframes teumi-big-hop{0%,100%{transform:translate(-50%,0) rotate(0)}12%{transform:translate(-50%,-9px) rotate(-3deg)}24%{transform:translate(-50%,0) rotate(2deg)}34%{transform:translate(-50%,-4px) rotate(2deg)}44%,100%{transform:translate(-50%,0) rotate(0)}}
+@keyframes teumi-glint{0%,100%{opacity:.35;transform:scale(.75) rotate(-15deg)}50%{opacity:1;transform:scale(1.18) rotate(12deg)}}
+@media(max-width:380px){.hero .teumi-stage{height:138px}.hero .teumi-art{width:205px;height:205px;top:-32px}}
+@media(prefers-reduced-motion:reduce){.hero .teumi-art,.hero .teumi-glint{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -237,7 +251,7 @@ h1,h2{text-wrap:balance;letter-spacing:-.02em}
   <!-- 지금 -->
   <section class="pane on" id="p-now">
     <div class="card hero">
-      <div class="greet" style="margin-bottom:12px"><div class="mini" id="miniPet">🌱</div><div class="bubble" id="say"></div></div>
+      <div class="greet" style="margin-bottom:12px"><div class="teumi-stage"><img class="teumi-art" src="teumi-mascot.png" alt="틈이"><span class="teumi-glint" aria-hidden="true">✦</span></div><div class="mini" id="miniPet">🌱</div><div class="bubble" id="say"></div></div>
       <div class="mo-now" id="moNow"></div>
       <h1 id="heroT">지금 뭐 하러 가세요?</h1>
       <p class="hint" id="hint"></p>
