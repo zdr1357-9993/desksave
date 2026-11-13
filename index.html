@@ -193,6 +193,24 @@ h1,h2{text-wrap:balance;letter-spacing:-.02em}
 .banner{transition:transform .4s var(--ease)}
 .foot{margin-top:16px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* 틈이 홈 모션: 기존 레이아웃을 유지하며 작은 반응만 추가 */
+:root{--motion-ease:cubic-bezier(.2,.8,.2,1)}
+.mini svg,.room .pet svg{transform-origin:50% 88%;animation:teumi-float 3.2s var(--motion-ease) infinite}
+#miniPet svg>g.pet-eyes,#pet svg>g.pet-eyes{transform-box:fill-box;transform-origin:center;animation:teumi-blink 5.4s ease-in-out infinite}
+#miniPet svg>path:nth-of-type(2),#pet svg>path:nth-of-type(2){transform-box:fill-box;transform-origin:100% 100%;animation:teumi-leaf 4.2s ease-in-out infinite}
+#miniPet svg>path:nth-of-type(3),#pet svg>path:nth-of-type(3){transform-box:fill-box;transform-origin:0% 100%;animation:teumi-leaf 4.2s ease-in-out infinite reverse}
+#playBtn:not(:disabled){box-shadow:0 8px 22px rgba(22,82,63,.2);will-change:transform,box-shadow}
+#playBtn:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 11px 26px rgba(22,82,63,.25)}
+#playBtn:not(:disabled):active{transform:scale(.975)}
+.mo.rec .mi{animation:teumi-cue 2.8s ease-in-out infinite}
+.tabs button:active .ic{transform:scale(.9)}
+@keyframes teumi-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes teumi-blink{0%,47%,49%,100%{transform:scaleY(1)}48%{transform:scaleY(.08)}}
+@keyframes teumi-leaf{0%,100%{transform:rotate(0)}50%{transform:rotate(4deg)}}
+@keyframes teumi-cue{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+@media(prefers-reduced-motion:reduce){.mini svg,.room .pet svg,#miniPet svg>g.pet-eyes,#pet svg>g.pet-eyes,#playBtn,.mo.rec .mi{animation:none!important;transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -340,7 +358,7 @@ function petSVG(n,happy){const leaf='#6dbb8f',leaf2='#4fa67a';let top=`<path d="
  if(n>=4)top+=`<circle cx="50" cy="16" r="5" fill="#f3a6b5"/><circle cx="50" cy="16" r="2" fill="#f7d36b"/>`;
  if(n>=5)top+=`<circle cx="62" cy="20" r="5.5" fill="#e4574b"/><path d="M62 15v-3" stroke="#6b4a2b" stroke-width="1.5" stroke-linecap="round"/>`;
  const eyes=happy?`<path d="M36.5 61q3.5-4 7 0M56.5 61q3.5-4 7 0" stroke="#1d1d1b" stroke-width="2.4" fill="none" stroke-linecap="round"/>`:`<ellipse cx="40" cy="60" rx="3.1" ry="3.6" fill="#1d1d1b"/><ellipse cx="60" cy="60" rx="3.1" ry="3.6" fill="#1d1d1b"/><circle cx="41" cy="58.8" r="1" fill="#fff"/><circle cx="61" cy="58.8" r="1" fill="#fff"/>`;
- return `<svg viewBox="0 0 100 100" aria-hidden="true">${top}<ellipse cx="50" cy="91" rx="24" ry="4" fill="#000" opacity=".07"/><path d="M20 64c0-17 13-29 30-29s30 12 30 29c0 15-13 25-30 25S20 79 20 64z" fill="#fbf8f1" stroke="#e7dcc6" stroke-width="1.5"/>${eyes}<ellipse cx="32.5" cy="68" rx="4.6" ry="2.6" fill="#f4a259" opacity=".55"/><ellipse cx="67.5" cy="68" rx="4.6" ry="2.6" fill="#f4a259" opacity=".55"/><path d="M45.5 67.5q4.5 4.5 9 0" stroke="#1d1d1b" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>`}
+ return `<svg viewBox="0 0 100 100" aria-hidden="true">${top}<ellipse cx="50" cy="91" rx="24" ry="4" fill="#000" opacity=".07"/><path d="M20 64c0-17 13-29 30-29s30 12 30 29c0 15-13 25-30 25S20 79 20 64z" fill="#fbf8f1" stroke="#e7dcc6" stroke-width="1.5"/><g class="pet-eyes">${eyes}</g><ellipse cx="32.5" cy="68" rx="4.6" ry="2.6" fill="#f4a259" opacity=".55"/><ellipse cx="67.5" cy="68" rx="4.6" ry="2.6" fill="#f4a259" opacity=".55"/><path d="M45.5 67.5q4.5 4.5 9 0" stroke="#1d1d1b" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>`}
 let petHappyUntil=0;
 
 // ---------- 상태 ----------
